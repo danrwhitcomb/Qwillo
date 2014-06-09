@@ -1,0 +1,16 @@
+{
+  "name": "App",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "*",
+    "jade": "*",
+    "redis": "*",
+    "debug": "~0.7.4",
+    "mongodb": "*",
+    "monk": "*"
+  }
+}
