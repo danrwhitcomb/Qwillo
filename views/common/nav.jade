@@ -1,0 +1,17 @@
+//Nav bar template.
+//Requires username
+
+nav.nav-bar
+	.nav-logo
+	.nav-menu-wrapper
+		ul.nav-menu
+			li
+				a.nav-link Categories
+			li
+				a.nav-link Submit
+			li 
+				- var signupClasses = ['nav-link', 'signup-link']
+				if username == null
+					a(class=signupClasses) Login/Signup
+				else
+					a(class=signupClasses) #{username}
