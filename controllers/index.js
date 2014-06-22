@@ -4,10 +4,17 @@
  */
 var viewModels = require('./viewModels/index');
 
-exports.index = function(req, res){
+module.exports.index = function(req, res){
 	
 	var model = new viewModels.indexModel();
-	model.username = req.user.username;
+	if(req.user != null){
+		model.username = req.user.username;
+	}
+	else
+	{
+		model.username = "Signup/login";
+	}
+	
 	model.title = 'Title is Something';
 	
 	res.render('index', model);
