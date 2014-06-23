@@ -7,7 +7,10 @@ var User = new Schema({
     password: String,
     username: String,
     firstName: String,
-    lastName: String
+    lastName: String,
+    isAdmin: Boolean,
+    dateJoined: Date,
+    isActive: Boolean
 });
 
 User.plugin(passportLocalMongoose);

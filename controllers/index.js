@@ -3,6 +3,7 @@
  * GET home page.
  */
 var viewModels = require('./viewModels/index');
+var defines = require('../system/defines');
 
 module.exports.index = function(req, res){
 	
@@ -15,7 +16,7 @@ module.exports.index = function(req, res){
 		model.username = "Signup/login";
 	}
 	
-	model.title = 'Title is Something';
+	model.title = defines.appName + " | Home";
 	
 	res.render('index', model);
 };
