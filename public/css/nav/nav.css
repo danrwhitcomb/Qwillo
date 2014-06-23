@@ -1,0 +1,16 @@
+.nav {
+	background-color: lightblue;
+	color: white;
+}
+
+.navbar-brand {
+	font-size: 26px !important;
+}
+
+.navbar-brand,
+.navbar-nav a{
+	color:white !important;
+	font: "Lucida Grande", Helvetica, Arial, sans-serif;
+	font-size: 18px;
+	text-shadow: black .3px .3px 1px;
+}

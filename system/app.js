@@ -15,8 +15,8 @@ var express = require('express')
   , passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
 
-//Controllers
-var indexController = require('../controllers/index');
+//Routes 
+var routes = require('./routes');
   
 var app = express();
 
@@ -31,7 +31,7 @@ app.use(methodOverride('X-HTTP_Method-Override'));
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 //passport config
 var user = require('../repositories/models/user');
@@ -65,7 +65,7 @@ if ('development' === app.get('env')) {
   app.use(errorHandler());
 }
 
-app.get('/', indexController.index);
+routes.defineRoutes(app);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
