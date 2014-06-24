@@ -1,5 +1,6 @@
+/* Nav bar styling */
 .nav {
-	background-color: lightblue;
+	background-color: #266dab;
 	color: white;
 }
 
@@ -13,4 +14,40 @@
 	font: "Lucida Grande", Helvetica, Arial, sans-serif;
 	font-size: 18px;
 	text-shadow: black .3px .3px 1px;
+}
+
+/* Login module styling */
+
+.login {
+	position:absolute;
+	display:none;
+	background-color: #22313f;
+	border-radius: 4px;
+	box-shadow: gray 2px 2px 6px;
+}
+
+.login-form {
+	padding: 10px;
+}
+
+.login-form input {
+	display: block;
+	color: black;
+	margin-bottom: 5px
+}
+
+.login-form button {
+	margin-top:5px;
+	background-color: #266dab;
+	border: none;
+	border-radius: 4px;
+}
+
+.login-form .login-button {
+
+}
+
+.login-form .signup-button {
+	background-color: #d35400;
+	float:right;
 }

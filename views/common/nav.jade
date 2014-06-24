@@ -1,6 +1,8 @@
 //Nav bar template.
 //Requires username
 
+
+
 nav.navbar.navbar-default.nav(role='navigation')
 	.container
 		//Brand and toggle get grouped for better mobile display 
@@ -17,5 +19,15 @@ nav.navbar.navbar-default.nav(role='navigation')
 					a(href='#') Categories
 				li.nav-link
 					a(href='#') Submit
-				li.nav-link
+				li.nav-link.login-link
 					a(href='#') #{username}
+
+	.login
+		.login-form-wrapper
+			form.login-form(action="submit" autocomplete='on' method='post')
+				input.login-box(placeholder="Username")
+				input.login-box(placeholder="Password")
+				button.login-button(type="submit" name="login") Login
+				button.signup-button(type='button' name="signup") Sign Up
+
+script(type='text/javascript' src='/js/common/nav/login_module.js')

@@ -13,7 +13,7 @@ module.exports.index = function(req, res){
 	}
 	else
 	{
-		model.username = "Signup/login";
+		model.username = "Login";
 	}
 	
 	model.title = defines.appName + " | Home";
