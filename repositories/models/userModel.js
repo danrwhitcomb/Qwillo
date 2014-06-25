@@ -15,4 +15,9 @@ var User = new Schema({
 
 User.plugin(passportLocalMongoose);
 
+User.methods.getFullName = function(){
+	return this.firstName + ' ' this.lastName;
+}
+
+
 module.exports = mongoose.model('User', User);

@@ -2,7 +2,7 @@
 /*
  * GET home page.
  */
-var viewModels = require('./viewModels/index');
+var viewModels = require('./viewModels/indexViewModel');
 var defines = require('../system/defines');
 
 module.exports.index = function(req, res){

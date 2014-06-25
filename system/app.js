@@ -34,7 +34,7 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, '../public')));
 
 //passport config
-var user = require('../repositories/models/user');
+var user = require('../repositories/models/userModel');
 passport.serializeUser(function(user, done) {
 	  done(null, user.id);
 	});

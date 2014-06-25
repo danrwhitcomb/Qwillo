@@ -21,13 +21,25 @@ nav.navbar.navbar-default.nav(role='navigation')
 					a(href='#') Submit
 				li.nav-link.login-link
 					a(href='#') #{username}
+	if (username == 'Login' )
+		.login
+			.login-form-wrapper
+				form.login-form(action="submit" autocomplete='on' method='post')
+					input.login-box(placeholder="Username")
+					input.login-box(placeholder="Password")
+					button.login-button(type="submit" name="login") Login
+					button.signup-button(type='button' name="signup") Sign Up
+	else 
+		.login
+			.flyout-info-header
+				img
+				p #{username}
+			ul.flyout-info-content
+				li.flyout-info-item
+					a(href='/user/#{username}') Profile
+				li.flyout-info-item
+					a(href='/account/settings/#{username}') Account Settings
 
-	.login
-		.login-form-wrapper
-			form.login-form(action="submit" autocomplete='on' method='post')
-				input.login-box(placeholder="Username")
-				input.login-box(placeholder="Password")
-				button.login-button(type="submit" name="login") Login
-				button.signup-button(type='button' name="signup") Sign Up
+
 
 script(type='text/javascript' src='/js/common/nav/login_module.js')
