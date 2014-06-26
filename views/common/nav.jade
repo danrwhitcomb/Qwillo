@@ -16,12 +16,12 @@ nav.navbar.navbar-default.nav(role='navigation')
 		#bs-example-navbar-collapse-1.collapse.navbar-collapse
 			ul.nav.navbar-nav.navbar-right
 				li.nav-link
-					a(href='#') Categories
+					a#categories(href='#') Categories
 				li.nav-link
 					a(href='#') Submit
 				li.nav-link.login-link
-					a(href='#') #{username}
-	if (username == 'Login' )
+					a(href='#') #{base.username}
+	if (username == 'Login')
 		.login
 			.login-form-wrapper
 				form.login-form(action="submit" autocomplete='on' method='post')
@@ -33,13 +33,23 @@ nav.navbar.navbar-default.nav(role='navigation')
 		.login
 			.flyout-info-header
 				img
-				p #{username}
+				p #{base.username}
 			ul.flyout-info-content
 				li.flyout-info-item
-					a(href='/user/#{username}') Profile
+					a(href='/account/#{base.username}') Profile
 				li.flyout-info-item
-					a(href='/account/settings/#{username}') Account Settings
+					a(href='/account/settings') Account Settings
 
-
+.categories.container
+	.categories-wrapper
+		- var array = base.categories.sort();
+		- for (var i = 0; i < 6; i++)
+			div.categories-list-wrapper
+				ul.category-list
+					- var currentKeys = array.slice(i*3, i*3 + 3);
+					each val in currentKeys
+						li.category-item
+							a(href='/category/#{val}') #{val}
 
 script(type='text/javascript' src='/js/common/nav/login_module.js')
+script(type='text/javascript' src='/js/common/nav/categories_module.js')

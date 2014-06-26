@@ -1,5 +1,6 @@
+var baseViewModel = require('./baseViewModel');
 
 module.exports.indexModel = function(){
-	this.username = null;
+	this.base = baseViewModel.model;
 	this.title = null;
 };

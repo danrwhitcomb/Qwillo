@@ -4,6 +4,11 @@
 	color: white;
 	border: none;
 	border-radius: 0;
+	margin-bottom: 0;
+}
+
+.navbar-default {
+	box-shadow: black 0 .2px 1px;
 }
 
 .navbar-brand {
@@ -56,4 +61,23 @@
 
 .login-form .signup-button:hover {
 	background-color: #f35400;
+}
+
+/* Categories */
+li.category-item {
+    list-style: none;
+}
+li.category-item > a {
+	color: white;
+}
+div.categories {
+    background-color: #7f8c8d;
+    margin-top: 0;
+    overflow:hidden;
+    height: 0;
+}
+div.categories-wrapper {
+}
+div.categories-list-wrapper {
+	display:inline-flex;
 }

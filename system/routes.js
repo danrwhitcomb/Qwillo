@@ -23,10 +23,10 @@ module.exports.defineRoutes = function(app){
 	app.route('/post/:id')
 		.get(postController.getPost);
 	
+	app.route('/account/settings')
+	.get(accountController.getUserSettings);
+	
 	//Account routes
 	app.route('/account/:username')
 		.get(accountController.getUserProfile);
-	
-	app.route('/account/:userId/settings')
-		.get(accountController.getUserSettings);
 };

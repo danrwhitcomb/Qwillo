@@ -9,11 +9,7 @@ module.exports.index = function(req, res){
 	
 	var model = new viewModels.indexModel();
 	if(req.user != null){
-		model.username = req.user.username;
-	}
-	else
-	{
-		model.username = "Login";
+		model.base.username = req.user.username;
 	}
 	
 	model.title = defines.appName + " | Home";
