@@ -1,7 +1,7 @@
 //Nav bar template.
 //Requires username
 
-
+link(rel='stylesheet', href='/css/nav/nav.css')
 
 nav.navbar.navbar-default.nav(role='navigation')
 	.container
@@ -21,7 +21,7 @@ nav.navbar.navbar-default.nav(role='navigation')
 					a(href='#') Submit
 				li.nav-link.login-link
 					a(href='#') #{base.username}
-	if (username == 'Login')
+	if (base.username == 'Login')
 		.login
 			.login-form-wrapper
 				form.login-form(action="submit" autocomplete='on' method='post')

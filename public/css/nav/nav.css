@@ -31,6 +31,7 @@
 	background-color: #22313f;
 	border-radius: 4px;
 	box-shadow: gray 2px 2px 6px;
+	z-index: 99999;
 }
 
 .login-form {

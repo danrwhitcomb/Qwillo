@@ -1,3 +1,8 @@
-.search_bar
-	form.login-form(action="submit" autocomplete='on' method='get')
-		input
+link(rel='stylesheet' href='/css/searchbar/search_bar.css')
+.search-bar.container.input-group
+	input.form-control(type='text' placeholder='What do you want to learn about?')
+	span(class="input-group-btn")
+		button.btn.btn-default.search-button(type="button")
+			span(class='glyphicon glyphicon-chevron-right')
+
+script(type='text/javascript' src='/js/common/search/search_bar.js')

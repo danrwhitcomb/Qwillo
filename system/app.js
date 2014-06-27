@@ -31,6 +31,7 @@ app.use(methodOverride('X-HTTP_Method-Override'));
 
 app.use(passport.initialize());
 app.use(passport.session());
+
 app.use(express.static(path.join(__dirname, '../public')));
 
 //passport config

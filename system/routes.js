@@ -4,12 +4,19 @@ var categoryController = require('../controllers/categoryController');
 var postController = require('../controllers/postController');
 var topicController = require('../controllers/topicController');
 var accountController = require('../controllers/accountController');
+var searchController = require('../controllers/searchController');
 
 module.exports.defineRoutes = function(app){
 	
 	//General routes
 	app.route('/')
 		.get(indexController.index);
+	
+	//Search routes
+	app.route('/search')
+		.get(searchController.doSearch);
+	
+	//app.route('/search/:query/')
 	
 	//Category routes
 	app.route('/category/:id')
