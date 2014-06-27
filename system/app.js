@@ -66,6 +66,16 @@ if ('development' === app.get('env')) {
   app.use(errorHandler());
 }
 
+app.use(function(req, res, next){
+	var model = require('../controllers/viewModels/baseViewModel').model;
+	if(req.user != null){
+		model.username = req.user.username;
+	}
+	req.model = model;
+	console.log('Hit base setup');
+	next();
+});
+
 routes.defineRoutes(app);
 
 http.createServer(app).listen(app.get('port'), function(){

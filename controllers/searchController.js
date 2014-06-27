@@ -1,6 +1,9 @@
+var searchViewModels = require('./viewModels/searchViewModel');
 
 module.exports.doSearch = function(req, res){
 	var search = req.query.q;
-	console.log(search);
-	res.send('You made a search for: ' + search.replace('+', ' '));
+	var model = searchViewModels.model;
+	model.base = req.model;
+	
+	res.render('search', model);
 };
