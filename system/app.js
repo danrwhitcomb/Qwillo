@@ -72,7 +72,6 @@ app.use(function(req, res, next){
 		model.username = req.user.username;
 	}
 	req.model = model;
-	console.log('Hit base setup');
 	next();
 });
 

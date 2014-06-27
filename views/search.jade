@@ -2,4 +2,17 @@ extends common/layout
 
 block content
 	.container
-		
+		.page-header
+			if (query != '')
+				h1 #{query}
+			else 
+				h1 You didn't search for anything...
+		.search-results
+			if (resultsCount == 0)
+				small No results found
+			else
+				p Results!
+	script.
+		$( document ).ready(function() {
+			$('.search-bar>input').val('#{query}');
+		});
