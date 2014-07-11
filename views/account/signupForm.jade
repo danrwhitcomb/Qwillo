@@ -1,0 +1,27 @@
+extends ../common/layout
+
+block content
+	.container
+		h1 Sign-up
+		.row
+			.col-md-4
+				form.signup-form
+					.form-group
+						label First Name
+						input.form-control(name='first_name' placeholder='Enter your first name')
+					.form-group
+						label Last Name
+						input.form-control(name='last_name' placeholder='Enter your last name')
+					.form-group
+						label(for='exampleInputEmail1') Email address
+						input#exampleInputEmail1.form-control(name='email', placeholder='Enter email')
+					.form-group
+						label(for='exampleInputPassword1') Password
+						input#exampleInputPassword1.form-control(name='password', type='password', placeholder='Password')
+					.form-group
+						label(for='exampleInputPassword1') Confirm Password
+						input#exampleInputPassword1.form-control(name='confirm_password' type='password', placeholder='Confirm password')
+					
+					button.btn.btn-default.submit-signup Submit
+			.col-md-4
+	script(type='text/javascript' src='/js/account/signupForm.js')

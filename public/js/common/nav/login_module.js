@@ -1,4 +1,5 @@
 $('.login-link').click(toggleLoginModule);
+$('.signup-button').click(goToSignup);
 
 function toggleLoginModule(){
 	var $login = $('.login');
@@ -10,4 +11,8 @@ function toggleLoginModule(){
 	} else {
 		$login.css('display', 'none');
 	}
+}
+
+function goToSignup(){
+	document.location.href = '/account/create';
 }

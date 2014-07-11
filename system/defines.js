@@ -25,3 +25,11 @@ module.exports.categories = [
 		'Fashion',
 		'Other'
 ];
+
+module.exports.messages = {
+		success: "Successfully completed the action"
+};
+
+module.exports.accountErrors = {
+		CreationError: "Failed to create user",
+};

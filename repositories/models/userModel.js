@@ -4,11 +4,14 @@ var mongoose = require('mongoose'),
 
 var User = new Schema({
     email: String,
+    username: String,
+    password: String,
     firstName: String,
     lastName: String,
-    isAdmin: Boolean,
-    dateJoined: Date,
-    isActive: Boolean
+    isAdmin: {type: Boolean, default: false},
+    isConfirmed: {type: Boolean, default: false},
+    dateJoined: {type: Date, default: Date.now},
+    isActive: {type: Boolean, default: false}
 });
 
 User.plugin(passportLocalMongoose);

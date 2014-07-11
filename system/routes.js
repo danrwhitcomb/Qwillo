@@ -30,10 +30,14 @@ module.exports.defineRoutes = function(app){
 	app.route('/post/:id')
 		.get(postController.getPost);
 	
+	//Account routes
 	app.route('/account/settings')
 	.get(accountController.getUserSettings);
 	
-	//Account routes
+	app.route('/account/create')
+		.get(accountController.accountSignup)
+		.post(accountController.doSignup);
+	
 	app.route('/account/:username')
-		.get(accountController.getUserProfile);
+	.get(accountController.getUserProfile);
 };

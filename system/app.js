@@ -66,6 +66,9 @@ if ('development' === app.get('env')) {
   app.use(errorHandler());
 }
 
+//cors
+
+
 app.use(function(req, res, next){
 	var model = require('../controllers/viewModels/baseViewModel').model;
 	if(req.user != null){
