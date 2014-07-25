@@ -27,9 +27,10 @@ module.exports.categories = [
 ];
 
 module.exports.messages = {
-		success: "Successfully completed the action"
+		success: "Successfully completed the action",
+		successCode: 100,
 };
 
-module.exports.accountErrors = {
-		CreationError: "Failed to create user",
+module.exports.stormpath = {
+		appAddress: "https://api.stormpath.com/v1/applications/57eR7cPcXVv7PjQgdcgmqr"
 };

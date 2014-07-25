@@ -17,8 +17,12 @@ function doSignup(){
 		type: 'POST',
 	});
 
-	request.done(function(){
-		document.location.href = '/';
+	request.done(function(response){
+		if(response.status != 100){
+			setMessage(response.status.userMessage);
+		} else {
+			document.location.href = '/';
+		}
 	});
 
 	request.fail(function(jqXHR, textStatus){
@@ -27,11 +31,7 @@ function doSignup(){
 
 }
 
-function signupSuccess(){
-	document.location.href = '/';
-
-}
-
-function signupError(err, textStatus){
-	alert(textStatus);
+function setMessage(message){
+	var errorBox = $('error-box');
+	errorBox.text(message);
 }

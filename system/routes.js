@@ -34,10 +34,7 @@ module.exports.defineRoutes = function(app){
 	app.route('/account/settings')
 	.get(accountController.getUserSettings);
 	
-	app.route('/account/create')
-		.get(accountController.accountSignup)
-		.post(accountController.doSignup);
-	
-	app.route('/account/:username')
-	.get(accountController.getUserProfile);
+	app.route('/register')
+	.get(accountController.registerUser)
+	.post(accountController.doSignup);
 };

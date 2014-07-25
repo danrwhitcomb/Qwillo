@@ -1,6 +1,5 @@
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema,
-    passportLocalMongoose = require('passport-local-mongoose');
+    Schema = mongoose.Schema;
 
 var User = new Schema({
     email: String,
@@ -14,11 +13,17 @@ var User = new Schema({
     isActive: {type: Boolean, default: false}
 });
 
-User.plugin(passportLocalMongoose);
 
 User.methods.getFullName = function(){
 	return this.firstName + ' ' + this.lastName;
 }
+
+User.methods.comparePassword = function(candidatePassword, cb) {
+	bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
+		if(err) return cb(err);
+		cb(null, isMatch);
+	});
+};
 
 
 module.exports = mongoose.model('User', User);

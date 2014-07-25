@@ -1,6 +1,5 @@
 var accountRepo = require('../repositories/accountRepository');
 var defines = require('../system/defines');
-var passport = require('passport');
 
 module.exports.signupUser = function(params){
 	if(accountRepo.isEmailTaken(params.email)){

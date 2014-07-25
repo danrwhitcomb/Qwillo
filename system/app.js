@@ -12,69 +12,47 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , mongoose = require('mongoose')
-  , passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy;
+  , stormpath = require('stormpath');
 
-//Routes 
+
+//Custom Modules
 var routes = require('./routes');
   
 var app = express();
 
 // all environments
 app.set('port', process.env.PORT || 3000);
-app.set('views', __dirname + './../views');
+app.set('views', __dirname + '/../views');
 app.set('view engine', 'jade');
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride('X-HTTP_Method-Override'));
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.use(express.static(path.join(__dirname, '../public')));
-
-//passport config
-var user = require('../repositories/models/userModel');
-passport.serializeUser(function(user, done) {
-	  done(null, user.id);
-	});
-
-passport.deserializeUser(function(id, done) {
-	findById(id, function (err, user) {
-		done(err, user);
-	});
-});
-
-//Passport strategy
-passport.use(new LocalStrategy(
-function(username, password, done) {
-	User.findOne({ username: username }, function (err, user) {
-		if (err) { return done(err); }
-		if (!user) { return done(null, false); }
-		if (!user.verifyPassword(password)) { return done(null, false); }
-		return done(null, user);
-    });
-  }
-));
+app.use(express.static(path.join(__dirname, '/../public')));
 
 // mongoose
-mongoose.connect('mongodb://localhost/passport_local_mongoose');
+mongoose.connect('mongodb://localhost/local_mongoose');
 
 // development only
 if ('development' === app.get('env')) {
   app.use(errorHandler());
 }
 
-//cors
 
+//Stormpath Setup
+var client;
+var apiKeyFilePath = __dirname + '/../.stormpath/apiKey.properties';
+stormpath.loadApiKey(apiKeyFilePath, function apiKeyFileLoaded(err, apiKey) {
+  client = new stormpath.Client({apiKey: apiKey});
+});
 
+//Baseview model for common data
 app.use(function(req, res, next){
-	var model = require('../controllers/viewModels/baseViewModel').model;
-	if(req.user != null){
-		model.username = req.user.username;
+	req.model = require('../controllers/viewModels/baseViewModel').model;
+	if(res.locals.user){
+		req.model.username = res.locals.user.username;
 	}
-	req.model = model;
+	req.model.stormpathClient = client;
 	next();
 });
 

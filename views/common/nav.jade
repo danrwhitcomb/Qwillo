@@ -12,7 +12,7 @@ nav.navbar.navbar-default.nav(role='navigation')
 				span.icon-bar
 				span.icon-bar
 				span.icon-bar
-			a.navbar-brand(href='/') App
+			a.navbar-brand(href='/') Qwillo
 		#bs-example-navbar-collapse-1.collapse.navbar-collapse
 			ul.nav.navbar-nav.navbar-right
 				li.nav-link
@@ -20,25 +20,15 @@ nav.navbar.navbar-default.nav(role='navigation')
 				li.nav-link
 					a(href='#') Submit
 				li.nav-link.login-link
-					a(href='#') #{base.username}
-	if (base.username == 'Login')
-		.login
-			.login-form-wrapper
-				form.login-form(action="submit" autocomplete='on' method='post')
-					input.login-box(placeholder="Username")
-					input.login-box(placeholder="Password")
-					button.login-button(type="submit" name="login") Login
-					button.signup-button(type='button' name="signup") Sign Up
-	else 
-		.login
-			.flyout-info-header
-				img
-				p #{base.username}
-			ul.flyout-info-content
-				li.flyout-info-item
-					a(href='/account/#{base.username}') Profile
-				li.flyout-info-item
-					a(href='/account/settings') Account Settings
+					a(href='#') Login
+	
+	.login
+		.login-form-wrapper
+			form.login-form(action="submit" autocomplete='on' method='post')
+				input.login-box(placeholder="Username")
+				input.login-box(placeholder="Password")
+				button.login-button(type="submit" name="login") Login
+				button.signup-button(type='button' name="signup") Sign Up
 
 .categories.container
 	.categories-wrapper

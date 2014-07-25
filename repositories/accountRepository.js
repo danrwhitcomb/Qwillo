@@ -40,12 +40,9 @@ module.exports.addUser = function(params) {
 		user.isAdmin = params.isAdmin;
 	}
 	
-	var result = true;
-	
 	user.save(function(err){
 		if(err) {
 			console.log("Ooops");
-			result = false;
 		}
 	});
 	return user;

@@ -14,5 +14,5 @@ function toggleLoginModule(){
 }
 
 function goToSignup(){
-	document.location.href = '/account/create';
+	document.location.href = '/register';
 }

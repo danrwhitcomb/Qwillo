@@ -1,0 +1,31 @@
+extends ../common/layout
+
+block content
+
+	.container
+		// Display an error if there is any.
+		if error
+			p #{error}
+		.center-block(style="max-width: 600px; margin-top: 40px")
+			h1 Sign-up for Qwillo!
+			form(method='post' role='form', onsubmit="return validateForm()")
+				.control-group
+					.form-group
+						label Username
+						input(placeholder='Username', name='username', type='text').form-control#username
+
+					.form-group
+						label First Name
+						input(placeholder='First Name', name='givenName', type='text').form-control#firstname
+
+					.form-group
+						label Last Name
+						input(placeholder='Last Name', name='surname', type='text').form-control#lastname
+					.form-group
+						label Email
+						input(placeholder='Email', name='email', required='true', type='text').form-control#email
+					.form-group
+						label Password
+						input(placeholder='Password', name='password', required='true', type='password').form-control#password
+
+					button(type='submit').btn.btn-default Create Account
