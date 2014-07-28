@@ -4,7 +4,8 @@ html
 		title= title
 		link(rel='stylesheet', href='/css/common/common.css')
 		link(rel='stylesheet', href='/css/bootstrap.min.css')
-		
+
+		script(type="text/javascript" src="/js/common/error.js")
 		script(type="text/javascript" src="/js/3rdParty/jquery-2.1.1.min.js")
 		script(type="text/javascript" src="/js/3rdParty/bootstrap.min.js")
 		
@@ -12,3 +13,10 @@ html
 		include nav.jade
 		include search.jade
 		block content
+		
+		.errorNode
+			.blackout
+				.error-wrapper
+					button.pull-right.close
+					p
+		script $('.errorNode').hide();

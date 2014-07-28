@@ -19,16 +19,20 @@ nav.navbar.navbar-default.nav(role='navigation')
 					a#categories(href='#') Categories
 				li.nav-link
 					a(href='#') Submit
-				li.nav-link.login-link
-					a(href='#') Login
-	
-	.login
-		.login-form-wrapper
-			form.login-form(action="submit" autocomplete='on' method='post')
-				input.login-box(placeholder="Username")
-				input.login-box(placeholder="Password")
-				button.login-button(type="submit" name="login") Login
-				button.signup-button(type='button' name="signup") Sign Up
+				if !base.username 
+					li.nav-link.login-link
+						a(href='#') Login
+				else
+					li.nav-link.dropdown
+						a.dropdown-toggle(href='#', data-toggle='dropdown')
+								| #{base.username}
+						ul.dropdown-menu(role='menu')
+							li
+								a(href='/account/#{base.username}') Account
+							li.logout-button
+								a(href='#') Logout
+
+
 
 .categories.container
 	.categories-wrapper
@@ -41,5 +45,29 @@ nav.navbar.navbar-default.nav(role='navigation')
 						li.category-item
 							a(href='/category/#{val}') #{val}
 
+.signup-box
+	.blackout-background
+	.center-block
+		.content-block
+			button.close(type='button')
+				span(aria-hidden='true') ×
+				span.sr-only Close
+			h2 Login to Qwillo!
+			hr
+			form(role='form')
+				.form-group
+					label(for='exampleInputEmail1') Username
+					input#exampleInputEmail1.form-control(type='username', placeholder='Enter username')
+				.form-group
+					label(for='exampleInputPassword1') Password
+					input#exampleInputPassword1.form-control(type='password', placeholder='Password')
+				p.error-message Your username or password does not match our records
+				button.btn.btn-success.btn-block.btn-lg(type='submit') Login
+			h3 Or 
+			form(role='form' )
+				a.btn.btn-primary.btn-block.btn-lg(href='/register') Signup
+
+
+script $('.signup-box').hide();
 script(type='text/javascript' src='/js/common/nav/login_module.js')
 script(type='text/javascript' src='/js/common/nav/categories_module.js')

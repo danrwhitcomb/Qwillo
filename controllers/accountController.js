@@ -34,10 +34,46 @@ module.exports.doSignup = function(req, res){
 				if(err){
 					res.send({"status": err});
 				} else {
-					res.send({"status": defines.successCode});
+					req.session.username = req.body.username;
+					res.send({"status": defines.messages.successCode});
 				}
 			});
 		};
 	});
+};
+
+module.exports.login = function(req, res){
+	if(req.session.username != null){
+		res.send({status:"You are already logged in!"});
+	} else {
+		authUser = {
+				username: req.body.username, 
+				password: req.body.password
+		};
+		
+		req.model.stormpathClient.getApplication(defines.stormpath.appAddress, function(err, gotApp) {
+			if(err) res.send({"status": err});
+			else { 
+				gotApp.authenticateAccount(authcRequest, function onAuthcResult(err, result) {
+					  result.getAccount(function(err, account) {
+						  if(err) res.send({"status": err});
+						  else {
+							  req.session.username = req.body.username;
+							  res.send({"status": defines.messages.sucessCode});
+						  }
+					  });
+				});
+			}
+		});
+	}
+};
+
+module.exports.logout = function(req, res){
+	if(req.session.username == null){
+		res.send({'status': "You are not logged in!"});
+	} else {
+		req.session = null;
+		res.send({'status': defines.messages.successCode});
+	}
 };
 

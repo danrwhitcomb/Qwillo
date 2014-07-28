@@ -3,13 +3,12 @@ extends ../common/layout
 block content
 
 	.container
-		// Display an error if there is any.
-		if error
-			p #{error}
 		.center-block(style="max-width: 600px; margin-top: 40px")
 			h1 Sign-up for Qwillo!
-			form(method='post' role='form', onsubmit="return validateForm()")
+			form(method='post' role='form').signup-form
 				.control-group
+					.error-box.alert.alert-danger
+						
 					.form-group
 						label Username
 						input(placeholder='Username', name='username', type='text').form-control#username
@@ -28,4 +27,7 @@ block content
 						label Password
 						input(placeholder='Password', name='password', required='true', type='password').form-control#password
 
-					button(type='submit').btn.btn-default Create Account
+					button.btn.btn-default.submit-signup.btn-success Create Account
+	script(src='/js/account/signupForm.js')
+	script.
+		$('.error-box').hide();

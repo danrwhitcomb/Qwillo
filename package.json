@@ -16,6 +16,8 @@
     "body-parser": "*",
     "method-override": "*",
     "morgan": "*",
-    "errorhandler": "*"
+    "errorhandler": "*",
+    "cookie-parser": "*",
+    "cookie-session": "*"
   }
 }

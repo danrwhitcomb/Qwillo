@@ -6,13 +6,9 @@ $('.signup-form').bind('submit', function(event) {
 function doSignup(){
 	
 	var data = $('.signup-form').serializeArray();
-	var sendData = {};
-	for (obj in data){
-		sendData[obj.name] = obj.value;
-	}
 
 	var request = $.ajax({
-		url: '/account/create',
+		url: '/register',
 		data: data,
 		type: 'POST',
 	});
@@ -32,6 +28,7 @@ function doSignup(){
 }
 
 function setMessage(message){
-	var errorBox = $('error-box');
+	var errorBox = $('.error-box');
+	errorBox.show();
 	errorBox.text(message);
 }

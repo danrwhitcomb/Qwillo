@@ -12,7 +12,9 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , mongoose = require('mongoose')
-  , stormpath = require('stormpath');
+  , stormpath = require('stormpath')
+  , cookieParser = require('cookie-parser')
+  , cookieSession = require('cookie-session')
 
 
 //Custom Modules
@@ -29,6 +31,11 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride('X-HTTP_Method-Override'));
 app.use(express.static(path.join(__dirname, '/../public')));
+app.use(cookieParser('THIS IS A SECRET!!!!'));
+app.use(cookieSession({
+	keys: ['SiddarthHiregowdara', 'DanielRowanWhitcomb'],
+	secret: 'Knights of the Round Table',
+}));
 
 // mongoose
 mongoose.connect('mongodb://localhost/local_mongoose');
@@ -49,8 +56,8 @@ stormpath.loadApiKey(apiKeyFilePath, function apiKeyFileLoaded(err, apiKey) {
 //Baseview model for common data
 app.use(function(req, res, next){
 	req.model = require('../controllers/viewModels/baseViewModel').model;
-	if(res.locals.user){
-		req.model.username = res.locals.user.username;
+	if(req.session.username){
+		req.model.username = req.session.username;
 	}
 	req.model.stormpathClient = client;
 	next();
