@@ -5,8 +5,12 @@ nav bar functions primarily
 */
 var defines = require('../../system/defines');
 
-module.exports.model = {
-	username: null,
-	categories : defines.categories,
-	title: defines.appTitle
+module.exports.model = function(){
+	return new baseModel();
 };
+
+function baseModel(){
+	this.username = null;
+	this.categories = defines.categories
+	this.title = defines.appTitle;
+}

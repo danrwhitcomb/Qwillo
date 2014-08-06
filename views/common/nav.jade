@@ -54,15 +54,15 @@ nav.navbar.navbar-default.nav(role='navigation')
 				span.sr-only Close
 			h2 Login to Qwillo!
 			hr
-			form(role='form')
+			form(role='form', onsumbit='return false').login-form
+				p.error-message Your username or password does not match our records
 				.form-group
-					label(for='exampleInputEmail1') Username
-					input#exampleInputEmail1.form-control(type='username', placeholder='Enter username')
+					label(for='exampleInputEmail1') Username or Email
+					input#exampleInputEmail1.form-control(type='username', name='username' placeholder='Enter username or email')
 				.form-group
 					label(for='exampleInputPassword1') Password
-					input#exampleInputPassword1.form-control(type='password', placeholder='Password')
-				p.error-message Your username or password does not match our records
-				button.btn.btn-success.btn-block.btn-lg(type='submit') Login
+					input#exampleInputPassword1.form-control(type='password', name='password', placeholder='Password')
+				button.btn.btn-success.btn-block.btn-lg.login-button Login
 			h3 Or 
 			form(role='form' )
 				a.btn.btn-primary.btn-block.btn-lg(href='/register') Signup

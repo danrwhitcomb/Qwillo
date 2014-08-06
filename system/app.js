@@ -55,12 +55,13 @@ stormpath.loadApiKey(apiKeyFilePath, function apiKeyFileLoaded(err, apiKey) {
 
 //Baseview model for common data
 app.use(function(req, res, next){
-	req.model = require('../controllers/viewModels/baseViewModel').model;
-	if(req.session.username){
-		req.model.username = req.session.username;
-	}
-	req.model.stormpathClient = client;
-	next();
+  var model = require('../controllers/viewModels/baseViewModel');
+  req.model = model.model();
+  if(req.session.username){
+    req.model.username = req.session.username;
+  }
+  req.model.stormpathClient = client;
+  next();
 });
 
 routes.defineRoutes(app);

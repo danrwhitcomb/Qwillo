@@ -4,7 +4,7 @@ Defines constants for application
 Aka strings, magic numbers, etc
 */
 
-module.exports.appName = "App";
+module.exports.appName = "Qwillo";
 
 module.exports.categories = [
 		'Art',

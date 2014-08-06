@@ -25,17 +25,17 @@ module.exports.doSignup = function(req, res){
 			email: req.body.email,
 			password: req.body.password
 	};
-	
+
 	var app;
 	req.model.stormpathClient.getApplication(defines.stormpath.appAddress, function(err, gotApp) {
-		if(err) res.send({"status": err});
+		if(err) res.send({status: err});
 		else { 
 			gotApp.createAccount(account, function onAccountCreated(err, createdAccount) {
 				if(err){
-					res.send({"status": err});
+					res.send({status: err});
 				} else {
 					req.session.username = req.body.username;
-					res.send({"status": defines.messages.successCode});
+					res.send({status: defines.messages.successCode});
 				}
 			});
 		};
@@ -46,22 +46,22 @@ module.exports.login = function(req, res){
 	if(req.session.username != null){
 		res.send({status:"You are already logged in!"});
 	} else {
-		authUser = {
-				username: req.body.username, 
-				password: req.body.password
-		};
-		
+
 		req.model.stormpathClient.getApplication(defines.stormpath.appAddress, function(err, gotApp) {
-			if(err) res.send({"status": err});
+			if(err) res.send({status: err});
 			else { 
+				var authcRequest = { username: req.body.username, password: req.body.password};
 				gotApp.authenticateAccount(authcRequest, function onAuthcResult(err, result) {
-					  result.getAccount(function(err, account) {
-						  if(err) res.send({"status": err});
-						  else {
-							  req.session.username = req.body.username;
-							  res.send({"status": defines.messages.sucessCode});
-						  }
-					  });
+					if(err) res.send({status: err});
+					else {
+						result.getAccount(function(err, account) {
+							  if(err) res.send({status: err});
+							  else {
+								  req.session.username = account.username;
+								  res.send({status: defines.messages.successCode});
+							  }
+						  });
+					}
 				});
 			}
 		});
@@ -70,10 +70,10 @@ module.exports.login = function(req, res){
 
 module.exports.logout = function(req, res){
 	if(req.session.username == null){
-		res.send({'status': "You are not logged in!"});
+		res.send({status: "You are not logged in!"});
 	} else {
 		req.session = null;
-		res.send({'status': defines.messages.successCode});
+		res.send({status: defines.messages.successCode});
 	}
 };
 
