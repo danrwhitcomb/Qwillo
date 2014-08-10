@@ -27,20 +27,24 @@ module.exports.defineRoutes = function(app){
 		.get(topicController.getTopic);
 		
 	//Post routes
-	app.route('/post/:id')
+	app.route('/post/submit')
+		.get(postController.submitPage)
+		.post(postController.submitPost);
+
+	app.route('/post/link/:id')
 		.get(postController.getPost);
 	
 	//Account routes
-	app.route('/account/settings')
+	app.route('/account/user/:user/settings')
 	.get(accountController.getUserSettings);
 	
 	app.route('/account/login')
-	.post(accountController.login);
+		.post(accountController.login);
 	
 	app.route('/account/logout')
-	.post(accountController.logout);
+		.post(accountController.logout);
 	
 	app.route('/register')
-	.get(accountController.registerUser)
-	.post(accountController.doSignup);
+		.get(accountController.registerUser)
+		.post(accountController.doSignup);
 };

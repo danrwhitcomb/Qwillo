@@ -18,6 +18,7 @@
     "morgan": "*",
     "errorhandler": "*",
     "cookie-parser": "*",
-    "cookie-session": "*"
+    "cookie-session": "*",
+    "async": "*"
   }
 }

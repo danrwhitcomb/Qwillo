@@ -18,7 +18,7 @@ nav.navbar.navbar-default.nav(role='navigation')
 				li.nav-link
 					a#categories(href='#') Categories
 				li.nav-link
-					a(href='#') Submit
+					a(href='/post/submit') Submit
 				if !base.username 
 					li.nav-link.login-link
 						a(href='#') Login
@@ -28,7 +28,7 @@ nav.navbar.navbar-default.nav(role='navigation')
 								| #{base.username}
 						ul.dropdown-menu(role='menu')
 							li
-								a(href='/account/#{base.username}') Account
+								a(href='/account/user/#{base.username}/settings') Account
 							li.logout-button
 								a(href='#') Logout
 

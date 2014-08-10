@@ -13,4 +13,4 @@ var Post = new Schema({
 	flags: Integer
 });
 
-module.exports = mongoose.model('Post', Post);
+module.exports.Post = mongoose.model('Post', Post);

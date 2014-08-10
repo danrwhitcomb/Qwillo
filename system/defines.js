@@ -29,6 +29,7 @@ module.exports.categories = [
 module.exports.messages = {
 		success: "Successfully completed the action",
 		successCode: 100,
+		notLoggedIn: "Oops! You must be logged in to perform this action."
 };
 
 module.exports.stormpath = {
