@@ -7,4 +7,7 @@ module.exports.indexModel = function(){
 function indexModel(){
 	this.base = null
 	this.title = null;
+	this.topics = null;
+	this.featuredTopic = null;
+	this.featuredPosts = [];
 }

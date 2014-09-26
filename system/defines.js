@@ -29,9 +29,23 @@ module.exports.categories = [
 module.exports.messages = {
 		success: "Successfully completed the action",
 		successCode: 100,
-		notLoggedIn: "Oops! You must be logged in to perform this action."
+		notLoggedIn: "Oops! You must be logged in to perform this action.",
+		invalidData: "Invalid argument error. Please use the correct argument."
 };
 
 module.exports.stormpath = {
 		appAddress: "https://api.stormpath.com/v1/applications/57eR7cPcXVv7PjQgdcgmqr"
+};
+
+module.exports.topics = {
+	homepageTopics: [
+		'Wikipedia',
+		'Lycos',
+		'History of Scotland',
+		'Dwayne Johnson',
+		'Nanoscopic Scale',
+		'404 error'
+	],
+
+	featuredTopic:"Malware"
 };

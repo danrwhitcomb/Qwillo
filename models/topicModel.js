@@ -3,9 +3,10 @@ var mongoose = require('mongoose'),
 
 var Topic = new Schema({
 	title: String,
+	category: String,
 	description: String,
 	creationDate: { type: Date, default: Date.now },
-	numberOfPosts: Integer
+	numberOfPosts: Number
 });
 
-module.exports = mongoose.model('Topic', Topic);
+module.exports = mongoose.model('topics', Topic);

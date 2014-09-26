@@ -1,4 +1,5 @@
 var postModel = require('../models/postModel');
+var topicModel = require('../models/topicModel');
 var defines = require('../system/defines');
 var utils = require('../system/utils');
 var async = require('async');
@@ -9,6 +10,7 @@ var Topic = topicModel.Topic;
 module.exports.submitPostForUser = function(res, data, username){
 
 	var now = new Data(year, month, day, hour, minute);
+	data.title = data.title.toLowerCase();
 	var post = new Post({title: data.title, 
 						 link: data.link,
 						 description: data.description,
@@ -29,7 +31,6 @@ module.exports.submitPostForUser = function(res, data, username){
 			})
 		},
 		savePost,
-
 		function(callback){
 			utils.sendSuccess(res);
 		}
@@ -38,21 +39,12 @@ module.exports.submitPostForUser = function(res, data, username){
 	});
 };
 
-module.exports.getPostForId = function(res, id){
-
-}
 
 module.exports.savePost = function(post, callback){
 	post.save(function(err){
 		if(err) callback(err);
 		else callback(null)
 	});
-};
-
-module.exports.checkTopic(callback, topic) = function(err, topic){
-	if(error){
-		savePost = function()
-	}
 };
 
 module.exports.sendPostModel = function(){

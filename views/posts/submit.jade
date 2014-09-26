@@ -7,29 +7,24 @@ block content
 			.col-lg-4
 				h1 Submit a Link
 				if base.username
-					.error-box.alert.alert-danger
-					form(method='post' role='form').submit-post-form
-						.control-group
-							.form-group
-								label Select Category
-								select.form-control
-									option -- Please Select --
-									each cat in base.categories
-										option= cat
-							.form-group
-								label Find Topic
-								input(placeholder='Search for a topic', name='topic', type='text').form-control
-							.form-group
-								label Title
-								input(placeholder='Choose a title', name='title', type='text').form-control
-							.form-group
-								label Description
-								textarea.form-control(rows="3", name='description', placeholder='What\'s this all about?', type='text')
-							.form-group
-								label Link
-								input(placeholder='Add a link!', name='link', type='text').form-control
-							.form-group
-								button.btn.btn-default.btn-success Submit
+					.topic-select
+						h2 1st: Search for a topic
+						
+					.post-submission
+						.error-box.alert.alert-danger
+						form(method='post' role='form').submit-post-form
+							.control-group
+								.form-group
+									label Title
+									input(placeholder='Choose a title', name='title', type='text').form-control
+								.form-group
+									label Description
+									textarea.form-control(rows="3", name='description', placeholder='What\'s this all about?', type='text')
+								.form-group
+									label Link
+									input(placeholder='Add a link!', name='link', type='text').form-control
+								.form-group
+									button.btn.btn-default.btn-success Submit
 				else
 					h3 You must be logged in to submit a post
 	script(type='text/javascript', src='/js/posts/submit.js')

@@ -7,10 +7,10 @@ var Post = new Schema({
 	description: String,
 	datePosted: Date,
 	user: String,
-	upvote: Integer,
-	downvote: Integer,
+	upvote: Number,
+	downvote: Number,
 	topic: String,
-	flags: Integer
+	flags: Number
 });
 
-module.exports.Post = mongoose.model('Post', Post);
+module.exports = mongoose.model('posts', Post);

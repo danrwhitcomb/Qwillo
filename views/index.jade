@@ -2,5 +2,17 @@ extends common/layout
 
 block content
 	.container
-		h1 #{title}
-		p Welcome to #{title}
+		.col-md-4
+			.panel.panel-default
+				.panel-heading Hightlighted
+				.panel-body
+					h2 #{featuredTopic.title}
+		.col-md-8
+			each topic in topics
+				.topicBox
+					.header
+						h2 
+							a(href='/topic/#{topic.title}') #{topic.title}
+
+
+		p This is the end!

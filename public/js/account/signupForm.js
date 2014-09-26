@@ -31,4 +31,4 @@ function setMessage(message){
 	var errorBox = $('.error-box');
 	errorBox.show();
 	errorBox.text(message);
-}we
+}
