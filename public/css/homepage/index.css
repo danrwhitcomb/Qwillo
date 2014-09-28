@@ -1,0 +1,24 @@
+/* Homepage Css
+Maps to index.jade
+*/
+.content {
+	margin-top: 20px;
+}
+
+.topicBox {
+	background-color: #DEF3FA;
+	height: 120px;
+	max-height: 120px;
+	min-height: 120px;
+	margin-bottom: 15px;
+	border-radius: 3px;
+}
+
+.topicBox .header {
+	padding-left: 10px;
+	padding-top: 10px;
+}
+
+.topicBox .header>h2 {
+	margin: 0;
+}
