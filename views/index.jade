@@ -4,16 +4,25 @@ block content
 	link(rel="stylesheet" href="/css/homepage/index.css")
 	.container.content
 		.col-md-4
-			.panel.panel-default
-				.panel-heading Hightlighted
-				.panel-body
-					h2 #{featuredTopic.title}
+			.panel
+				.panel-heading
+					img(src="/images/placeholder.jpg")
+					h1 #{featuredTopic.title}
+				.panel-body.featured-panel 
+					each post in featuredPosts
+						.postBox
+							.header
+								h2
+									a(href='/topic/#{featuredTopic.title}/#{post.title}')
+					
 		.col-md-8
 			each topic in topics
 				.topicBox
 					.header
 						h2 
 							a(href='/topic/#{topic.title}') #{topic.title}
-
+					.pull-right
+					.topicDescription.pull-left Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis placerat, massa vitae iaculis molestie, purus mi aliquam nisl, scelerisque gravida risus diam ut ligula. Praesent arcu nibh, elementum in ipsum quis, maximus dignissim turpis. Cras purus elit, sodales ac tempus a, hendrerit nec tortor. Nam rutrum nec lectus et interdum. Sed eget tortor in risus finibus 
+					
 
 		p This is the end!

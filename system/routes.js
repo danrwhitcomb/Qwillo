@@ -27,7 +27,7 @@ module.exports.defineRoutes = function(app){
 		.get(topicController.getTopic);
 		
 	//Post routes
-	app.route('/post/submit')
+	app.route('/topic/:id/post/:postName')
 		.get(postController.submitPage)
 		.post(postController.submitPost);
 
