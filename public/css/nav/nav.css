@@ -1,26 +1,30 @@
 /* Nav bar styling */
 .nav {
-	background-color: #266dab;
-	color: white;
+	background-color: #fcfcfc !important;
 	border: none;
 	border-radius: 0;
 	margin-bottom: 0;
 }
 
-.navbar-default {
-	box-shadow: black 0 .2px 1px;
-}
-
 .navbar-brand {
-	font-size: 26px !important;
+	font-family: "Rockwell", garamond, serif;
+	font-size: 32px !important;
 }
 
 .navbar-brand,
 .navbar-nav a{
-	color:white !important;
+	color:#59b7c5 !important;
 	font: "Lucida Grande", Helvetica, Arial, sans-serif;
 	font-size: 18px;
-	text-shadow: black .3px .3px 1px;
+	display: inline;
+}
+
+.navbar button {
+	background-color: #59b7c5;
+}
+
+.navbar .navbar-search {
+	display: inline;
 }
 
 /* Login module styling */

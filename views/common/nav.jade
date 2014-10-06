@@ -13,6 +13,9 @@ nav.navbar.navbar-default.nav(role='navigation')
 				span.icon-bar
 				span.icon-bar
 			a.navbar-brand(href='/') Qwillo
+			link(rel='stylesheet' href='/css/searchbar/search_bar.css')
+		
+		script(type='text/javascript' src='/js/common/search/search_bar.js')
 		#bs-example-navbar-collapse-1.collapse.navbar-collapse
 			ul.nav.navbar-nav.navbar-right
 				li.nav-link
@@ -31,6 +34,12 @@ nav.navbar.navbar-default.nav(role='navigation')
 								a(href='/account/user/#{base.username}/settings') Account
 							li.logout-button
 								a(href='#') Logout
+			form(class="navbar-form")
+				div(class="form-group" style="display:inline;")
+					div(class="input-group")
+						input(type="text" class="form-control")
+						span(class="input-group-addon")
+							span(class="glyphicon glyphicon-search")
 
 
 

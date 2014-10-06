@@ -10,19 +10,21 @@ block content
 					h1 #{featuredTopic.title}
 				.panel-body.featured-panel 
 					each post in featuredPosts
-						.postBox
+						.post-box
 							.header
 								h2
 									a(href='/topic/#{featuredTopic.title}/#{post.title}')
+							.featured-content
+								| #{post.description}
 					
 		.col-md-8
 			each topic in topics
-				.topicBox
+				.topic-box
 					.header
 						h2 
 							a(href='/topic/#{topic.title}') #{topic.title}
 					.pull-right
-					.topicDescription.pull-left Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis placerat, massa vitae iaculis molestie, purus mi aliquam nisl, scelerisque gravida risus diam ut ligula. Praesent arcu nibh, elementum in ipsum quis, maximus dignissim turpis. Cras purus elit, sodales ac tempus a, hendrerit nec tortor. Nam rutrum nec lectus et interdum. Sed eget tortor in risus finibus 
+					.topic-description.pull-left Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis placerat, massa vitae iaculis molestie, purus mi aliquam nisl, scelerisque gravida risus diam ut ligula. Praesent arcu nibh, elementum in ipsum quis, maximus dignissim turpis. Cras purus elit, sodales ac tempus a, hendrerit nec tortor. Nam rutrum nec lectus et interdum. Sed eget tortor in risus finibus 
 					
 
 		p This is the end!

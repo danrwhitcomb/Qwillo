@@ -6,8 +6,8 @@ Maps to index.jade
 }
 
 /*Topic feed boxes*/
-.topicBox {
-	background-color: #DEF3FA;
+.topic-box {
+	background-color: #7ec8d3;
 	height: 120px;
 	max-height: 120px;
 	min-height: 120px;
@@ -16,27 +16,32 @@ Maps to index.jade
 	box-shadow: .2px .5px .5px #888888
 }
 
-.topicBox .header {
+.topic-box .header {
 	padding-left: 10px;
 	padding-top: 10px;
 	display: inline;
 	float: left;
 }
 
-.topicBox .header>h2 {
+.topic-box .header>h2 {
 	margin: 0;
 }
 
-.topicDescription {
+.topic-box .header>h2>a {
+	color: white;
+}
+
+.topic-description {
 	padding-left: 10px;
 	max-height: 60px;
 	width:75%;
 	overflow: hidden;
 	display: inline;
+	color: #444444;
 }
 
 
-.topicBox>.pull-right {
+.topic-box>.pull-right {
 	background-image: url('/images/placeholder.jpg');
 	height: 100%;
 	width: 25%;
@@ -46,7 +51,7 @@ Maps to index.jade
 /* Highlighted Panel */
 .panel, .panel-defautl>.panel-heading {
 	border: none;
-	background-color: #D1DBDE;
+	background-color: #f0f0f0;
 	border-radius: 3px;
 	min-height: 600px;
 	box-shadow: .2px .5px .5px #888888;
@@ -63,7 +68,7 @@ Maps to index.jade
 
 .panel-heading>h1 {
 	margin: 10px 0 0 10px;
-	color: #f7f7f7;
+	color: #292929;
 }
 
 
