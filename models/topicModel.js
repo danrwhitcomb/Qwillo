@@ -6,7 +6,8 @@ var Topic = new Schema({
 	category: String,
 	description: String,
 	creationDate: { type: Date, default: Date.now },
-	numberOfPosts: Number
+	numberOfPosts: Number,
+	imageUrl: String,
 });
 
 module.exports = mongoose.model('topics', Topic);

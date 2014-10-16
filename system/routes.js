@@ -21,18 +21,26 @@ module.exports.defineRoutes = function(app){
 	//Category routes
 	app.route('/category/:id')
 		.get(categoryController.getCategory);
+
+
+	app.route('/topic/query/:query')
+		.get(topicController.getTopicsForQuery);
 	
 	//Topic routes
+	app.route('/topic/:id/:postName')
+		.get(postController.getPost);
+	
 	app.route('/topic/:id')
 		.get(topicController.getTopic);
 		
 	//Post routes
-	app.route('/topic/:id/post/:postName')
-		.get(postController.submitPage)
+	
+
+	//Submit Routes
+	app.route('/post/submit')
+		.get(postController.submissionPage)
 		.post(postController.submitPost);
 
-	app.route('/post/link/:id')
-		.get(postController.getPost);
 	
 	//Account routes
 	app.route('/account/user/:user/settings')

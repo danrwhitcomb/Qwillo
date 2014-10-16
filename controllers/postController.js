@@ -7,8 +7,12 @@ module.exports.getPost = function(req, res){
 	res.send('This is the post page');
 };
 
-module.exports.submitPage = function(req, res){
-	res.render('posts/submit', {base:req.model});
+module.exports.submissionPage = function(req, res){
+	if(req.query.topic){
+		res.render('posts/submit', {base: req.model, topic: req.query.topic});
+	} else {
+		res.render('posts/submit', {base:req.model});
+	}
 };
 
 module.exports.submitPost = function(req, res){

@@ -1,19 +1,20 @@
 extends ../common/layout
 
 block content
-
+	link(rel='stylesheet', href='/css/post/submit.css')
 	.container
 		.row
 			.col-lg-4
 				h1 Submit a Link
 				if base.username
-					.topic-select
-						h2 1st: Search for a topic
-						
 					.post-submission
 						.error-box.alert.alert-danger
 						form(method='post' role='form').submit-post-form
 							.control-group
+								.form-group#remote
+									label Topic
+									p#topic-error.input-error Please enter an existing topic
+									input(placeholder='Search for a topic', name='topic', type='text').form-control.typeahead
 								.form-group
 									label Title
 									input(placeholder='Choose a title', name='title', type='text').form-control
@@ -27,6 +28,8 @@ block content
 									button.btn.btn-default.btn-success Submit
 				else
 					h3 You must be logged in to submit a post
+	
+	script(type='text/javascript', src='/js/posts/typeahead.bundle.min.js')
 	script(type='text/javascript', src='/js/posts/submit.js')
 	script.
 		$('.error-box').hide();

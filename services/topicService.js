@@ -3,6 +3,7 @@ var async = require('async');
 var mongoose = require('mongoose');
 var topicModel = require('../models/topicModel');
 var postModel = require('../models/postModel');
+var utils = require('../system/utils');
 
 //Models 
 var Topic = topicModel;
@@ -10,7 +11,18 @@ var Post = postModel;
 
 module.exports.getTopicsForCategory = function(category, res){
 	Topic.findAll();
-}
+};
+
+module.exports.getTopicsForQuery = function(query, res){
+	Topic.find({title: {$regex: query, $options: 'i'}},
+		function(err, topics){
+			if(err) {
+				utils.sendErr(res, err);
+			} else {
+				res.send(topics);
+			}
+		}).limit(15);
+};
 
 module.exports.getHomepageTopics = function(model, res){
 	var definedTopics = defines.topics.homepageTopics;
@@ -45,10 +57,30 @@ module.exports.getHomepageTopics = function(model, res){
 	],
 		function(err, results){
 			if(err){
-				utils.sendError(res, err);
+				utils.sendErr(res, err);
 			} else {
 				res.render('index', model);
 			}
 		});
 	
+};
+
+module.exports.getTopicPage = function(res, topic){
+	Post.find({topic: topic.title},
+		function(err, posts){
+			if(err){
+				res.sendErr(err);
+			} else {
+				var viewModel = {
+					title: topic.title,
+					posts: posts,
+					imageUrl: topic.imageUrl,
+					description: topic.description,
+					creationDate: topic.creationDate,
+					base: res.model
+				}
+
+				res.render('topics/topic', viewModel);
+			}
+		}).sort({datePosted: 'asc'}).limit(15);
 }

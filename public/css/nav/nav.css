@@ -27,6 +27,10 @@
 	display: inline;
 }
 
+.navbar .search-button:hover{
+	cursor: pointer;
+}
+
 /* Login module styling */
 .signup-box {
 	position: absolute;

@@ -1,0 +1,46 @@
+.description-box {
+	margin-top: 30px;
+	padding: 5px;
+}
+
+@media only screen and (max-width: 991px) {
+	.content-box {
+		margin-top: 20px;
+	}
+	
+}
+
+/*.description-box .topic-image{
+	float:left;
+	display:inline;
+}*/
+
+.description-box .topic-image img {
+	height: 100%;
+	width: 100%;
+}
+
+/*.description-box .content-box {
+	width:75%;
+	height: 100%;
+	float:right;
+	padding-left:10px;
+}*/
+
+.description-box .content-box h2 {
+	margin-top: 0;
+}
+
+/*.description-box .action-box {
+	position: absolute;
+	bottom: 0;
+}*/
+
+.description-box .action-box button{
+	width: 100px;
+	margin-right: 10px;
+}
+
+.content-pane{
+	margin-top: 20px;
+}
