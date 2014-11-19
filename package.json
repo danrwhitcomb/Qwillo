@@ -1,10 +1,11 @@
 {
   "name": "Qwillo",
   "version": "0.0.1",
-  "subdomain": "qwillo-staging",
+  "subdomain": "danrwhitcomb-app",
   "private": true,
   "scripts": {
-    "start": "node system/app.js"
+    "start-local": "node system/app.js local",
+    "start-test": "node system/app.js test"
   },
   "dependencies": {
     "express": "*",

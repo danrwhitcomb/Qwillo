@@ -21,6 +21,19 @@ var express = require('express')
 var routes = require('./routes');
   
 var app = express();
+var config = require('./config');
+
+
+if(!process.argv[2] || process.argv[2] == "local"){
+  console.log("Building local server . . . ");
+  config = config.local;
+} else if(process.argv[2] == "test"){
+  console.log("Building test server . . .");
+  config = config.test;
+} else {
+  console.log("Please enter a valid build type");
+  app.close();
+}
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -31,14 +44,14 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride('X-HTTP_Method-Override'));
 app.use(express.static(path.join(__dirname, '/../public')));
-app.use(cookieParser('THIS IS A SECRET!!!!'));
+app.use(cookieParser(config.session.parser));
 app.use(cookieSession({
-	keys: ['SiddarthHiregowdara', 'DanielRowanWhitcomb'],
-	secret: 'Knights of the Round Table',
+	keys: [config.session.session_one, config.session.session_two],
+	secret: config.session.secret,
 }));
 
 // mongoose
-mongoose.connect('mongodb://localhost/local_mongoose');
+mongoose.connect(config.db.mongodb);
 
 // development only
 if ('development' === app.get('env')) {

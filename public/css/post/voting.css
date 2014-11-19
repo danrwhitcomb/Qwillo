@@ -1,0 +1,14 @@
+.post-action-box button{
+	margin-right: 10px;
+	background-color: transparent !important;
+	color: white !important;
+	border-color: transparent !important;
+}
+
+.active.up {
+	color: yellow;
+}
+
+.active.down {
+	color: red;
+}
