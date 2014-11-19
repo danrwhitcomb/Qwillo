@@ -7,9 +7,11 @@ var Post = new Schema({
 	description: String,
 	datePosted: Date,
 	user: String,
+	userId: Schema.Types.ObjectId,
 	upvote: Number,
 	downvote: Number,
 	topic: String,
+	topicId: Schema.Types.ObjectId,
 	flags: Number
 });
 

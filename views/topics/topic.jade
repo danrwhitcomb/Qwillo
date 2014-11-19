@@ -2,6 +2,8 @@ extends ../common/layout
 
 block content
 	link(rel='stylesheet', href='/css/topic/topic.css')
+	link(rel='stylesheet', href='/css/post/voting.css')
+	script(type='text/javscript', src='/js/posts/voting.js')
 	.container
 		.row.description-box
 			.topic-image.col-md-4
@@ -11,10 +13,10 @@ block content
 					img(src='/images/placeholder.jpg')
 			.content-box.col-md-8
 				.row
-					.col-md-12
+					.col-md-12.topic-info
 						h2.topic-title #{title}
 						p.topic-description
-							| Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercit
+							| Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed 
 					.action-box.col-md-12
 						button(type="button", class="btn btn-primary")
 							span(class="glyphicon glyphicon-plus")
@@ -39,8 +41,36 @@ block content
 				//
 					 Tab panes 
 				.tab-content
-					#hot.tab-pane.fade.in.active Hot
-					#top.tab-pane.fade Top
-					#new.tab-pane.fade New
+					#hot.tab-pane.fade.in.active 
+						each post in hotPosts
+							.post-box
+								h2 
+									a(href='#{post.link}')
+										| #{post.title}
+								p #{post.description}
+								.post-action-box
+									button.btn.btn-default.btn-sm.up(type='button')
+										span.glyphicon.glyphicon-thumbs-up
+										|  Helpful!
+									button.btn.btn-default.btn-sm.down(type='button')
+										span.glyphicon.glyphicon-thumbs-down
+										|  Useless!
+									script
+										| votingButtons($('button.up'), $('button.down'), '#{post.id}');
 
+
+					#top.tab-pane.fade 
+						each post in topPosts
+							.post-box
+								h2 
+									a(href='#{post.link}')
+										| #{post.title}
+								p #{post.description}
+					#new.tab-pane.fade 
+						each post in newPosts
+							.post-box
+								h2 
+									a(href='#{post.link}')
+										| #{post.title}
+								p #{post.description}
 

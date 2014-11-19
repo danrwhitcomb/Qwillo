@@ -13,7 +13,7 @@ module.exports.submitPostForUser = function(res, data, username){
 	var post = new Post({title: data.title, 
 						 link: data.link,
 						 description: data.description,
-						 dataPosted: now,
+						 datePosted: now,
 						 user: username,
 						 upvote: 0,
 						 downvote: 0,

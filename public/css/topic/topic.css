@@ -44,3 +44,32 @@
 .content-pane{
 	margin-top: 20px;
 }
+
+.description-box .topic-info {
+	height: 155px;
+	max-height: 155px;
+	overflow: hidden;
+}
+
+.post-box {
+    background-color: #59b7c5;
+    color: black;
+    padding: 8px;
+	border-radius: 3px;
+    margin: 10px 0 10px;
+}
+
+.post-box a {
+    color: white;
+}
+
+.post-box h2 {
+    margin: 0;
+}
+
+.post-box .post-action-box button{
+	margin-right: 10px;
+	background-color: transparent !important;
+	color: white !important;
+	border-color: transparent !important;
+}

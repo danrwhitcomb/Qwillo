@@ -1,7 +1,8 @@
 
 
-# App
-
+# Qwillo
+A subject based reference aggregator.
+Designed and built by Dan Whitcomb and Siddarth Hiregowdara
 
 
 ## Usage

@@ -10,7 +10,10 @@ var User = new Schema({
     isAdmin: {type: Boolean, default: false},
     isConfirmed: {type: Boolean, default: false},
     dateJoined: {type: Date, default: Date.now},
-    isActive: {type: Boolean, default: false}
+    isActive: {type: Boolean, default: false},
+    voteHistory: {upvotes: [Schema.Types.ObjectId], 
+                downvotes: [Schema.Types.ObjectId]
+            },
 });
 
 

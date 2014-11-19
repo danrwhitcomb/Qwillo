@@ -1,6 +1,7 @@
 {
-  "name": "App",
-  "version": "0.0.1-1",
+  "name": "Qwillo",
+  "version": "0.0.1",
+  "subdomain": "qwillo-staging",
   "private": true,
   "scripts": {
     "start": "node system/app.js"
