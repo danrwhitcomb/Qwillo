@@ -38,7 +38,7 @@ function submitPost(){
 
 	}).done(function(response){
 		if(response.status == 100){
-			document.location.href = '/topic/' + send_data[0] + '/' + send_data[1];
+			document.location.href = '/topic/' + send_data[0].value;
 		} else {
 			$('#topic-error').show();
 		}

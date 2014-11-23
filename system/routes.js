@@ -43,8 +43,10 @@ module.exports.defineRoutes = function(app){
 
 	
 	//Account routes
-	app.route('/account/user/:user/settings')
-	.get(accountController.getUserSettings);
+	app.route('/user/:user')
+		.get(accountController.getUserProfile);
+	app.route('/user/:user/settings')
+		.get(accountController.getUserSettings);
 	
 	app.route('/account/login')
 		.post(accountController.login);
@@ -55,4 +57,10 @@ module.exports.defineRoutes = function(app){
 	app.route('/register')
 		.get(accountController.registerUser)
 		.post(accountController.doSignup);
+
+
+	app.route('*')
+	.get(function(req, res){
+	  res.render('common/404', {base: req.model});
+	});
 };

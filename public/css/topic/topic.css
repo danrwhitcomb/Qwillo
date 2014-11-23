@@ -1,6 +1,12 @@
 .description-box {
 	margin-top: 30px;
 	padding: 5px;
+	box-shadow: .0px 1.5px 2px gray;
+	background-color: rgba(255,255,255, .7);
+}
+
+.description-box>.row{
+	margin-bottom: 10px;
 }
 
 @media only screen and (max-width: 991px) {
@@ -27,8 +33,9 @@
 	padding-left:10px;
 }*/
 
-.description-box .content-box h2 {
-	margin-top: 0;
+.description-box h1 {
+	position: absolute;
+	margin:0;
 }
 
 /*.description-box .action-box {
@@ -37,9 +44,11 @@
 }*/
 
 .description-box .action-box button{
-	width: 100px;
-	margin-right: 10px;
+	width: 100%;
+	box-shadow: .0px .5px 1px #212121;
+
 }
+
 
 .content-pane{
 	margin-top: 20px;
@@ -52,15 +61,16 @@
 }
 
 .post-box {
-    background-color: #59b7c5;
+     background-color: rgba(255,255,255, .7);
     color: black;
     padding: 8px;
-	border-radius: 3px;
     margin: 10px 0 10px;
+    box-shadow: .0px 1.5px 2px #212121;
 }
 
 .post-box a {
-    color: white;
+    color: black;
+    opacity: .87;
 }
 
 .post-box h2 {
@@ -69,7 +79,25 @@
 
 .post-box .post-action-box button{
 	margin-right: 10px;
-	background-color: transparent !important;
-	color: white !important;
+	opacity: .87;
 	border-color: transparent !important;
 }
+
+.post-box .post-action-box .useful {
+	background-color: #3F51B5 !important;
+	color: white !important;
+}
+
+.post-box .post-action-box .useful:hover {
+	background-color: #32408f !important;
+}
+
+.post-box .post-action-box .useless {
+	background-color: #FF9800 !important;
+	color: white !important;
+}
+
+.post-box .post-action-box .useless:hover{
+	background-color: #cc7a00 !important;
+}
+

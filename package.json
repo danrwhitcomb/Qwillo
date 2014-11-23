@@ -23,7 +23,7 @@
     "cookie-session": "*",
     "async": "*"
   },
-  "subdomain": "danrwhitcomb-App",
+  "subdomain": "danrwhitcomb-app",
   "engines": {
     "node": "0.10.x"
   }

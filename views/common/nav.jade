@@ -1,7 +1,7 @@
 //Nav bar template.
 //Requires username
 
-link(rel='stylesheet', href='/css/nav/nav.css')
+link(rel='stylesheet', href='/css/common/nav.css')
 
 nav.navbar.navbar-default.nav(role='navigation')
 	.container
@@ -31,7 +31,9 @@ nav.navbar.navbar-default.nav(role='navigation')
 								| #{base.username}
 						ul.dropdown-menu(role='menu')
 							li
-								a(href='/account/user/#{base.username}/settings') Account
+								a(href='/user/#{base.username}') Profile
+							li
+								a(href='/user/#{base.username}/settings') Account
 							li.logout-button
 								a(href='#') Logout
 			form(class="navbar-form")

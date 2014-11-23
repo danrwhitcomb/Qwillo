@@ -51,7 +51,7 @@ app.use(cookieSession({
 }));
 
 // mongoose
-mongoose.connect(config.db.mongodb);
+mongoose.connect(config.db.connectionString);
 
 // development only
 if ('development' === app.get('env')) {

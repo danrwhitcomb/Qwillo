@@ -7,13 +7,12 @@ Maps to index.jade
 
 /*Topic feed boxes*/
 .topic-box {
-	background-color: #7ec8d3;
+	background-color: rgba(255,255,255, .7);
 	height: 120px;
 	max-height: 120px;
 	min-height: 120px;
 	margin-bottom: 15px;
-	border-radius: 3px;
-	box-shadow: .2px .5px .5px #888888
+	box-shadow: .0px .5px 2px gray;;
 }
 
 .topic-box .header {
@@ -28,7 +27,8 @@ Maps to index.jade
 }
 
 .topic-box .header>h2>a {
-	color: white;
+	color: black;
+	opacity: .87
 }
 
 .topic-description {
@@ -37,7 +37,8 @@ Maps to index.jade
 	width:75%;
 	overflow: hidden;
 	display: inline;
-	color: #444444;
+	color: black;
+	opacity: .87;
 }
 
 
@@ -51,10 +52,10 @@ Maps to index.jade
 /* Highlighted Panel */
 .panel, .panel-defautl>.panel-heading {
 	border: none;
-	background-color: #f0f0f0;
+	background-color: #f7f7f7;
 	border-radius: 3px;
 	min-height: 600px;
-	box-shadow: .2px .5px .5px #888888;
+	box-shadow: .0px .5px 2px gray;;
 }
 
 .panel-heading {
