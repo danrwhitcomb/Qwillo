@@ -35,6 +35,12 @@ if(!process.argv[2] || process.argv[2] == "local"){
   app.close();
 }
 
+if(!process.argv[3]){
+  config.port = process.argv[3];
+} else {
+  config.port = 3000;
+}
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/../views');
@@ -79,6 +85,6 @@ app.use(function(req, res, next){
 
 routes.defineRoutes(app);
 
-http.createServer(app).listen(app.get('port'), function(){
+http.createServer(app).listen(config.port, function(){
   console.log('Express server listening on port ' + app.get('port'));
 });

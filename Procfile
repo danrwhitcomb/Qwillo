@@ -1,1 +1,1 @@
-web: npm run-scripts start-test
+web: npm run-scripts start-test $PORT
