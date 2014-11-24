@@ -50,10 +50,12 @@ Maps to index.jade
 }
 
 /* Highlighted Panel */
+.panel {
+	border-radius: 0 !important;
+}
 .panel, .panel-defautl>.panel-heading {
 	border: none;
 	background-color: #f7f7f7;
-	border-radius: 3px;
 	min-height: 600px;
 	box-shadow: .0px .5px 2px gray;;
 }
@@ -64,7 +66,6 @@ Maps to index.jade
 
 .panel-heading>img {
 	width: 100%;
-	border-radius: 3px;
 }
 
 .panel-heading>h1 {

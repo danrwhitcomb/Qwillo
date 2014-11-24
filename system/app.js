@@ -41,6 +41,8 @@ if(!process.argv[3]){
   config.port = 3000;
 }
 
+console.log("Listening on port: " + config.port)
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/../views');
@@ -86,5 +88,5 @@ app.use(function(req, res, next){
 routes.defineRoutes(app);
 
 http.createServer(app).listen(config.port, function(){
-  console.log('Express server listening on port ' + app.get('port'));
+  console.log('Express server listening on port ' + config.port);
 });

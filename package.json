@@ -4,8 +4,8 @@
   "subdomain": "danrwhitcomb-app",
   "private": true,
   "scripts": {
-    "start-local": "node system/app.js local",
-    "start-test": "node system/app.js test"
+    "start-local": "node system/app.js local 3000",
+    "start-test": "node system/app.js test $PORT"
   },
   "dependencies": {
     "express": "*",
