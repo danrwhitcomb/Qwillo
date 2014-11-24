@@ -7,11 +7,11 @@ var Topic = topicModel;
 
 module.exports.getTopic = function(req, res){
 	var topic = req.params.id.toLowerCase();
-	Topic.findOne({title: {$regex: new RegExp(topic, "i")}}, 
+	Topic.findOne({title: {$regex: new RegExp('^' + topic + '$', "i")}}, 
 		function(err, topic){
-			if(err){
+			if(err || !topic){
 				res.status(404);
-			    res.render('404', { url: req.url });
+			    res.render('common/404', { base:req.model });
 			 
 			} else {
 				res.model = req.model;
