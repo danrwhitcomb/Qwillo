@@ -21,7 +21,12 @@ var express = require('express')
 var routes = require('./routes');
   
 var app = express();
-var config = require('./config');
+var config = {};
+try{
+  config = require('./config');
+} catch(e){
+  console.log("No configuration file detected");
+}
 
 
 if(!process.argv[2] || process.argv[2] == "local"){
@@ -29,7 +34,16 @@ if(!process.argv[2] || process.argv[2] == "local"){
   config = config.local;
 } else if(process.argv[2] == "test"){
   console.log("Building test server . . .");
-  config = config.test;
+  config.session = {};
+  config.session.parser = process.env.PARSER;
+  config.session.session_one = process.env.SESSION_ONE_KEY;
+  config.session.session_two = process.env.SESSION_TWO_KEY;
+  config.session.secret = process.env.SESSION_SECRET;
+  config.db = {};
+  config.db.connectionString = process.env.MONGOLAB_URI;
+  config.stormpath = {};
+  config.stormpath.id = process.env.STORMPATH_ID;
+  config.stormpath.secret = process.env.STORMPATH_SECRET;
 } else {
   console.log("Please enter a valid build type");
   app.close();
@@ -69,10 +83,7 @@ if ('development' === app.get('env')) {
 
 //Stormpath Setup
 var client;
-var apiKeyFilePath = __dirname + '/../.stormpath/apiKey.properties';
-stormpath.loadApiKey(apiKeyFilePath, function apiKeyFileLoaded(err, apiKey) {
-  client = new stormpath.Client({apiKey: apiKey});
-});
+client = new stormpath.Client({apiKey: config.stormpath});
 
 //Baseview model for common data
 app.use(function(req, res, next){
