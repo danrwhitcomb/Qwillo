@@ -2,29 +2,51 @@ extends common/layout
 
 block content
 	link(rel="stylesheet" href="/css/homepage/index.css")
-	.container.content
-		.col-xs-4
-			.panel
-				.panel-heading
-					img(src="/images/placeholder.jpg")
-					h1 #{featuredTopic.title}
-				.panel-body.featured-panel 
-					each post in featuredPosts
-						.post-box
-							.header
-								h2
-									a(href='/topic/#{featuredTopic.title}/#{post.title}')
-							.featured-content
-								| #{post.description}
+	link(rel="stylesheet" href="/css/owl-carousel/owl.carousel.css")
+	link(rel="stylesheet" href="/css/owl-carousel/owl.theme.css")
+	script(src="/js/owl-carousel/owl.carousel.min.js")
+	script(src='/js/index.js')
+	.container
+		.row
+			.col-xs-6
+				p I wish I could think of something cool to write here
+			.col-xs-6
+				.action-box.pull-right
+					a(href='/post/submit') Post Link
+					a(href='/topic/submit') New Topic
+		.row
+			.col-xs-12
+				#owl-demo.owl-carousel.owl-theme
+					each topic in topics
+						.item
+							if topic.imageUrl
+								img(src='#{topic.imageUrl}')
+							else
+								img(src='/images/placeholder.jpg')
+
+
+		//- 	.panel
+		//- 		.panel-heading
+		//- 			img(src="/images/placeholder.jpg")
+		//- 			a(href='/topic/#{featuredTopic.title}')
+		//- 				h1 #{featuredTopic.title}
+		//- 		.panel-body.featured-panel 
+		//- 			each post in featuredPosts
+		//- 				.post-box
+		//- 					.header
+		//- 						h2
+		//- 							a(href='/topic/#{featuredTopic.title}/#{post.title}')
+		//- 					.featured-content
+		//- 						| #{post.description}
 					
-		.col-xs-8
-			each topic in topics
-				.topic-box
-					.header
-						h2 
-							a(href='/topic/#{topic.title}') #{topic.title}
-					.pull-right
-					.topic-description.pull-left Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis placerat, massa vitae iaculis molestie, purus mi aliquam nisl, scelerisque gravida risus diam ut ligula. Praesent arcu nibh, elementum in ipsum quis, maximus dignissim turpis. Cras purus elit, sodales ac tempus a, hendrerit nec tortor. Nam rutrum nec lectus et interdum. Sed eget tortor in risus finibus 
+		//- .col-xs-8
+		//- 	each topic in topics
+		//- 		.topic-box
+		//- 			.header
+		//- 				h2 
+		//- 					a(href='/topic/#{topic.title}') #{topic.title}
+		//- 			.pull-right
+		//- 			.topic-description.pull-left Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis placerat, massa vitae iaculis molestie, purus mi aliquam nisl, scelerisque gravida risus diam ut ligula. Praesent arcu nibh, elementum in ipsum quis, maximus dignissim turpis. Cras purus elit, sodales ac tempus a, hendrerit nec tortor. Nam rutrum nec lectus et interdum. Sed eget tortor in risus finibus 
 					
 
 		p This is the end!

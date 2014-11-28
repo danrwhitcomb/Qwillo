@@ -1,7 +1,7 @@
 extends ../common/layout
 
 block content
-	link(rel='stylesheet', href='/css/post/submit.css')
+	link(rel='stylesheet', href='/css/common/typeahead.css')
 	.container
 		.row
 			.col-lg-4
@@ -14,7 +14,10 @@ block content
 								.form-group#remote
 									label Topic
 									p#topic-error.input-error Please enter an existing topic
-									input(placeholder='Search for a topic', name='topic', type='text').form-control.typeahead
+									if topic
+										input(placeholder='Search for a topic', name='topic', type='text', value='#{topic}').form-control.typeahead
+									else
+										input(placeholder='Search for a topic', name='topic', type='text').form-control.typeahead
 								.form-group
 									label Title
 									input(placeholder='Choose a title', name='title', type='text').form-control

@@ -22,11 +22,17 @@ module.exports.defineRoutes = function(app){
 	app.route('/category/:id')
 		.get(categoryController.getCategory);
 
-
 	app.route('/topic/query/:query')
 		.get(topicController.getTopicsForQuery);
 	
 	//Topic routes
+	app.route('/topic/submit')
+		.get(topicController.topicSubmissionPage)
+		.post(topicController.submitTopic);
+		
+	app.route('/topic/image')
+		.post(topicController.setPictureForTopic);
+		
 	app.route('/topic/:id/:postName')
 		.get(postController.getPost);
 	

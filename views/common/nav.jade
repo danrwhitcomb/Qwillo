@@ -18,15 +18,11 @@ nav.navbar.navbar-default.nav(role='navigation')
 		script(type='text/javascript' src='/js/common/search/search_bar.js')
 		#bs-example-navbar-collapse-1.collapse.navbar-collapse
 			ul.nav.navbar-nav.navbar-right
-				li.nav-link
-					a#categories(href='#') Categories
-				li.nav-link
-					a(href='/post/submit') Submit
 				if !base.username 
 					li.nav-link.login-link
 						a(href='#') Login
 				else
-					li.nav-link.dropdown
+					li.nav-link.dropdown.username-link
 						a.dropdown-toggle(href='#', data-toggle='dropdown')
 								| #{base.username}
 						ul.dropdown-menu(role='menu')
@@ -63,7 +59,7 @@ nav.navbar.navbar-default.nav(role='navigation')
 			button.close(type='button')
 				span(aria-hidden='true') ×
 				span.sr-only Close
-			h2 Welcome Back!
+			h2 Hello There!
 			hr
 			form(role='form', onsumbit='return false').login-form
 				p.error-message Your username or password does not match our records
@@ -73,12 +69,10 @@ nav.navbar.navbar-default.nav(role='navigation')
 				.form-group
 					label(for='exampleInputPassword1') Password
 					input#exampleInputPassword1.form-control(type='password', name='password', placeholder='Password')
-				button.btn.btn-success.btn-block.btn-lg.login-button Jump In!
+				button.btn.btn-success.btn-block.btn-lg.login-button Sign In!
 			h3 Or 
-			form(role='form' )
-				a.btn.btn-primary.btn-block.btn-lg(href='/register') New Friend?
+			a.btn.btn-primary.btn-block.btn-lg(href='/register') New Friend?
 
 
 script $('.signup-box').hide();
 script(type='text/javascript' src='/js/common/nav/login_module.js')
-script(type='text/javascript' src='/js/common/nav/categories_module.js')

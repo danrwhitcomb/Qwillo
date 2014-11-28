@@ -1,0 +1,36 @@
+extends ../common/layout
+
+block content
+	link(href='/css/common/typeahead.css' rel="stylesheet" type="text/css")
+	.container
+		.row
+			.col-xs-12
+				h1 Create a new topic!
+				if base.username
+					.topic-submission
+						.error-box.alert.alert-danger
+						form(method='post' role='form').submit-topic-form
+							.control-group.row
+								.col-xs-6
+									.form-group#remote
+										label Topic Name
+										input(placeholder='Search for a topic', name='topic', type='text').form-control.typeahead
+										p#topic-error.input-error Please enter an existing topic
+
+									.form-group
+										label Picture?
+										input(placeholder='Picture URL?', name='imageUrl', type='text').form-control
+								.col-xs-6
+									.form-group.description-input
+										label Description
+										textarea.form-control(rows="3", name='description', placeholder='What\'s this all about?', type='text')
+								.col-xs-12
+									.form-group
+										button.btn.btn-default.btn-success CREATE TOPIC!
+				else
+					h3 You must be logged in to submit a post
+	
+	script(type='text/javascript', src='/js/posts/typeahead.bundle.min.js')
+	script(type='text/javascript', src='/js/topic/topic_submit.js')
+	script.
+		$('.error-box').hide();

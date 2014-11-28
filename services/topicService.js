@@ -13,8 +13,32 @@ module.exports.getTopicsForCategory = function(category, res){
 	Topic.findAll();
 };
 
+module.exports.createNewTopic = function(res, topic, description, imageUrl){
+	Topic.findOne({titleLower: topic.toLowerCase()},
+	function(err, topicObj){
+		if(err) {
+			utils.sendErr(res, err);
+		} else if(topicObj){
+			utils.sendErr(res, "Topic already exists");
+		} else {
+			var newTopic = new Topic({
+				title: topic,
+				titleLower: topic.toLowerCase(),
+				description: description,
+				creationDate: { type: Date, default: Date.now },
+				numberOfPosts: 0,
+				imageUrl: imageUrl,
+			});
+			newTopic.save(function(err){
+				if(err) callback(err);
+				else utils.sendSuccess(res);
+			});
+		}
+	});
+}
+
 module.exports.getTopicsForQuery = function(query, res){
-	Topic.find({title: {$regex: query, $options: 'i'}},
+	Topic.find({title: {$regex: new RegExp('^' + query, "i")}},
 		function(err, topics){
 			if(err) {
 				utils.sendErr(res, err);
@@ -114,47 +138,6 @@ module.exports.getTopicPage = function(res, topic){
 					else return -1;
 				});
 
-				// /* Calculate hot posts */
-				// var hotPosts = posts.sort()
-				// async.sortBy(posts, function(post, callback){
-				// 	var time = (new Date(post.creationDate)).getTime() - Date.now;
-				// 	var score = post.upvotes - post.downvotes;
-				// 	var sign;
-				// 	if(score > 0) sign = 1;
-				// 	else if(sign < 0) sign = -1;
-				// 	else sign = 0;
-				// 	var order = Math.log(Math.max(Math.abs(score)))
-
-				// 	return Math.round(order + sign * time / 45000);
-				// }, function(err, results){
-				// 	if(err){ utils.sendErr(res, err);}
-				// 	else{
-				// 		hotPosts = results;
-				// 	}
-				// });
-
-				// var topPosts; 
-				// async.sortBy(posts, function(post, callback){
-				// 	return post.upvotes - post.downvotes;
-				// }, function(err, results){
-				// 	if(err){ utils.sendErr(res, err);}
-				// 	else{
-				// 		topPosts = results;
-				// 	}
-				// });
-
-				// var newPosts; 
-				// async.sortBy(posts, function(post, callback){
-				// 	return (new Date(post.creationDate)).getTime() - Date.now;
-				// }, function(err, results){
-				// 	if(err){ utils.sendErr(res, err);}
-				// 	else{
-				// 		newPosts = results;
-				// 	}
-				// });
-
-				
-
 				var viewModel = {
 					title: topic.title,
 					hotPosts: hotPosts,
@@ -170,4 +153,19 @@ module.exports.getTopicPage = function(res, topic){
 				res.render('topics/topic', viewModel);
 			}
 		}).sort({datePosted: 'asc'}).limit(15);
+}
+
+module.exports.setPictureForTopic = function(res, topic, imageUrl){
+	Topic.findOne({titleLower: topic.toLowerCase()},
+		function(err, topicObj){
+			if(err || !topicObj) {
+				utils.sendErr(res, err);
+			} else {
+				topicObj.imageUrl = imageUrl;
+				topicObj.save(function(err, project, numAffected){
+					if(err) utils.sendErr(res, err);
+					else utils.sendSuccess(res);
+				});
+			}
+		});
 }

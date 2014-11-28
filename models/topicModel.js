@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 var Topic = new Schema({
 	title: String,
-	category: String,
+	titleLower: String,
 	description: String,
 	creationDate: { type: Date, default: Date.now },
 	numberOfPosts: Number,

@@ -1,12 +1,19 @@
 .description-box {
 	margin-top: 30px;
-	padding: 5px;
+	padding: 0;
 	box-shadow: .0px 1.5px 2px gray;
 	background-color: rgba(255,255,255, .7);
+	min-height: 500px;
+	overflow: hidden;
 }
 
 .description-box>.row{
 	margin-bottom: 10px;
+}
+
+.description-box .other {
+	padding-left: 10px;
+	padding-right: 10px;
 }
 
 @media only screen and (max-width: 991px) {
@@ -26,6 +33,7 @@
 	width: 100%;
 }
 
+
 /*.description-box .content-box {
 	width:75%;
 	height: 100%;
@@ -34,7 +42,6 @@
 }*/
 
 .description-box h1 {
-	position: absolute;
 	margin:0;
 }
 
@@ -46,7 +53,7 @@
 .description-box .action-box button{
 	width: 100%;
 	box-shadow: .0px .5px 1px #212121;
-
+	font-size:1vw;
 }
 
 
@@ -54,18 +61,44 @@
 	margin-top: 20px;
 }
 
-.description-box .topic-info {
-	height: 155px;
-	max-height: 155px;
+
+.description-header button.image-edit-button {
+	position: absolute;
+	right: 20px;
+	top: 5px;
+	display: none;
+	border: solid 2px #3F51B5;
+	background-color: transparent;
+	padding: 3px 6px;
+}
+
+.description-header button.image-edit-button span{
+	color: #3F51B5 ;
+}
+
+
+.description-header:hover button.image-edit-button {
+	display:inherit;
+}
+
+.image-edit-box {
+	padding-top:3px;
+	box-shadow: inset .0px 1.5px 2px gray;
+	height: 0;
 	overflow: hidden;
+	display:none;
+}
+
+.image-edit-box .input-group{
+	margin-bottom:10px;
 }
 
 .post-box {
-     background-color: rgba(255,255,255, .7);
+    background-color: rgba(255,255,255, .7);
     color: black;
     padding: 8px;
     margin: 10px 0 10px;
-    box-shadow: .0px 1.5px 2px #212121;
+    box-shadow: .0px 1.5px 2px gray;
 }
 
 .post-box a {

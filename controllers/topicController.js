@@ -7,7 +7,7 @@ var Topic = topicModel;
 
 module.exports.getTopic = function(req, res){
 	var topic = req.params.id.toLowerCase();
-	Topic.findOne({title: {$regex: new RegExp('^' + topic + '$', "i")}}, 
+	Topic.findOne({titleLower: topic}, 
 		function(err, topic){
 			if(err || !topic){
 				res.status(404);
@@ -19,6 +19,21 @@ module.exports.getTopic = function(req, res){
 			}
 		});
 };
+
+module.exports.topicSubmissionPage = function(req, res){
+	res.render('topics/topic_submit', {base:req.model});
+}
+
+module.exports.submitTopic = function(req, res){
+	if(!req.session.username){
+		utils.sendErr(res, defines.messages.notLoggedIn);
+	} else if(!req.body.topic || !req.body.description) {
+		utils.sendErr(res, defines.messages.invalidData);
+	} else {
+		var imageUrl = req.body.imageUrl ? req.body.imageUrl:'';
+		topicService.createNewTopic(res, req.body.topic, req.body.description, imageUrl);
+	}
+}
 
 module.exports.getTopicsForCategory = function(req, res){
 	if(req.body.category == null){
@@ -35,3 +50,13 @@ module.exports.getTopicsForQuery = function(req, res){
 		topicService.getTopicsForQuery(req.params.query, res);
 	}
 };
+
+module.exports.setPictureForTopic = function(req, res){
+	if(!req.session.username){
+		utils.sendErr(res, defines.messages.notLoggedIn);
+	} else if(!req.body.topic || !req.body.imageUrl){
+		utils.sendErr(res, defines.messages.invalidData);
+	} else {
+		topicService.setPictureForTopic(res, req.body.topic, req.body.imageUrl);
+	}
+}

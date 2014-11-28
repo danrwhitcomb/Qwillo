@@ -7,8 +7,12 @@
 
 .navbar {
 		box-shadow: 0 .3px 1px #212121;
-		background-color: #3F51B5 !important;
+		background-color: #1253A3 !important;
 
+}
+
+.navbar .container {
+	padding:0;
 }
 
 .navbar-brand {
@@ -16,9 +20,13 @@
 	font-size: 32px !important;
 }
 
+.navbar-nav {
+	margin-left:10px;
+}
+
 .navbar-brand,
 .navbar-nav a{
-	color: white !important;
+	color: #F4F4F2 !important;
 	font: "Lucida Grande", Helvetica, Arial, sans-serif;
 	font-size: 18px;
 	display: inline;
@@ -108,6 +116,21 @@ div.categories-wrapper {
 }
 div.categories-list-wrapper {
 	display:inline-flex;
+}
+
+.login-link,
+.username-link {
+	background-color: #F36966;
+}
+
+.login-link a, 
+.username-link a{
+	color: #EDEBE6 !important;
+}
+
+.username-link.open>a{
+	background-color: #FFD464 !important;
+	color: #30302F !important;
 }
 
 /*User account dropdown*/
