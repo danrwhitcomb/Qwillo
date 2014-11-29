@@ -16,10 +16,10 @@ module.exports.submissionPage = function(req, res){
 };
 
 module.exports.submitPost = function(req, res){
-	if(req.session.username == null){
+	if(req.session.user == null){
 		res.send({status: defines.messages.notLoggedIn});
 	} else {
-		postService.submitPostForUser(res, req.body, req.session.username);
+		postService.submitPostForUser(res, req.body, req.session.user);
 	}
 };
 

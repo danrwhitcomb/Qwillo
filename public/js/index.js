@@ -2,11 +2,11 @@ $(document).ready(function() {
  
   var owlCarousel = $("#owl-demo").owlCarousel({
  
-      navigation : true, // Show next and prev buttons
       slideSpeed : 500,
       paginationSpeed : 600,
       singleItem:true,
-      autoPlay:true,
+      autoPlay:false,
+      navigation : false,
  
       // "singleItem:true" is a shortcut for:
       // items : 1, 

@@ -1,0 +1,19 @@
+.container
+	.center-block
+			.content-block
+				button.close(type='button')
+					span(aria-hidden='true') x
+					span.sr-only Close
+				h2 Hello There!
+				hr
+				form(role='form', onsumbit='return false').login-form
+					p.error-message Your username or password does not match our records
+					.form-group
+						label(for='exampleInputEmail1') Username or Email
+						input#exampleInputEmail1.form-control(type='username', name='username' placeholder='Enter username or email')
+					.form-group
+						label(for='exampleInputPassword1') Password
+						input#exampleInputPassword1.form-control(type='password', name='password', placeholder='Password')
+					button.btn.btn-success.btn-block.btn-lg.login-button Sign In!
+				h3 Or 
+				a.btn.btn-primary.btn-block.btn-lg(href='/register') New Friend?

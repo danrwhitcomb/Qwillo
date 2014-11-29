@@ -30,7 +30,9 @@ module.exports.messages = {
 		success: "Successfully completed the action",
 		successCode: 100,
 		notLoggedIn: "Oops! You must be logged in to perform this action.",
-		invalidData: "Invalid argument error. Please use the correct argument."
+		loggingIn: "Oops! You can't perform this action while logged in.",
+		invalidData: "Invalid argument error. Please use the correct argument.",
+		invalidCredentials: "The credentials you provided does not match our records!"
 };
 
 module.exports.stormpath = {

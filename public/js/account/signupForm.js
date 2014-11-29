@@ -15,7 +15,7 @@ function doSignup(){
 
 	request.done(function(response){
 		if(response.status != 100){
-			setMessage(response.status.userMessage);
+			setMessage(response.error);
 		} else {
 			document.location.href = '/';
 		}

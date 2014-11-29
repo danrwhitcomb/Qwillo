@@ -5,5 +5,5 @@ module.exports.sendSuccess = function(res){
 };
 
 module.exports.sendErr = function(res, err){
-	res.send({status: err});
+	res.send({status: 200, error: err});
 };

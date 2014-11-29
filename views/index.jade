@@ -6,25 +6,32 @@ block content
 	link(rel="stylesheet" href="/css/owl-carousel/owl.theme.css")
 	script(src="/js/owl-carousel/owl.carousel.min.js")
 	script(src='/js/index.js')
-	.container
-		.row
-			.col-xs-6
-				p I wish I could think of something cool to write here
-			.col-xs-6
-				.action-box.pull-right
-					a(href='/post/submit') Post Link
-					a(href='/topic/submit') New Topic
-		.row
+	.container-fluid
+		//- .row
+		//- 	.col-xs-6
+		//- 		p I wish I could think of something cool to write here
+		//- 	.col-xs-6
+		//- 		.action-box.pull-right
+		//- 			a(href='/post/submit') Post Link
+		//- 			a(href='/topic/submit') New Topic
+		.row.carousel
 			.col-xs-12
 				#owl-demo.owl-carousel.owl-theme
 					each topic in topics
 						.item
-							if topic.imageUrl
-								img(src='#{topic.imageUrl}')
-							else
-								img(src='/images/placeholder.jpg')
+							a(href="/topic/#{topic.title}" style='display: block')
+								if topic.imageUrl
+									img(src='#{topic.imageUrl}')
+								else
+									img(src='/images/placeholder.jpg')
 
+		.row.category-row
+			.col-xs-3
+				h1 Tech
 
+			.col-xs-3
+			.col-xs-3
+			.col-xs-3
 		//- 	.panel
 		//- 		.panel-heading
 		//- 			img(src="/images/placeholder.jpg")

@@ -25,7 +25,7 @@ module.exports.topicSubmissionPage = function(req, res){
 }
 
 module.exports.submitTopic = function(req, res){
-	if(!req.session.username){
+	if(!req.session.user){
 		utils.sendErr(res, defines.messages.notLoggedIn);
 	} else if(!req.body.topic || !req.body.description) {
 		utils.sendErr(res, defines.messages.invalidData);
@@ -52,7 +52,7 @@ module.exports.getTopicsForQuery = function(req, res){
 };
 
 module.exports.setPictureForTopic = function(req, res){
-	if(!req.session.username){
+	if(!req.session.user){
 		utils.sendErr(res, defines.messages.notLoggedIn);
 	} else if(!req.body.topic || !req.body.imageUrl){
 		utils.sendErr(res, defines.messages.invalidData);

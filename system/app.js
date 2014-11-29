@@ -12,7 +12,6 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , mongoose = require('mongoose')
-  , stormpath = require('stormpath')
   , cookieParser = require('cookie-parser')
   , cookieSession = require('cookie-session')
 
@@ -81,18 +80,13 @@ if ('development' === app.get('env')) {
 }
 
 
-//Stormpath Setup
-var client;
-client = new stormpath.Client({apiKey: config.stormpath});
-
 //Baseview model for common data
 app.use(function(req, res, next){
   var model = require('../controllers/viewModels/baseViewModel');
   req.model = model.model();
-  if(req.session.username){
-    req.model.username = req.session.username;
+  if(req.session.user){
+    req.model.username = req.session.user.username;
   }
-  req.model.stormpathClient = client;
   next();
 });
 

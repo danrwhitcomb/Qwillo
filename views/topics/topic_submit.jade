@@ -20,13 +20,14 @@ block content
 									.form-group
 										label Picture?
 										input(placeholder='Picture URL?', name='imageUrl', type='text').form-control
+
+									.form-group
+										button.btn.btn-default.btn-success CREATE TOPIC!
 								.col-xs-6
 									.form-group.description-input
 										label Description
-										textarea.form-control(rows="3", name='description', placeholder='What\'s this all about?', type='text')
-								.col-xs-12
-									.form-group
-										button.btn.btn-default.btn-success CREATE TOPIC!
+										textarea.form-control(rows="5", name='description', placeholder='What\'s this all about?', type='text')
+									
 				else
 					h3 You must be logged in to submit a post
 	

@@ -5,6 +5,10 @@ var postController = require('../controllers/postController');
 var topicController = require('../controllers/topicController');
 var accountController = require('../controllers/accountController');
 var searchController = require('../controllers/searchController');
+var dashboardController = require('../controllers/dashboardController');
+
+var userModel = require('../models/userModel');
+var User = userModel;
 
 module.exports.defineRoutes = function(app){
 	
@@ -55,6 +59,7 @@ module.exports.defineRoutes = function(app){
 		.get(accountController.getUserSettings);
 	
 	app.route('/account/login')
+		//.get(accountController.loginPage)
 		.post(accountController.login);
 	
 	app.route('/account/logout')
@@ -65,8 +70,27 @@ module.exports.defineRoutes = function(app){
 		.post(accountController.doSignup);
 
 
+	app.route('/dashboard')
+		.get(isAdmin(), dashboardController.index)
+
 	app.route('*')
 	.get(function(req, res){
 	  res.render('common/404', {base: req.model});
 	});
 };
+
+function isAdmin(){
+	return function(req, res, next){
+		User.findOne({usernameLower: req.session.user.username.toLowerCase()}, function(err, user){
+			if(err || !user){
+				res.sendStatus(403);
+			} else {
+				if(user.isAdmin){
+					next();
+				} else {
+					res.sendStatus(403);
+				}
+			}
+		});
+	};
+}
