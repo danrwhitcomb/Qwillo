@@ -28,8 +28,8 @@ module.exports.defineRoutes = function(app, subdomain){
 	router.post('/post/submit', utils.isLoggedIn(), postController.submitPost);
 	router.get('/user/:username', utils.isLoggedIn(), accountController.getUser);
 	router.post('/account/login', utils.isNotLoggedIn(), accountController.login);
-	route.post('/account/logout', utils.isLoggedIn(), accountController.logout);
-	route.post('/account/signup', utils.isNotLoggedIn(), accountController.doSignup); 
+	router.post('/account/logout', utils.isLoggedIn(), accountController.logout);
+	router.post('/account/signup', utils.isNotLoggedIn(), accountController.doSignup); 
 
 
 	app.use(subdomain('api', router));
