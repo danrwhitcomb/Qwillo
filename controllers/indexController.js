@@ -11,5 +11,6 @@ module.exports.index = function(req, res){
 	var model = viewModels.indexModel();
 	model.base = req.model;
 	model.title = defines.appName + " | Home";
-	topicService.getHomepageTopics(model, res);
+	model.categories = defines.categories;
+	res.render('index', {base:model});
 };

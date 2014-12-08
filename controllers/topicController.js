@@ -6,29 +6,50 @@ var topicModel = require('../models/topicModel');
 var Topic = topicModel;
 
 module.exports.getTopic = function(req, res){
-	var topic = req.params.id.toLowerCase();
+	var topic = req.params.title.toLowerCase();
 	Topic.findOne({titleLower: topic}, 
 		function(err, topic){
 			if(err || !topic){
-				res.status(404);
-			    res.render('common/404', { base:req.model });
+				res.send({status:  defines.messages.dataNotFoundErrorCode,
+						  message: defines.messages.dataNotFound});
 			 
 			} else {
-				res.model = req.model;
-				topicService.getTopicPage(res, topic);
+				utils.sendSuccess(res, topic);
 			}
 		});
 };
 
+module.exports.getPostsForTopic = function(req, res){
+	var topic = req.params.title.toLowerCase();
+	Topic.findOne({titleLower: topic}, 
+		function(err, topic){
+			if(err || !topic){
+				res.send({status:  defines.messages.dataNotFoundErrorCode,
+						  message: defines.messages.dataNotFound});
+			 
+			} else {
+				topicService.getPostsForTopic(res, req.params.topic, req.query.start, req.query.limit);
+			}
+		});
+	
+}
+
+module.exports.getTopicPage = function(req, res){
+	res.render('topic/topicPage');
+}
+
+
 module.exports.topicSubmissionPage = function(req, res){
-	res.render('topics/topic_submit', {base:req.model});
+	res.render('topics/topic_submit');
 }
 
 module.exports.submitTopic = function(req, res){
 	if(!req.session.user){
-		utils.sendErr(res, defines.messages.notLoggedIn);
+		res.send({status:  defines.messages.accountErrorCode,
+				  message: defines.messages.notLoggedIn});
 	} else if(!req.body.topic || !req.body.description) {
-		utils.sendErr(res, defines.messages.invalidData);
+		res.send({status:  defines.messages.invalidDataErrorCode, 
+				  message: defines.messages.invalidData});
 	} else {
 		var imageUrl = req.body.imageUrl ? req.body.imageUrl:'';
 		topicService.createNewTopic(res, req.body.topic, req.body.description, imageUrl);

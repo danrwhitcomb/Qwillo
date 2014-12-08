@@ -1,0 +1,68 @@
+.header, .main-content {
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
+.page-header {
+	padding: 0;
+
+}
+
+.page-header .header-title {
+	background-color: black;
+
+}
+
+.page-header .header-title h1{
+	color: white;
+	text-align: center;
+	font-size: 40px;
+	margin-bottom: 5px;
+	font-family: "Rockwell", Helvetica, Arial, sans-serif;
+}
+
+.main-content .page-info {
+	background-color: #f7f7f7;
+	box-shadow: .0px 1.5px 2px gray;
+}
+
+/*NAV LIST*/
+.nav-list {
+	list-style-type: none;
+	margin-right: 20px;
+}
+
+.nav-list-item {
+	padding-top: 10px;
+	border-bottom: 1px solid gray;
+}
+
+.nav-list-link:hover {
+	text-decoration: none;
+}
+
+.page-header .header-buttons li{
+	width: 50%;
+}
+
+.page-header .header-buttons li a {
+	width: 100%;
+}
+
+/*FORM CONTROLS*/
+form input.ng-invalid.ng-dirty {
+	border-color: #FA787E;
+}
+
+form input.ng-valid.ng-dirty {
+	border-color: #78FA89;
+}
+
+form input.ng-invalid.ng-dirty {
+	border-color: #FA787E;
+}
+
+form a.disabledLink {
+	pointer-events: none;
+	cursor: default;
+}

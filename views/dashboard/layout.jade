@@ -1,20 +1,26 @@
 doctype html
 html
-	block head
+	head
 		title= title
 		link(rel='stylesheet', href='/css/common/common.css')
 		link(rel='stylesheet', href='/css/foundation.min.css')
 		link(rel='stylesheet', href='/css/normalize.css')
 
+		script(type="text/javascript" src="/js/common/error.js")
 		script(type="text/javascript" src="/js/3rdParty/jquery-2.1.1.min.js")
-		script(type="text/javascript" src="/js/3rdParty/angular.min.js")
-		script(type='text/javascript' src='/js/3rdParty/foundation.min.js')
+		script(type="text/javascript" src="/js/3rdParty/foundation.min.js")
+		script(type='')
 
 		link(rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32")
 
 		
 	body
-
 		.content
 			block content
-		script $(document).foundation();
+		
+		.errorNode
+			.blackout
+				.error-wrapper
+					button.pull-right.close
+					p
+		script $('.errorNode').hide();

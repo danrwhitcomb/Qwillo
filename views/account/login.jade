@@ -1,4 +1,22 @@
-extends ../common/layout
-
-block content
-	include login_form
+h2 Welcome Back!
+br
+form(novalidate name='form')
+	.row.collapse.prefix-radius
+		.small-3.columns
+			span.prefix Email
+		.small-9.columns
+			input(type='email', placeholder="Email" ng-model='creds.email' required)
+	.row.collapse.prefix-radius
+		.small-3.columns
+			span.prefix Password
+		.small-9.columns
+			input(type='password' placeholder="Password" ng-model='creds.password' required minlength='6' maxlength='26')
+	.row.collapse(ng-show="didReceivedError")
+		.small-12.columns
+			.alert-box.alert.radius {{errorMessages}}
+				a.close &times;
+	.row.collapse
+		.small-12.columns
+			a.button(ng-click="submit()" ng-disabled="form.$invalid" ng-class="{disabledLink: form.$invalid}") Login! 
+	a(class="close-reveal-modal") &#215;
+a(data-reveal-id='signup-modal') New to Qwillo?

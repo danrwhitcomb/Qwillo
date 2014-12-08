@@ -7,9 +7,27 @@ var bcrypt = require('bcrypt');
 
 var User = userModel;
 
-module.exports.getUserProfile = function(req, res){
-  res.send("This is the user profile page");
+module.exports.getUser = function(req, res){
+	User.find({usernameLower: req.session.user.username}, function(err, user){
+		if(err) res.send({status:defines.messages.serverErrorCode, message: defines.messages.serverError, error: err});
+		else if(user.length() === 0){
+			res.send({status:  defines.messages.accountErrorCode, 
+					  message: defines.messages.dataNotFound});
+		} else {
+			user = user[0];
+			user.password = "DATA OMITTED";
+			utils.sendSuccess(user);
+		}
+	}).limit(1);
 };
+
+module.exports.getUserProfilePage = function(req, res){
+
+};
+
+module.exports.getUserSettingsPage = function(req, res){
+
+}
 
 module.exports.getUserSettings = function(req, res){
 	res.send('This is the user settings page');
@@ -17,11 +35,13 @@ module.exports.getUserSettings = function(req, res){
 
 module.exports.registerUser = function(req, res){
 	if(res.locals.user != null){
-		res.render('errors/alreadyLoggedIn', {base: req.model});
+		res.send({status:  defines.messages.accountErrorCode, 
+				  message: defines.messages.alreadyLoggedIn});
 	} else {
-		res.render('account/register', {base: req.model, title: "Register"});
+		res.render('account/register');
 	}
 };
+
 
 module.exports.doSignup = function(req, res){
 	if(req.session.user){
@@ -31,7 +51,7 @@ module.exports.doSignup = function(req, res){
 			username: req.body.username,
 			usernameLower: req.body.username.toLowerCase(),
 			password: req.body.password,
-			email: req.body.email,
+			email: req.body.email.toLowerCase(),
 			firstName: req.body.firstName,
 			lastName: req.body.lastName,
 			isAdmin: false,
@@ -40,9 +60,14 @@ module.exports.doSignup = function(req, res){
 			history: {},
 		});
 
+
+
 		user.save(function(err, user){
-			if(err) utils.sendErr(res, err);
-			else {
+			if(err) {
+				utils.sendErr(res, {status:  defines.messages.serverError,
+									message: defines.decodeDatabaseError(err),
+									error:   err});
+			} else {
 				req.session.user = {username: user.username}
 				utils.sendSuccess(res);
 			}
@@ -54,7 +79,7 @@ module.exports.login = function(req, res){
 	if(req.session.user != null){
 		utils.sendErr(res, defines.messages.alreadyLoggedIn);
 	} else {
-		User.findOne({usernameLower: req.body.username.toLowerCase()}, function(err, user){
+		User.findOne({email: req.body.email.toLowerCase()}, function(err, user){
 			if(err || !user){
 				utils.sendErr(res, defines.messages.invalidCredentials);
 			} else {
@@ -72,15 +97,20 @@ module.exports.login = function(req, res){
 };
 
 module.exports.loginPage = function(req, res){
-	res.render('account/login', {base: req.model});
+	res.render('account/login');
 };
+
+module.exports.signupPage = function(req, res){
+	res.render('account/signup');
+}
 
 module.exports.logout = function(req, res){
 	if(req.session.user == null){
-		res.send({status: "You are not logged in!"});
+		res.send({status: defines.messages.accountErrorCode,
+				  message: defines.messages.notLoggedIn});
 	} else {
 		req.session = null;
-		res.send({status: defines.messages.successCode});
+		utils.sendSuccess(res);
 	}
 };
 

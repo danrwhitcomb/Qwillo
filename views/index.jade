@@ -1,59 +1,37 @@
 extends common/layout
 
+block append head
+	link(rel='stylesheet', href='/css/index.css')
+	script(type='text/javascript' src='/js/index.js')
+	script(type='text/javascript' src='/js/navModule.js')
+	script(type='text/javascript' src='/js/urlService.js')
+
 block content
-	link(rel="stylesheet" href="/css/homepage/index.css")
-	link(rel="stylesheet" href="/css/owl-carousel/owl.carousel.css")
-	link(rel="stylesheet" href="/css/owl-carousel/owl.theme.css")
-	script(src="/js/owl-carousel/owl.carousel.min.js")
-	script(src='/js/index.js')
-	.container-fluid
-		//- .row
-		//- 	.col-xs-6
-		//- 		p I wish I could think of something cool to write here
-		//- 	.col-xs-6
-		//- 		.action-box.pull-right
-		//- 			a(href='/post/submit') Post Link
-		//- 			a(href='/topic/submit') New Topic
-		.row.carousel
-			.col-xs-12
-				#owl-demo.owl-carousel.owl-theme
-					each topic in topics
-						.item
-							a(href="/topic/#{topic.title}" style='display: block')
-								if topic.imageUrl
-									img(src='#{topic.imageUrl}')
-								else
-									img(src='/images/placeholder.jpg')
+	div(ng-app="IndexModule")
+		.row.header
+			.medium-3.column.page-header()
+				.header-title
+					h1 Qwillo
+				account-handler
+					if base.user
+						.user-info
+							h3 #{base.user.username}
+							ul.nav-list(ng-show="header.userSelect")
+								li 
+					else
+						ul.button-group.header-buttons.clearf-fix
+							li.left
+								a.button(href="#" data-reveal-id="signup-modal") Sign Up
+							li.right
+								a.button(href="#" data-reveal-id="login-modal") Login
+				login-modal#login-modal.reveal-modal(data-reveal).tiny
+				signup-modal#signup-modal.reveal-modal(data-reveal).tiny
+		.row.main-content
+			.medium-3.page-info
+				ul.nav-list
+					each cat in base.categories
+						li.nav-list-item
+							a.nav-list-link(href='/\##{cat}') #{cat}
+			.medium-8.page-content
 
-		.row.category-row
-			.col-xs-3
-				h1 Tech
-
-			.col-xs-3
-			.col-xs-3
-			.col-xs-3
-		//- 	.panel
-		//- 		.panel-heading
-		//- 			img(src="/images/placeholder.jpg")
-		//- 			a(href='/topic/#{featuredTopic.title}')
-		//- 				h1 #{featuredTopic.title}
-		//- 		.panel-body.featured-panel 
-		//- 			each post in featuredPosts
-		//- 				.post-box
-		//- 					.header
-		//- 						h2
-		//- 							a(href='/topic/#{featuredTopic.title}/#{post.title}')
-		//- 					.featured-content
-		//- 						| #{post.description}
-					
-		//- .col-xs-8
-		//- 	each topic in topics
-		//- 		.topic-box
-		//- 			.header
-		//- 				h2 
-		//- 					a(href='/topic/#{topic.title}') #{topic.title}
-		//- 			.pull-right
-		//- 			.topic-description.pull-left Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis placerat, massa vitae iaculis molestie, purus mi aliquam nisl, scelerisque gravida risus diam ut ligula. Praesent arcu nibh, elementum in ipsum quis, maximus dignissim turpis. Cras purus elit, sodales ac tempus a, hendrerit nec tortor. Nam rutrum nec lectus et interdum. Sed eget tortor in risus finibus 
-					
-
-		p This is the end!
+		

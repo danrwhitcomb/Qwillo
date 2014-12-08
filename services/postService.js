@@ -15,9 +15,7 @@ module.exports.submitPostForUser = function(res, data, username){
 						 description: data.description,
 						 datePosted: now,
 						 user: username,
-						 upvote: 0,
-						 downvote: 0,
-						 topic: data.topic
+						 topic: data.topic.toLowerCase()
 						});
 
 
@@ -31,10 +29,12 @@ module.exports.submitPostForUser = function(res, data, username){
 		},
 		savePost,
 		function(callback){
-			utils.sendSuccess(res);
+			utils.sendSuccess(res, post);
 		}
 	], function(err){
-		utils.sendError(res, err);
+		res.send({status: defines.messages.serverErrorCode,
+				  message: defines.messages.serverError,
+				  error: err})
 	});
 };
 

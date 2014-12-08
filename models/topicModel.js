@@ -6,6 +6,7 @@ var Topic = new Schema({
 	titleLower: String,
 	description: String,
 	creationDate: { type: Date, default: Date.now },
+	labels: [],
 	numberOfPosts: Number,
 	imageUrl: String,
 });

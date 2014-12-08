@@ -9,12 +9,12 @@
   },
   "dependencies": {
     "express": "*",
+    "express-subdomain": "~1.0.2",
     "jade": "*",
     "bcrypt": "*",
     "mongoose": "*",
     "debug": "~0.7.4",
     "mongodb": "*",
-    "serve-favicon": "*",
     "body-parser": "*",
     "method-override": "*",
     "morgan": "*",
@@ -23,7 +23,6 @@
     "cookie-session": "*",
     "async": "*"
   },
-  "subdomain": "danrwhitcomb-app",
   "engines": {
     "node": "0.10.x"
   }

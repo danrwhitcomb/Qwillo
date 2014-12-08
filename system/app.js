@@ -4,7 +4,7 @@
  */
 //Modules
 var express = require('express')
-  , favicon = require('serve-favicon')
+  , subdomain = require('express-subdomain')
   , bodyParser = require('body-parser')
   , methodOverride = require('method-override')
   , morgan = require('morgan')
@@ -13,7 +13,7 @@ var express = require('express')
   , path = require('path')
   , mongoose = require('mongoose')
   , cookieParser = require('cookie-parser')
-  , cookieSession = require('cookie-session')
+  , cookieSession = require('cookie-session');
 
 
 //Custom Modules
@@ -60,7 +60,6 @@ console.log("Listening on port: " + config.port)
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/../views');
 app.set('view engine', 'jade');
-app.use(favicon(__dirname + '/../public/images/favicons/favicon-32x32.png'));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(methodOverride('X-HTTP_Method-Override'));
@@ -72,8 +71,12 @@ app.use(cookieSession({
 }));
 
 // mongoose
-mongoose.connect(config.db.connectionString);
-
+try{
+  mongoose.connect(config.db.connectionString);
+} catch(e){
+  console.log("Could not connect to:" + config.db.connectionString);
+  app.close();
+}
 // development only
 if ('development' === app.get('env')) {
   app.use(errorHandler());
@@ -90,8 +93,6 @@ app.use(function(req, res, next){
   next();
 });
 
-routes.defineRoutes(app);
+routes.defineRoutes(app, subdomain);
 
-http.createServer(app).listen(config.port, function(){
-  console.log('Express server listening on port ' + config.port);
-});
+app.listen(config.port);

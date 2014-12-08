@@ -91,70 +91,61 @@ module.exports.getHomepageTopics = function(model, res){
 	
 };
 
-module.exports.getTopicPage = function(res, topic){
-	Post.find({topic: topic.title},
+module.exports.getPostsForTopic = function(res, topic, start, limit){
+	start = start || 0;
+	limit = limit || 15;
+
+	Post.find({topic: topic},
 		function(err, posts){
 			if(err){
-				res.sendErr(err);
+				res.send
 			} else {
 
-				var hotPosts = posts.slice();
-				hotPosts.sort(function(a, b){
-					var a_time = (new Date(a.datePosted)).getTime() - Date.now;
-					var a_score = a.upvotes - a.downvotes;
-					var a_sign;
-					if(a_score > 0) a_sign = 1;
-					else if(a_sign < 0) a_sign = -1;
-					else a_sign = 0;
-					var a_order = Math.log(Math.max(Math.abs(a_score)));
-					var a_total = Math.round(a_order + a_sign * a_time / 45000);
+				// var hotPosts = posts.slice();
+				// hotPosts.sort(function(a, b){
+				// 	var a_time = (new Date(a.datePosted)).getTime() - Date.now;
+				// 	var a_score = a.upvotes - a.downvotes;
+				// 	var a_sign;
+				// 	if(a_score > 0) a_sign = 1;
+				// 	else if(a_sign < 0) a_sign = -1;
+				// 	else a_sign = 0;
+				// 	var a_order = Math.log(Math.max(Math.abs(a_score)));
+				// 	var a_total = Math.round(a_order + a_sign * a_time / 45000);
 
-					var b_time = (new Date(a.datePosted)).getTime() - Date.now;
-					var b_score = a.upvotes - a.downvotes;
-					var b_sign;
-					if(b_score > 0) b_sign = 1;
-					else if(b_sign < 0) b_sign = -1;
-					else b_sign = 0;
-					var b_order = Math.log(Math.max(Math.abs(b_score)));
-					var b_total = Math.round(b_order + b_sign * b_time / 45000);
+				// 	var b_time = (new Date(a.datePosted)).getTime() - Date.now;
+				// 	var b_score = a.upvotes - a.downvotes;
+				// 	var b_sign;
+				// 	if(b_score > 0) b_sign = 1;
+				// 	else if(b_sign < 0) b_sign = -1;
+				// 	else b_sign = 0;
+				// 	var b_order = Math.log(Math.max(Math.abs(b_score)));
+				// 	var b_total = Math.round(b_order + b_sign * b_time / 45000);
 
-					if(a_total > b_total) return 1;
-					if(a_total === b_total) return 0;
-					else return -1;
-				});
+				// 	if(a_total > b_total) return 1;
+				// 	if(a_total === b_total) return 0;
+				// 	else return -1;
+				// });
 
-				var topPosts = posts.slice();
-				topPosts.sort(function(a, b){
-					var a_total = a.upvotes - a.downvotes;
-					var b_total = b.upvotes - b.downvotes;
+				// var topPosts = posts.slice();
+				// topPosts.sort(function(a, b){
+				// 	var a_total = a.upvotes - a.downvotes;
+				// 	var b_total = b.upvotes - b.downvotes;
 
-					if(a_total > b_total) return 1;
-					if(a_total === b_total) return 0;
-					else return -1;
-				});
+				// 	if(a_total > b_total) return 1;
+				// 	if(a_total === b_total) return 0;
+				// 	else return -1;
+				// });
 
-				var newPosts = posts.slice();
-				newPosts.sort(function(a,b){
-					if(a.datePosted < b.datePosted) return 1;
-					if(a.datePosted === b.datePosted) return 0;
-					else return -1;
-				});
+				// var newPosts = posts.slice();
+				// newPosts.sort(function(a,b){
+				// 	if(a.datePosted < b.datePosted) return 1;
+				// 	if(a.datePosted === b.datePosted) return 0;
+				// 	else return -1;
+				// });
 
-				var viewModel = {
-					title: topic.title,
-					hotPosts: hotPosts,
-					topPosts: topPosts,
-					newPosts: newPosts,
-					imageUrl: topic.imageUrl,
-					description: topic.description,
-					creationDate: topic.creationDate,
-					base: res.model
-				}
-
-
-				res.render('topics/topic', viewModel);
+				utils.sendSuccess(res, posts);
 			}
-		}).sort({datePosted: 'asc'}).limit(15);
+		}).sort({datePosted: 'asc'}).skip(start).limit(limit);
 }
 
 module.exports.setPictureForTopic = function(res, topic, imageUrl){

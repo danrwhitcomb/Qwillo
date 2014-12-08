@@ -8,16 +8,13 @@ module.exports.appName = "Qwillo";
 
 module.exports.categories = [
 		'Art',
-		'Natural Sciences',
+		'Science',
 		'Music',
 		'Games',
-		'Technology',
 		'Computing',
-		'Design',
 		'History',
 		'Social Sciences',
 		'Literature',
-		'Politics',
 		'News',
 		'Sports',
 		'TV & Film',
@@ -29,10 +26,16 @@ module.exports.categories = [
 module.exports.messages = {
 		success: "Successfully completed the action",
 		successCode: 100,
+		accountErrorCode: 200,
+		invalidDataErrorCode: 300,
+		dataNotFoundErrorCode: 400,
+		serverErrorCode: 500,
+		serverError: "A server error occured. Please try again in a few minutes!",
 		notLoggedIn: "Oops! You must be logged in to perform this action.",
 		loggingIn: "Oops! You can't perform this action while logged in.",
 		invalidData: "Invalid argument error. Please use the correct argument.",
-		invalidCredentials: "The credentials you provided does not match our records!"
+		invalidCredentials: "The credentials you provided does not match our records!",
+		dataNotFound: "The data you requested could not be found!"
 };
 
 module.exports.stormpath = {
@@ -51,3 +54,7 @@ module.exports.topics = {
 
 	featuredTopic:"Malware"
 };
+
+module.exports.decodeDatabaseError = function(error){
+	return error.err;
+}
