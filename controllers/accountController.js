@@ -81,14 +81,14 @@ module.exports.login = function(req, res){
 	} else {
 		User.findOne({email: req.body.email.toLowerCase()}, function(err, user){
 			if(err || !user){
-				utils.sendErr(res, defines.messages.invalidCredentials);
+				res.send({status: defines.messages.accountErrorCode, message: defines.messages.invalidCredentials});
 			} else {
 				bcrypt.compare(req.body.password, user.password, function(err, result){
 					if(result){
 						req.session.user = {username: user.username}
 						utils.sendSuccess(res);
 					} else {
-						utils.sendErr(res, defines.messages.invalidCredentials);
+						res.send({status: defines.messages.accountErrorCode, message: defines.messages.invalidCredentials});
 					}
 				});
 			}

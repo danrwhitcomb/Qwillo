@@ -37,6 +37,9 @@ module.exports.defineRoutes = function(app, subdomain){
 	//HTML Routes
 	app.route('/')
 		.get(indexController.index);
+
+	app.route('/index/category')
+		.get(indexController.indexCategories);
 	
 	//Search routes
 	app.route('/search')
@@ -47,24 +50,38 @@ module.exports.defineRoutes = function(app, subdomain){
 	app.route('/topic/query/:query')
 		.get(topicController.getTopicsForQuery);
 	
+
+	app.route('/topic')
+		.get(topicController.getTopicPage);
+
 	//Topic routes
 	app.route('/topic/submit')
 		.get(topicController.topicSubmissionPage)
-		
-	app.route('/topic/:id/:postName')
-		.get(postController.getPostPage);
+		.post(utils.isLoggedIn(), topicController.submitTopic);
+
+	app.route('/topic/image')
+		.post(utils.isLoggedIn(), topicController.setPictureForTopic);
 	
-	app.route('/topic/:id')
-		.get(topicController.getTopicPage);
+	app.route('/topic/:title')
+		.get(topicController.getTopic);
+
+	app.route('/topic/:title/posts')
+		.get(topicController.getPostsForTopic);
+
+	app.route('/topic/:title/posts/:postName')
+		.get(postController.getPostForTopic);
+
 		
 	//Post routes
 	
 
 	//Submit Routes
 	app.route('/post/submit')
-		.get(postController.submissionPage)
+		.get(postController.submissionPage);
 
-	
+	app.route('/post')
+		.get(postController.getPostPage);
+
 	//Account routes
 	app.route('/user/:user')
 		.get(accountController.getUserProfilePage);
@@ -72,10 +89,15 @@ module.exports.defineRoutes = function(app, subdomain){
 		.get(accountController.getUserSettingsPage);
 	
 	app.route('/account/login')
-		.get(accountController.loginPage);
+		.get(accountController.loginPage)
+		.post(accountController.login);
 	
 	app.route('/account/signup')
-		.get(accountController.signupPage);
+		.get(accountController.signupPage)
+		.post(accountController.doSignup);
+
+	app.route('/account/logout')
+		.post(accountController.logout);
 	// //Dashboard routes !! ALL THESE ROUTES REQUIRE ADMIN ACCESS !!
 	// app.route('/dashboard')
 	// 	.get(utils.isAdmin(), dashboardController.index);

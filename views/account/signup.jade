@@ -1,36 +1,47 @@
 h2 Welcome to Qwillo!
 br
-form(novalidate)
+form(novalidate name='form')
 	.row.collapse.prefix-radius
 		.small-3.columns
 			span.prefix First Name
 		.small-9.columns
-			input(type='text', placeholder="What your mom calls you" ng-model='firstName' required)
+			input(type='text', placeholder="What your mom calls you" ng-model='creds.firstName' required)
 
 	.row.collapse.prefix-radius
 		.small-3.columns
 			span.prefix Last Name
 		.small-9.columns
-			input(type='text', placeholder="What your teachers call you" ng-model='lastName' required)
+			input(type='text', placeholder="What your teachers call you" ng-model='creds.lastName' required)
+
+	.row.collapse.prefix-radius
+		.small-3.columns
+			span.prefix Username
+		.small-9.columns
+			input(type='text', placeholder="What you what to be called" ng-model='creds.username' required)
+
 	.row.collapse.prefix-radius
 		.small-3.columns
 			span.prefix Email
 		.small-9.columns
-			input(type='email', placeholder="For all the spam" ng-model='email' required)
+			input(type='email', placeholder="For all the spam" ng-model='creds.email' required)
 
 	.row.collapse.prefix-radius
 		.small-3.columns
 			span.prefix Password
 		.small-9.columns
-			input(type='password', placeholder="Hopefully not 'password'" ng-model='password' required minlength='6' maxlength='26')
+			input(type='password', placeholder="Hopefully not 'password'" ng-model='creds.password' required minlength='6' maxlength='26')
 
 	.row.collapse.prefix-radius
 		.small-3.columns
 			span.prefix Confirm Password
 		.small-9.columns
 			input(type='password' placeholder="Please don't make it 'password'" ng-model='confirmPassword' required minlength='6' maxlength='26')
+	.row.collapse(ng-show="didReceivedError")
+		.small-12.columns
+			.alert-box.alert.radius {{errorMessages}}
+				a.close &times;
 	.row.collapse
 		.small-12.columns
-			a.button(ng-click="submit()") Signup!
-	a(class="close-reveal-modal")&#215;
+			a.button(ng-click="submit()" ng-disabled="form.$invalid" ng-class="{disabledLink: form.$invalid}") Signup!
+	a(class="close-reveal-modal") &#215;
 a(data-reveal-id='login-modal') Login instead?

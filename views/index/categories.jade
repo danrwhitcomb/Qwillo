@@ -1,0 +1,14 @@
+block append head
+
+block content
+	each cat in categories
+		.row
+			.columns.medium-12
+				h3 #{cat.title}
+				hr
+		.row 
+			each topic in cat.featuredTopics
+				.columns.medium-3
+					img(src='/img/placeholder.jpg')
+					h4 #{topic.title}
+					p #{topic.description}

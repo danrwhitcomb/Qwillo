@@ -11,9 +11,9 @@ form(novalidate name='form')
 			span.prefix Password
 		.small-9.columns
 			input(type='password' placeholder="Password" ng-model='creds.password' required minlength='6' maxlength='26')
-	.row.collapse(ng-show="didReceivedError")
+	.row.collapse(ng-show="didReceiveError")
 		.small-12.columns
-			.alert-box.alert.radius {{errorMessages}}
+			.alert-box.alert.radius {{errorMessage}}
 				a.close &times;
 	.row.collapse
 		.small-12.columns

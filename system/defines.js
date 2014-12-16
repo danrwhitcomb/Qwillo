@@ -34,7 +34,7 @@ module.exports.messages = {
 		notLoggedIn: "Oops! You must be logged in to perform this action.",
 		loggingIn: "Oops! You can't perform this action while logged in.",
 		invalidData: "Invalid argument error. Please use the correct argument.",
-		invalidCredentials: "The credentials you provided does not match our records!",
+		invalidCredentials: "The credentials you provided do not match our records!",
 		dataNotFound: "The data you requested could not be found!"
 };
 

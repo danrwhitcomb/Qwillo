@@ -1,17 +1,15 @@
-{"title":"Art","description":""} 
-{"title":"Natural Sciences","description":""} 
-{"title":"Music","description":""} 
-{"title":"Games","description":""} 
-{"title":"Technology","description":""}
-{"title":"Computing","description":""}
-{"title":"Design","description":""}
-{"title":"History","description":""}
-{"title":"Social Sciences","description":""}
-{"title":"Literature","description":""}
-{"title":"Politics","description":""}
-{"title":"News","description":""}
-{"title":"Sports","description":""}
-{"title":"TV & Film","description":""}
-{"title":"Business","description":""}
-{"title":"Fashion","description":""}
-{"title":"Other","description":""} 
+{"title":"Art","description":"", "featuredTopics":[]} 
+{"title":"Science","description":"", "featuredTopics":[]} 
+{"title":"Music","description":"", "featuredTopics":[]} 
+{"title":"Games","description":"", "featuredTopics":[]} 
+{"title":"Technology","description":"", "featuredTopics":[]}
+{"title":"History","description":"", "featuredTopics":[]}
+{"title":"Social Sciences","description":"", "featuredTopics":[]}
+{"title":"Literature","description":"", "featuredTopics":[]}
+{"title":"Politics","description":"", "featuredTopics":[]}
+{"title":"News","description":"", "featuredTopics":[]}
+{"title":"Sports","description":"", "featuredTopics":[]}
+{"title":"TV & Film","description":"", "featuredTopics":[]}
+{"title":"Business","description":"", "featuredTopics":[]}
+{"title":"Fashion","description":"", "featuredTopics":[]}
+{"title":"Other","description":"", "featuredTopics":[]} 

@@ -28,8 +28,8 @@ module.exports.deletePost = function(req, res){
 
 };
 
-module.exports.getPost = function(req, res){
-	Post.find({_id: req.params.postId}, function(err, post){
+module.exports.getPostForTopic = function(req, res){
+	Post.find({_id: req.params.postName, topic: req.params.title.toLowerCase()}, function(err, post){
 		if(err || post.length === 1){
 			res.send({status: defines.messages.dataNotFoundErrorCode,
 					  messages: defines.messages.dataNotFound});
