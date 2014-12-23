@@ -1,0 +1,36 @@
+h2 New topic? Can do!
+br
+if base.username
+	form(novalidate name='form').submit-topic
+		.row.collapse.prefix-radius
+			.small-3.columns
+				span.prefix Title
+			.small-9.columns
+				input(type='text', placeholder="What would you call this?" ng-model='data.topic' required)
+
+		
+		.row.collapse.prefix-radius
+			.small-3.columns
+				span.prefix Image Address
+			.small-9.columns
+				input(type='url', placeholder="Pictures say 1000 words" ng-model='data.imageUrl' required)
+
+		.row
+			.small-12
+				label Description
+					textarea(type='text' placeholder="What's this all about?" ng-model='data.description' required minlength='2' maxlength='500' rows='4')
+
+
+		.row.collapse(ng-show="didReceiveError")
+			.small-12.columns
+				.alert-box.alert.radius {{errorMessage}}
+					a.close &times;
+		.row.collapse
+			.small-12.columns
+				a.button(ng-click="submit()"  ng-disabled="form.$invalid" ng-class="{disabledLink: form.$invalid}") Submit! 
+else 
+	.panel.callout
+		h4 Oops!
+		p You need to be logged in to do that
+	a(data-reveal-id='login-modal') Login to Qwillo
+a(class="close-reveal-modal") &#215;

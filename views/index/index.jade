@@ -2,45 +2,4 @@ extends ../common/layout
 
 block append head
 	link(rel='stylesheet', href='/css/index.css')
-	script(type='text/javascript' src='/js/account/navModule.js')
-	script(type='text/javascript' src='/js/common/urlService.js')
 	script(type='text/javascript' src='/js/indexContent.js')
-
-block content
-	div(ng-app="IndexModule")
-		.row.header
-			.medium-3.column.page-header
-				.header-title
-					h1 Qwillo
-				.account-handler(ng-controller='AccountController as acCtrl')
-					if base.username
-						.userinfo
-							.usernameBox(ng-click="acCtrl.selectUsername()")
-								h4.username #{base.username}
-							ul.account-settings-list(ng-show="acCtrl.userSelect")
-								li 
-									a(href='#user=profile') Profile
-								li 
-									a(href='#user=settings') Settings
-								li(ng-click="acCtrl.logout()")
-									a Logout
-					else
-						ul.button-group.header-buttons.clearf-fix
-							li.left
-								a.button(href="#" data-reveal-id="signup-modal") Sign Up
-							li.right
-								a.button(href="#" data-reveal-id="login-modal") Login
-						login-modal#login-modal.reveal-modal(data-reveal).tiny
-						signup-modal#signup-modal.reveal-modal(data-reveal).tiny
-				.page-info.he
-					ul.nav-list
-						each cat in base.categories
-							li.nav-list-item
-								a.nav-list-link(href='/\##{cat}') #{cat}
-			.medium-9.columns
-				.row
-					categories.medium-12.columns.main-content
-
-
-
-		

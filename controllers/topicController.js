@@ -35,12 +35,12 @@ module.exports.getPostsForTopic = function(req, res){
 }
 
 module.exports.getTopicPage = function(req, res){
-	res.render('topic/topicPage');
+	res.render('topic/topic', {base: req.model});
 }
 
 
 module.exports.topicSubmissionPage = function(req, res){
-	res.render('topics/topic_submit');
+	res.render('topic/submit', {base: req.model});
 }
 
 module.exports.submitTopic = function(req, res){
@@ -80,4 +80,16 @@ module.exports.setPictureForTopic = function(req, res){
 	} else {
 		topicService.setPictureForTopic(res, req.body.topic, req.body.imageUrl);
 	}
+}
+
+module.exports.topicSidebar = function(req, res){
+	var topic = req.params.title;
+	Topic.find({titleLower: topic.toLowerCase()}).limit(1).exec(function(err, data){
+		if(err || !data[0]) res.send('');
+		else res.render('topic/sidebar', {base: req.model, topic: data[0]});
+	});
+};
+
+module.exports.topicContent = function(req, res){
+	res.render('topic/content', {base: req.model});
 }

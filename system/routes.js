@@ -38,8 +38,14 @@ module.exports.defineRoutes = function(app, subdomain){
 	app.route('/')
 		.get(indexController.index);
 
-	app.route('/index/category')
+	app.route('/pages/index/category')
 		.get(indexController.indexCategories);
+
+	app.route('/pages/index/skeleton')
+		.get(indexController.skeletonPage);
+
+	app.route('/pages/index/sidebar')
+		.get(indexController.sidebarPage);
 	
 	//Search routes
 	app.route('/search')
@@ -56,14 +62,16 @@ module.exports.defineRoutes = function(app, subdomain){
 
 	//Topic routes
 	app.route('/topic/submit')
-		.get(topicController.topicSubmissionPage)
 		.post(utils.isLoggedIn(), topicController.submitTopic);
 
 	app.route('/topic/image')
 		.post(utils.isLoggedIn(), topicController.setPictureForTopic);
 	
-	app.route('/topic/:title')
+	app.route('/topic/:title/data')
 		.get(topicController.getTopic);
+
+	app.route('/topic/:title')
+		.get(topicController.getTopicPage);
 
 	app.route('/topic/:title/posts')
 		.get(topicController.getPostsForTopic);
@@ -71,6 +79,13 @@ module.exports.defineRoutes = function(app, subdomain){
 	app.route('/topic/:title/posts/:postName')
 		.get(postController.getPostForTopic);
 
+		//HTML
+		app.route('/pages/topic/submit')
+			.get(topicController.topicSubmissionPage)
+		app.route('/pages/topic/sidebar/:title')
+			.get(topicController.topicSidebar);
+		app.route('/pages/topic/content/:title')
+			.get(topicController.topicContent);
 		
 	//Post routes
 	
@@ -88,6 +103,10 @@ module.exports.defineRoutes = function(app, subdomain){
 	app.route('/user/:user/settings')
 		.get(accountController.getUserSettingsPage);
 	
+
+	app.route('/pages/account/handler')
+		.get(accountController.accountHandlerPage);
+
 	app.route('/account/login')
 		.get(accountController.loginPage)
 		.post(accountController.login);
@@ -98,21 +117,30 @@ module.exports.defineRoutes = function(app, subdomain){
 
 	app.route('/account/logout')
 		.post(accountController.logout);
+
 	// //Dashboard routes !! ALL THESE ROUTES REQUIRE ADMIN ACCESS !!
-	// app.route('/dashboard')
-	// 	.get(utils.isAdmin(), dashboardController.index);
+	app.route('/dashboard')
+		.get(utils.isAdmin(), dashboardController.index);
 
-	// app.route('/dashboard/users')
-	// 	.get(utils.isAdmin(), dashboardController.usersPage);
+	app.route('/dashboard/users')
+		.get(utils.isAdmin(), dashboardController.usersPage);
 
-	// app.route('/dashboard/topics')
-	// 	.get(utils.isAdmin(), dashboardController.topicsPage);
+	app.route('/dashboard/topics')
+		.get(utils.isAdmin(), dashboardController.topicsPage);
 
-	// app.route('/dashboard/featured')
-	// 	.get(utils.isAdmin(), dashboardController.featuredPage);
+	app.route('/dashboard/featured')
+		.get(utils.isAdmin(), dashboardController.featuredPage);
+	app.route('/dashboard/featured/getTopics')
+		.get(utils.isAdmin(), dashboardController.getFeaturedTopics);
 
-	// app.route('/dashboard/posts')
-	// 	.get(utils.isAdmin(), dashboardController.postsPage);
+	app.route('/dashboard/featured/setFeatured')
+		.post(utils.isAdmin(), dashboardController.setFeaturedTopic);
+
+	app.route('/dashboard/featured/removeFeatured')
+		.post(utils.isAdmin(), dashboardController.deleteFeaturedTopic);
+
+	app.route('/dashboard/posts')
+		.get(utils.isAdmin(), dashboardController.postsPage);
 
 	
 

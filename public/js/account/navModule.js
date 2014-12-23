@@ -1,11 +1,33 @@
 var navModule = angular.module("HeaderModule", []);
 
+navModule.directive('accountHandler', ['$http', 'urlService', function($http, urlService){
+  return {
+    restrict: "E",
+    templateUrl: urlService.getUrl('accountHandler'),
+    scope: {},
+    controller: function($http, $scope, urlService){
+      $scope.userSelect = false;
+
+      $scope.selectUsername = function(){
+        $scope.userSelect = !$scope.userSelect;
+      };
+
+      $scope.logout = function(){
+        $http.post(urlService.getUrl('doLogout'), null)
+        .success(function(data, status, headers, config){
+          document.location.reload();
+        });
+      }
+    }
+  }
+}]);
+
 navModule.directive("loginModal", ['$http','urlService', function($http, urlService){
   return{
     restrict:'E',
     templateUrl: urlService.getUrl('loginHTML'),
     scope: {},
-    controller: function($http,$scope, urlService){
+    controller: function($http, $scope, urlService){
       $scope.creds = {};
       $scope.errorMessage = '';
       $scope.didReceiveError = false;
@@ -56,20 +78,24 @@ navModule.directive("signupModal", ['$http', 'urlService', function($http, urlSe
   }
 }]);
 
-navModule.controller('AccountController', ['$http','urlService', function($http, urlService){
-  var ctrl = this;
-  ctrl.userSelect = false;
+navModule.directive('submitPostModal', ['$http', 'urlService', function($http, urlService){
+  return {
+    restrict: "E",
+    templateUrl: urlService.getUrl('submitPost'),
+    scope: {},
+    controller: function($http, $scope, urlService){
 
-  this.selectUsername = function(){
-    ctrl.userSelect = !ctrl.userSelect;
-  };
-
-  this.logout = function(){
-    $http.post(urlService.getUrl('doLogout'), null)
-    .success(function(data, status, headers, config){
-      document.location.reload();
-    });
+    }
   }
+}]);
 
+navModule.directive('submitTopicModal', ['$http', 'urlService', function($http, urlService){
+  return {
+    restrict: "E",
+    templateUrl: urlService.getUrl('submitTopic'),
+    scope: {},
+    controller: function($http, $scope, urlService){
 
+    }
+  }
 }]);

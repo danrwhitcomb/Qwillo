@@ -1,11 +1,15 @@
 var app = angular.module("ContentModule", []);
 
-app.directive('categories', ['$http', function($http, $scope){
+app.directive('sidebar', ['$http', 'urlService', function($http, urlService, $scope){
+	return {
+		restrict: 'E',
+		templateUrl: urlService.getUrl('indexSidebar')
+	}
+}]);
+
+app.directive('content', ['$http', 'urlService', function($http, urlService, $scope){
 	return {
 		restrict:"E",
-		templateUrl: "/index/category",
-		controller: function($http, $scope){
-
-		}
+		templateUrl: urlService.getUrl('indexCategories'),
 	};
 }]);

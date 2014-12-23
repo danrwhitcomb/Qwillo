@@ -114,3 +114,7 @@ module.exports.logout = function(req, res){
 	}
 };
 
+module.exports.accountHandlerPage = function(req, res){
+	res.render('account/account-handler', {base: req.model});
+};
+

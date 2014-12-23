@@ -1,0 +1,35 @@
+extends layout
+
+block append head
+	script(src='/js/posts/typeahead.bundle.min.js')
+	script(src="/js/dashboard/featured.js")
+	link(rel='stylesheet' href='/css/dashboard/featured.css')
+	link(rel='stylesheet' href='/css/common/typeahead.css')
+	script(src='/js/common/urlService.js')
+
+
+
+block content
+	.featuredContent(ng-app='IndexModule' ng-controller='FeaturedController')
+		.row(ng-repeat="cat in categories | orderBy:'title'")
+			.small-12.columns
+				category
+					h4 {{cat.title}}
+					.row
+						.topic.small-3.columns(ng-repeat="topic in cat.featuredTopics")
+							a(href='/topic/{{topic.title}}')
+								a(href="#" class="close" ng-click='removeFeatured(topic.title, cat.title)') &times;
+								img(href='{{topic.imageUrl}}')
+								p {{topic.title}}
+								p {{topic.description}}
+
+						.topic.small-3.columns(ng-if="cat.featuredTopics.length < 4")
+							a(href="#" data-reveal-id="addTopicModal" ng-click="setCurrentCategory(cat.title)") Add Topic
+		#addTopicModal.reveal-modal(data-reveal).tiny
+			h4 Set featured topic for {{currentCategory}}
+			#remote
+				input.typeahead(placeholder='Search for a topic' type='text')
+			a.button(ng-click="submit()") Go!
+			a(class="close-reveal-modal") &#215;
+
+	script typeAheadSetup(); function typeAheadSetup(){var topics = new Bloodhound({datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'), queryTokenizer: Bloodhound.tokenizers.whitespace, remote: '/topic/query/%QUERY'}); topics.initialize(); var div = $('#remote .typeahead');div.typeahead(null, {name: 'topics',displayKey: 'title',source: topics.ttAdapter()});}

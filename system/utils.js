@@ -1,4 +1,5 @@
 var defines = require('./defines');
+var User = require('../models/userModel');
 
 //POST-WARE
 module.exports.sendSuccess = function(res, data){
@@ -24,20 +25,24 @@ module.exports.isNotLoggedIn = function(){
 		if(req.session.user) res.send({status:defines.message.accountErrorCode, message: defines.message.notLoggedIn});
 		else next();
 	};
-}
+};
 
-function isAdmin(){
+module.exports.isAdmin = function(){
 	return function(req, res, next){
-		User.findOne({usernameLower: req.session.user.username.toLowerCase()}, function(err, user){
-			if(err || !user){
-				res.sendStatus(403);
-			} else {
-				if(user.isAdmin){
-					next();
-				} else {
+		if(!req.session.user) res.sendStatus(403);
+		else {
+			User.findOne({usernameLower: req.session.user.username.toLowerCase()}, function(err, user){
+				if(err || !user){
 					res.sendStatus(403);
+				} else {
+					if(user.isAdmin){
+						next();
+					} else {
+						res.sendStatus(403);
+					}
 				}
-			}
-		});
+			});
+		}
+		
 	};
 };

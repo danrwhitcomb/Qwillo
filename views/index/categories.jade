@@ -1,14 +1,17 @@
-block append head
-
-block content
-	each cat in categories
-		.row
+link(rel='stylesheet' href='/css/common/content.css')
+each cat in categories
+	.category-box
+		.row(id='#{cat.title}')
 			.columns.medium-12
 				h3 #{cat.title}
 				hr
 		.row 
 			each topic in cat.featuredTopics
-				.columns.medium-3
-					img(src='/img/placeholder.jpg')
-					h4 #{topic.title}
-					p #{topic.description}
+				.columns.medium-3.end
+					a(href='/topic/#{topic.title}')
+						if topic.imageUrl != ""
+							img(src='topic.imageUrl')
+						else
+							img(src='/images/placeholder.jpg')
+						h4.topic-title #{topic.title}
+						p.topic-description #{topic.description}

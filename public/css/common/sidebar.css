@@ -1,0 +1,19 @@
+sidebar.page-info {
+	overflow: scroll;
+	display: block;
+	position: fixed;
+	width: inherit;
+	background-color: #ededed;
+}
+
+
+@media (min-width: 641px) {
+	.page-header {
+		position: fixed;
+	}
+
+	.page-info {
+		height: 100vh;
+	}
+
+}

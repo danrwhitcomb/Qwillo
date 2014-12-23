@@ -3,6 +3,7 @@ var mongoose = require('mongoose'),
 
 var Category = new Schema({
 	title: String,
+	titleLower: String,
 	link: String,
 	description: String,
 	featuredTopics: []

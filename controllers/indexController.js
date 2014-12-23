@@ -13,7 +13,7 @@ module.exports.index = function(req, res){
 	model.base = req.model;
 	model.title = defines.appName + " | Home";
 
-	var query = Category.find().select('title').exec(function(err, data){
+	var query = Category.find().select('title').sort({title:1}).exec(function(err, data){
 		if(err) res.send({status:defines.messages.serverErrorCode, message: defines.messages.serverError});
 		else{
 			model.categories = data
@@ -26,7 +26,7 @@ module.exports.index = function(req, res){
 module.exports.indexCategories = function(req, res){
 	var model = {base: req.model};
 
-	var query = Category.find(function(err, data){
+	Category.find().sort({title:1}).exec(function(err, data){
 		if(err) res.send({status:defines.messages.serverErrorCode, message: defines.messages.serverError});
 		else{
 			model.categories = data
@@ -34,3 +34,19 @@ module.exports.indexCategories = function(req, res){
 		}
 	});
 };
+
+module.exports.skeletonPage = function(req, res){
+	res.render('common/skeleton');
+}
+
+module.exports.sidebarPage = function(req, res){
+	var model = {base: req.model};
+
+	Category.find().sort({title:1}).exec(function(err, data){
+		if(err) res.send({status:defines.messages.serverErrorCode, message: defines.messages.serverError});
+		else{
+			model.categories = data
+			res.render('index/sidebar', model);
+		}
+	});
+}

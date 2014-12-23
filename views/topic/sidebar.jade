@@ -1,0 +1,25 @@
+link(rel='stylesheet', href='/css/common/sidebar.css')
+.row
+	.small-12
+		h2.topic-title #{topic.title}
+.row
+	.small-12
+		.topic-image
+			if topic.imageUrl
+				img(src="#{topic.imageUrl}")
+			else 
+				img(src='/images/placeholder.jpg')
+
+.row
+	.small-12
+		p.topic-description #{topic.description}
+
+
+.row
+	ul.button-group.even-3
+		li
+			a.button(data-reveal-id="submit-post-modal") Submit
+		li
+			a.button Invite
+		li
+			a.button Report

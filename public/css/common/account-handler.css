@@ -1,0 +1,51 @@
+account-handler {
+	position: fixed;
+}
+
+account-handler li {
+	background-color: #4D4D4D;
+	display: block;
+	margin-bottom: 5px !important;
+	float: right;
+	width: 100%;
+	transition: all .25s ease;
+}
+
+account-handler li:hover {
+	background-color: #5D5D5D;
+}
+
+account-handler li a {
+	color: #fefefe !important;
+	display: block;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	font-family: 'District Pro';
+	text-align: center
+}
+
+
+
+/*FORM CONTROLS*/
+
+form input.ng-invalid.ng-dirty, 
+form textarea.ng-invalid.ng-dirty {
+	border-color: #FA787E;
+}
+
+form input.ng-valid.ng-dirty,
+form textarea.ng-valid.ng-dirty {
+	border-color: #78FA89;
+}
+
+form input.ng-invalid.ng-dirty,
+form textarea.ng-invalid.ng-dirty {
+	border-color: #FA787E;
+}
+
+form a.disabledLink {
+	pointer-events: none;
+	cursor: default;
+}
+
+.

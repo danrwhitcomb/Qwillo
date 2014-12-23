@@ -1,0 +1,31 @@
+link(rel='stylesheet' href='/css/common/account-handler.css')
+
+ul.button-group.header-buttons.right
+	
+		
+	if base.username
+		li.username 
+			a(ng-click="selectUsername()") #{base.username}
+			ul.account-settings-list(ng-show="userSelect")
+				li 
+					a(href='#user=profile') Profile
+				li 
+					a(href='#user=settings') Settings
+				li(ng-click="logout()")
+					a Logout
+	else
+		li
+			a(data-reveal-id="signup-modal") Sign Up
+		li
+			a(data-reveal-id="login-modal") Login
+		login-modal#login-modal.reveal-modal(data-reveal).tiny
+		signup-modal#signup-modal.reveal-modal(data-reveal).tiny
+
+	li
+		a(data-reveal-id="submit-topic-modal") New Topic
+	li
+		a(data-reveal-id="submit-post-modal") New Post
+
+submit-topic-modal#submit-topic-modal.reveal-modal(data-reveal).medium
+submit-post-modal#submit-post-modal.reveal-modal(data-reveal).medium
+script $(document).foundation();

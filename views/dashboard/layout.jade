@@ -1,26 +1,42 @@
 doctype html
 html
-	head
-		title= title
+	block head
 		link(rel='stylesheet', href='/css/common/common.css')
 		link(rel='stylesheet', href='/css/foundation.min.css')
 		link(rel='stylesheet', href='/css/normalize.css')
 
-		script(type="text/javascript" src="/js/common/error.js")
 		script(type="text/javascript" src="/js/3rdParty/jquery-2.1.1.min.js")
-		script(type="text/javascript" src="/js/3rdParty/foundation.min.js")
-		script(type='')
+		script(type="text/javascript" src="/js/3rdParty/angular.min.js")
+		script(type='text/javascript' src='/js/3rdParty/foundation.min.js')
+		script(type='text/javascript' src='/js/app.js')
+
 
 		link(rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32")
 
 		
 	body
+		.contain-to-grid.sticky
+			nav.top-bar(data-topbar role='navigation' data-options="sticky_on: large")
+				ul.title-area
+					li.name
+						h1
+							a(href='/dashboard') Qwillo Dashboard
+					// Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone
+					li.toggle-topbar.menu-icon
+						a(href='#')
+							span Menu
+				// Left Nav Section
+				section.top-bar-section
+					ul.left
+						li
+							a(href='/dashboard/featured') Featured
+						li
+							a(href='/dashboard/posts') Posts
+						li
+							a(href='/dashboard/topics') Topics
+						li
+							a(href='/dashboard/users') Users
+
 		.content
 			block content
-		
-		.errorNode
-			.blackout
-				.error-wrapper
-					button.pull-right.close
-					p
-		script $('.errorNode').hide();
+		script $(document).foundation();

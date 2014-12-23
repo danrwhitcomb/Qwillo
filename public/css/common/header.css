@@ -1,0 +1,38 @@
+.header {
+	position: fixed;
+	z-index: 99;
+}
+
+.header .nav-bar {
+	opacity: 1;
+
+}
+
+.header, .header .row, .content.row {
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+	max-width: none;
+}
+
+.header .columns, .content .columns {
+	padding: 0;
+}
+
+.page-header {
+	padding: 0;
+}
+
+.page-header .header-title {
+	background-color: #3C948B;
+
+}
+
+.page-header .header-title h1{
+	color: white;
+	text-align: center;
+	font-size: 36px;
+	margin-top: 0;
+	margin-bottom: 5px;
+	font-family: "Rockwell", Helvetica, Arial, sans-serif;
+	border-bottom: 1px solid #d2d6d5;
+}

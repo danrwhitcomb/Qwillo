@@ -10,6 +10,7 @@ var Post = new Schema({
 	upvote: {type:Number, default: 0},
 	downvote: {type:Number, default: 0},
 	topic: String,
+	label: String,
 	flags: {type:Number, default: 0}
 });
 
