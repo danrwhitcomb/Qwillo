@@ -2,15 +2,13 @@ block append head
 	link(rel='stylesheet' href='/css/common/header.css')
 
 .row.header
-	.medium-3.column.page-header
-		.header-title
-			a(href='/')
-				h1 Qwillo
-		
-.row.content
-	.medium-3.columns
+	.medium-3.columns.sidebar
+		.page-header
+			.header-title
+				a(href='/')
+					h1 Qwillo
 		sidebar.page-info
-	.medium-8.columns
+	.medium-8.columns.primary-content
 		content.main-content
-	.medium-1.columns
+	.medium-1.columns.right-nav
 		account-handler.account-handler

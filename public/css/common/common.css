@@ -14,3 +14,11 @@ a {
 .content>.columns{
 	margin-top: 50px;
 }
+
+.sidebar {
+	position:fixed !important;
+}
+
+.primary-content {
+	margin-left: 25%;
+}

@@ -1,10 +1,15 @@
+sidebar {
+	padding: 5px !important;
+}
+
 sidebar .row {
 	margin-left: 5px !important;
 	margin-right: 5px !important;
 }
 
 sidebar .topic-title {
-	
+	font-family: 'Roboto';
+	text-align: left;
 }
 
 sidebar .topic-description {

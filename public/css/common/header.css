@@ -1,11 +1,5 @@
 .header {
-	position: fixed;
 	z-index: 99;
-}
-
-.header .nav-bar {
-	opacity: 1;
-
 }
 
 .header, .header .row, .content.row {
@@ -31,8 +25,7 @@
 	color: white;
 	text-align: center;
 	font-size: 36px;
-	margin-top: 0;
-	margin-bottom: 5px;
+	margin: 0;
 	font-family: "Rockwell", Helvetica, Arial, sans-serif;
 	border-bottom: 1px solid #d2d6d5;
 }

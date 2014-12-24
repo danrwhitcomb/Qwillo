@@ -1,15 +1,14 @@
 sidebar.page-info {
 	overflow: scroll;
 	display: block;
-	position: fixed;
-	width: inherit;
+	width: 100%;
 	background-color: #ededed;
 }
 
 
 @media (min-width: 641px) {
 	.page-header {
-		position: fixed;
+		/*position: fixed;*/
 	}
 
 	.page-info {
