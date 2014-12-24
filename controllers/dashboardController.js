@@ -37,7 +37,7 @@ module.exports.getFeaturedTopics = function(req, res){
 module.exports.setFeaturedTopic = function(req, res){
 	var cat = req.body.category;
 	Category.find({titleLower: cat.toLowerCase()}).limit(1).exec(function(err, data){
-		if(err) res.send({status:defines.messages.serverErrorCode, message: defines.messages.serverError});
+		if(err || !data[0]) res.send({status:defines.messages.serverErrorCode, message: defines.messages.serverError});
 		else if(data[0].featuredTopics.length >= 4){
 			res.send({status:600, message:"There are already 4 featured topics"});
 		} else {
