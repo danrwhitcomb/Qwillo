@@ -21,11 +21,15 @@ app.factory('urlService', ['$http', function($http){
 
 		submitPost: '/post/submit',
 		submitTopic: '/pages/topic/submit',
+		topicLabels: '/topic/VAR/labels',
 
-		topicContent: '/pages/topic/content',
+		topicContent: '/pages/topic/posts',
 		topicSidebar: '/pages/topic/sidebar',
-		topicData: '/topic/%VAR/data',
-		topicPosts: '/topic/%VAR/posts',
+		topicData: '/topic/VAR',
+		topicDataSave: '/topic/save',
+		topicPostData: '/topic/VAR/posts',
+		topicPostDataWithOffset: '/topic/VAR/data?offset=VAR&limit=VAR',
+		topicPosts: '/pages/topic/posts',
 
 		setFeatured: '/dashboard/featured/setFeatured',
 		getFeatured: '/dashboard/featured/getTopics',
@@ -43,7 +47,7 @@ app.factory('urlService', ['$http', function($http){
 			var route = that.routes[key];
 			for(var i = 0; i < varArray.length; i++){
 				var insert = varArray[i];
-				route.replace('VAR', insert);
+				route = route.replace('VAR', insert);
 			}
 
 			return 'http://' + that.hostname + ':' + that.port + route;

@@ -1,6 +1,58 @@
 extends ../common/layout
 
 block append head
-	script(src='/js/account/navModule.js')
-	script(src='/js/topic/topicContent.js')
 	link(rel='stylesheet' href='/css/topic/topic.css')
+
+block append head
+	script(src='/js/topic/topic.js')
+
+block content
+	.small-header
+		include ../common/header
+	.topic-content(topic-id='#{topic._id}')
+		.row
+			.columns.small-4
+				.topic-info.module-box
+					.row
+						.columns.small-12
+							.topic-info-header
+								span.topic-image-wrapper
+									if topic.imageUrl || topic.imageUrl != ""
+										img(src='#{topic.imageUrl}').topic-image
+									else
+										img(src='/images/placeholder.jpg').topic-image
+								.topic-title
+									h4 #{topic.title}
+					.row
+						.columns.small-12
+							.topic-description
+								p #{topic.description}
+
+
+			.columns.small-8
+				.topic-data
+					.data-buttons
+						.row
+							.small-11.columns
+								ul.post-filters
+									li
+										button.module-box
+											i.fa.fa-child 
+											|  Top
+									li
+										button.module-box
+											i.fa.fa-fire
+											|  Hot
+									li
+										button.module-box
+											i.fa.fa-plus
+											|  New
+							.small-1.columns
+								button.module-box.submit-post-button(data-reveal-id='submit-post-modal')
+									i.fa.fa-pencil
+
+					.row
+						.small-12.columns
+	#submit-post-modal.reveal-modal(data-reveal)
+		include ../post/submit
+							

@@ -1,24 +1,8 @@
 body {
-  font: 14px "Open sans", Helvetica, Arial, sans-serif !important;
-  background-color: #fefefe!important;
+	background-color: #82BB63 !important;
 }
 
-body>.content {
-	min-height: 100vh;
-}
-
-a {
-  color: #00B7FF;
-}
-
-.content>.columns{
-	margin-top: 50px;
-}
-
-.sidebar {
-	position:fixed !important;
-}
-
-.primary-content {
-	margin-left: 25%;
+.module-box {
+	background-color: white;
+	box-shadow: 2px 2px 1px gray;
 }

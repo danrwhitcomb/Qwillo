@@ -1,11 +1,6 @@
-var navModule = angular.module("HeaderModule", []);
+var navModule = angular.module("AccountModule", []);
 
-navModule.directive('accountHandler', ['$http', 'urlService', function($http, urlService){
-  return {
-    restrict: "E",
-    templateUrl: urlService.getUrl('accountHandler'),
-    scope: {},
-    controller: function($http, $scope, urlService){
+navModule.controller('AccountController', ['$http', '$scope', 'urlService', function($http, $scope, urlService){
       $scope.userSelect = false;
 
       $scope.selectUsername = function(){
@@ -18,8 +13,6 @@ navModule.directive('accountHandler', ['$http', 'urlService', function($http, ur
           document.location.reload();
         });
       }
-    }
-  }
 }]);
 
 navModule.directive("loginModal", ['$http','urlService', function($http, urlService){
@@ -74,28 +67,6 @@ navModule.directive("signupModal", ['$http', 'urlService', function($http, urlSe
             });
         }
       };
-    }
-  }
-}]);
-
-navModule.directive('submitPostModal', ['$http', 'urlService', function($http, urlService){
-  return {
-    restrict: "E",
-    templateUrl: urlService.getUrl('submitPost'),
-    scope: {},
-    controller: function($http, $scope, urlService){
-
-    }
-  }
-}]);
-
-navModule.directive('submitTopicModal', ['$http', 'urlService', function($http, urlService){
-  return {
-    restrict: "E",
-    templateUrl: urlService.getUrl('submitTopic'),
-    scope: {},
-    controller: function($http, $scope, urlService){
-
     }
   }
 }]);

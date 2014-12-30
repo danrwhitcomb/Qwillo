@@ -1,0 +1,21 @@
+extends layout
+
+block append head
+	script(src='/js/3rdParty/typeahead.js')
+	link(rel='stylesheet' href='/css/common/typeahead.css')
+
+block content
+	.row(style='margin-top: 20px')
+		.small-12.columns
+			form 
+				.row.collapse.prefix-radius
+					.small-2.columns
+						span.prefix Find Topic
+					.small-8.columns
+						input.typeahead(type='text', placeholder="Search for a topic" ng-model='topicName'  required)
+					.small-2.columns
+						a.button.postfix Get
+
+	.
+
+	script typeAheadSetup(); function typeAheadSetup(){var topics = new Bloodhound({datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'), queryTokenizer: Bloodhound.tokenizers.whitespace, remote: '/topic/query/%QUERY'}); topics.initialize(); var div = $('form .typeahead');div.typeahead(null, {name: 'topics',displayKey: 'title',source: topics.ttAdapter()});}

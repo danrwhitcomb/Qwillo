@@ -1,0 +1,15 @@
+block append head
+	link(rel='stylesheet' href='/css/search.css')
+	script(src='/js/common/search.js')
+	script(src='/js/3rdParty/typeahead.js')
+	link(rel='stylesheet' href='/css/common/typeahead.css')
+
+
+
+block search
+	.search
+		.columns.small-11(ng-controller='SearchController')
+			input.search-box.typeahead(type='text')
+		.columns.small-1
+			button.search-button
+				i.fa.fa-search

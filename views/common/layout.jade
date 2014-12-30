@@ -13,11 +13,11 @@ html
 		script(type='text/javascript' src='/js/account/navModule.js')
 		script(type='text/javascript' src='/js/common/urlService.js')
 
-
+		link(href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet")
 		link(rel="icon" type="image/png" href="/images/favicons/favicon-32x32.png" sizes="32x32")
 
 		
-	body
-
-		skeleton(ng-app="IndexModule")
+	body(ng-app='IndexModule')
+		include ../account/account-handler
+		block content
 		script $(document).foundation();

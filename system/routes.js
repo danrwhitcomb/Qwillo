@@ -66,12 +66,20 @@ module.exports.defineRoutes = function(app, subdomain){
 
 	app.route('/topic/image')
 		.post(utils.isLoggedIn(), topicController.setPictureForTopic);
+
+	app.route('/topic/adminSave')
+		.post(utils.isAdmin(), dashboardController.saveAdminTopicData);
+	app.route('/topic/save')
+		.post(utils.isLoggedIn(), topicController.saveTopicData);
 	
 	app.route('/topic/:title/data')
 		.get(topicController.getTopic);
 
 	app.route('/topic/:title')
 		.get(topicController.getTopicPage);
+
+	app.route('/topic/:title/labels')
+		.get(topicController.getTopicLabels);
 
 	app.route('/topic/:title/posts')
 		.get(topicController.getPostsForTopic);
@@ -84,7 +92,7 @@ module.exports.defineRoutes = function(app, subdomain){
 			.get(topicController.topicSubmissionPage)
 		app.route('/pages/topic/sidebar/:title')
 			.get(topicController.topicSidebar);
-		app.route('/pages/topic/content/:title')
+		app.route('/pages/topic/posts')
 			.get(topicController.topicContent);
 		
 	//Post routes

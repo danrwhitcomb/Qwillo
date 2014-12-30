@@ -1,25 +1,25 @@
-account-handler {
+.header-buttons {
 	position: fixed;
+	right: 0;
+	left: inherit;
+	top: 9px;
 }
 
-account-handler li {
-	background-color: #4D4D4D;
+.header-buttons  li {
+	background-color: transparent;
+	border: 2px solid #FDfEF5;
 	display: block;
-	margin-bottom: 5px !important;
-	float: right;
-	width: 100%;
+	margin: 5px !important;
 	transition: all .25s ease;
+	min-width: 100px;
+	border-radius: 2px;
 }
 
-account-handler li:hover {
-	background-color: #5D5D5D;
-}
-
-account-handler li a {
+.header-buttons  li a {
 	color: #fefefe !important;
 	display: block;
-	padding-top: 3px;
-	padding-bottom: 3px;
+	padding: 3px;
+
 	font-family: 'District Pro';
 	text-align: center
 }

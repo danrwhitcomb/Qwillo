@@ -6,7 +6,7 @@ var Category = new Schema({
 	titleLower: String,
 	link: String,
 	description: String,
-	featuredTopics: []
+	featuredTopics: [{type: Schema.Types.ObjectId, ref: 'topics'}]
 });
 
 module.exports = mongoose.model('categories', Category);

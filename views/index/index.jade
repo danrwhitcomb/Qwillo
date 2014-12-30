@@ -1,5 +1,16 @@
 extends ../common/layout
 
 block append head
-	link(rel='stylesheet', href='/css/index.css')
-	script(type='text/javascript' src='/js/indexContent.js')
+	link(rel='stylesheet' href='/css/header.css')
+	link(rel='stylesheet' href='/css/common/typeahead.css')
+	script(src='/js/3rdParty/typeahead.js')
+
+block content
+	.row
+		.columns.small-8.small-centered
+			.row
+				.columns.small-12.header
+					h1 Qwillo
+					p What do you want to learn about?
+			.row
+				include ../search/search

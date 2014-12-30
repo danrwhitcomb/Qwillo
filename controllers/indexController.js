@@ -8,25 +8,13 @@ var topicService = require('../services/topicService');
 var Category = require('../models/categoryModel');
 
 module.exports.index = function(req, res){
-
-	var model = viewModels.indexModel();
-	model.base = req.model;
-	model.title = defines.appName + " | Home";
-
-	var query = Category.find().select('title').sort({title:1}).exec(function(err, data){
-		if(err) res.send({status:defines.messages.serverErrorCode, message: defines.messages.serverError});
-		else{
-			model.categories = data
-			res.render('index/index', model);
-		}
-	});
-
+	res.render('index/index', {base: req.model});
 };
 
 module.exports.indexCategories = function(req, res){
 	var model = {base: req.model};
 
-	Category.find().sort({title:1}).exec(function(err, data){
+	Category.find().populate('featuredTopics').sort({title:1}).exec(function(err, data){
 		if(err) res.send({status:defines.messages.serverErrorCode, message: defines.messages.serverError});
 		else{
 			model.categories = data

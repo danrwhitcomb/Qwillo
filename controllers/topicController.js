@@ -1,13 +1,12 @@
 var topicService = require('../services/topicService');
 var utils = require('../system/utils');
 var defines = require('../system/defines');
-var topicModel = require('../models/topicModel');
-
-var Topic = topicModel;
+var Topic = require('../models/topicModel');
+var Label = require('../models/labelModel');
 
 module.exports.getTopic = function(req, res){
 	var topic = req.params.title.toLowerCase();
-	Topic.findOne({titleLower: topic}, 
+	Topic.findOne({titleLower: topic}).select('title imageUrl description ').exec( 
 		function(err, topic){
 			if(err || !topic){
 				res.send({status:  defines.messages.dataNotFoundErrorCode,
@@ -35,7 +34,15 @@ module.exports.getPostsForTopic = function(req, res){
 }
 
 module.exports.getTopicPage = function(req, res){
-	res.render('topic/topic', {base: req.model});
+	Topic.findOne({titleLower: req.params.title.toLowerCase()}).select('title imageUrl description _id labels').populate('labels').exec( 
+		function(err, topic){
+			if(err || !topic){
+				res.status(404);
+			 
+			} else {
+				res.render('topic/topic', {base: req.model, topic: topic});
+			}
+		});
 }
 
 
@@ -92,4 +99,17 @@ module.exports.topicSidebar = function(req, res){
 
 module.exports.topicContent = function(req, res){
 	res.render('topic/content', {base: req.model});
+}
+
+module.exports.getTopicLabels = function(req, res){
+	Label.find({topic: req.params.title.toLowerCase()}, function(err, data){
+		if(err) res.send({status:defines.messages.serverErrorCode, message: defines.messages.serverError});
+		else {
+			res.send({status: defines.messages.successCode, message: defines.messages.success, data: data});
+		}
+	});
+}
+
+module.exports.saveTopicData = function(req, res){
+
 }
