@@ -1,17 +1,22 @@
 h2 Woohoo! Let's make a post
 br
 if base.username
-	form(novalidate name='form')
+	form(novalidate name='form' ng-controller='SubmitController')
 		.row.collapse.prefix-radius
 			.small-12
-				h4 New post for #{topic.title}
-				
+				h4 New post for #{topic.title}	
 
 		.row.collapse.prefix-radius
 			.small-3.columns
 				span.prefix Title
 			.small-9.columns
 				input(type='text' placeholder="What do you want to call it?" ng-model='data.title' required minlength='2' maxlength='50')
+
+		.row.collapse.prefix-radius
+			.small-3.columns
+				span.prefix Link/URL
+			.small-9.columns
+				input(type='url' placeholder="Where is it?" ng-model='data.link' required minlength='2' maxlength='50')
 
 		.row.collapse.prefix-radius
 			.small-12.columns
@@ -21,7 +26,7 @@ if base.username
 		.row.collapse
 			.small-12.columns
 				label Choose a Label
-					select
+					select(ng-model='data.label')
 						each label in topic.labels
 							option(value='#{label._id}') #{label.title}
 						option(value='-1') -- NONE --

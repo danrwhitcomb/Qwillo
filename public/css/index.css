@@ -1,29 +1,45 @@
-.header {
-	text-align: center;
+.search-wrapper {
+	min-height: 80vh;
 }
 
-.header h1{
+.explanation-wrapper {
+	min-height: 80vh;
+	background: url(/images/library.jpg) no-repeat center center fixed;
+	background-size: cover;
+	margin-left: 0;
+	margin-right: 0;
+	max-width: none;
+
+}
+
+.exp-header {
+	margin-bottom: 40px;
+}
+
+.exp-header .title {
 	font-family: "Rockwell", serif !important;
-	font-size: 76px;
-	margin-bottom: 0;
-	color: #FDfEF5;
 }
 
-.header p {
-	font-family: "Roboto", sans-serif !important;
-	font-size: 25px;
-	color: #FDfEF5;
+.shadow-wrapper {
+	position: absolute;
+	background-color: black;
+	opacity: .6;
+	min-height: 100%;
+	width: 100%;
 }
 
-.search-button {
-    padding-top: 6px;
-    padding-bottom: 6px;
-    background-color: white;
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-	transition: background-color .25s ease;
-	margin-left: 10px;
+.explanation-wrapper h1 {
+	color: #f7f7f7;
 }
 
-.search-button:hover {
-	background-color: #123D12;
+.explanation-wrapper h3,
+.explanation-wrapper p {
+		color: #f7f7f7;
+		text-align: center;
+}
+
+.icon-wrapper {
+	margin-left: auto;
+	margin-right: auto;
+	width: 70px;
 }

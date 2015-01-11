@@ -6,3 +6,25 @@ body {
 	background-color: white;
 	box-shadow: 2px 2px 1px gray;
 }
+
+.header-buttons {
+	right: 0;
+	left: inherit;
+	top: 9px;
+}
+
+.header-buttons  li {
+	border: 2px solid #FDfEF5;
+	transition: all .25s ease;
+	border-radius: 2px;
+	margin-left: 10px !important;
+}
+
+.header-buttons  li a {
+	color: #26484A!important;
+	display: block;
+	padding: 3px;
+
+	font-family: 'District Pro';
+	text-align: center
+}

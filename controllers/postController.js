@@ -8,20 +8,12 @@ module.exports.getPost = function(req, res){
 
 //DEPRECATED
 module.exports.submissionPage = function(req, res){
-	if(req.query.topic){
-		res.render('posts/submit', {base: req.model, topic: req.query.topic});
-	} else {
-		res.render('posts/submit', {base:req.model});
-	}
+	res.render('posts/submit', {base:req.model});
 };
 
 module.exports.submitPost = function(req, res){
-	if(req.session.user == null){
-		res.send({status: defines.messages.accountErrorCode,
-				  message: defines.messages.notLoggedIn});
-	} else {
-		postService.submitPostForUser(res, req.body, req.session.user);
-	}
+	postService.submitPostForUser(res, req.body, req.session.userId);
+
 };
 
 module.exports.deletePost = function(req, res){

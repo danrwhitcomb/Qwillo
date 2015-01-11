@@ -5,7 +5,7 @@ var Topic = new Schema({
 	title: String,
 	titleLower: String,
 	description: String,
-	creationDate: { type: Date, default: Date.now },
+	creationDate: {type: Date, default: Date.now },
 	labels: [{type: Schema.Types.ObjectId, ref: 'labels'}],
 	numberOfPosts: Number,
 	imageUrl: String,

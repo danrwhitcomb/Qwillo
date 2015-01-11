@@ -2,16 +2,16 @@ extends ../common/layout
 
 block append head
 	link(rel='stylesheet' href='/css/topic/topic.css')
-
-block append head
 	script(src='/js/topic/topic.js')
+	title #{topic.title} | Qwillo
+	
 
 block content
 	.small-header
 		include ../common/header
 	.topic-content(topic-id='#{topic._id}')
 		.row
-			.columns.small-4
+			.columns.medium-4
 				.topic-info.module-box
 					.row
 						.columns.small-12
@@ -29,30 +29,41 @@ block content
 								p #{topic.description}
 
 
-			.columns.small-8
-				.topic-data
+			.columns.medium-8
+				.topic-data(ng-controller='TopicController')
 					.data-buttons
 						.row
-							.small-11.columns
+							.small-10.columns
 								ul.post-filters
 									li
-										button.module-box
+										button.module-box(ng-click='orderId = 0' ng-class='active: orderId == 0')
 											i.fa.fa-child 
 											|  Top
 									li
-										button.module-box
+										button.module-box(ng-click='orderId = 1' ng-class='active: orderId == 1')
 											i.fa.fa-fire
 											|  Hot
 									li
-										button.module-box
+										button.module-box(ng-click='orderId = 2' ng-class='active: orderId == 2')
 											i.fa.fa-plus
 											|  New
-							.small-1.columns
-								button.module-box.submit-post-button(data-reveal-id='submit-post-modal')
+							.small-2.columns
+								button.module-box.submit-post-button.right(data-reveal-id='submit-post-modal')
 									i.fa.fa-pencil
 
 					.row
 						.small-12.columns
+							.post-box.module-box(ng-repeat='post in posts | orderBy : order[orderId]')
+								.arrow-box
+									i.fa.fa-sort-up.fa-4x.arrow-button
+									span.vote-count {{post.upvotes - post.downvotes}}
+									i.fa.fa-sort-down.fa-4x.arrow-button
+								.info-box
+									a(href='{{post.link}}') 
+										h4 {{post.title}}
+									p  {{post.description}}
+
+
 	#submit-post-modal.reveal-modal(data-reveal)
 		include ../post/submit
 							

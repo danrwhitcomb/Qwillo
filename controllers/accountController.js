@@ -68,7 +68,7 @@ module.exports.doSignup = function(req, res){
 									message: defines.decodeDatabaseError(err),
 									error:   err});
 			} else {
-				req.session.user = {username: user.username}
+				req.session.user = {username: user.username, id: user._id};
 				utils.sendSuccess(res);
 			}
 		});
@@ -85,7 +85,7 @@ module.exports.login = function(req, res){
 			} else {
 				bcrypt.compare(req.body.password, user.password, function(err, result){
 					if(result){
-						req.session.user = {username: user.username}
+						req.session.user = {username: user.username, id: user._id};
 						utils.sendSuccess(res);
 					} else {
 						res.send({status: defines.messages.accountErrorCode, message: defines.messages.invalidCredentials});

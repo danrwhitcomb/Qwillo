@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
 var Label = new Schema({
 	name: String,
 	nameLower: String,
-	topic: String
+	topic: {type: Schema.Types.ObjectId, ref: 'topics'}
 });
 
 module.exports = mongoose.model('labels', Label);

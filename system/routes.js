@@ -20,32 +20,11 @@ module.exports.defineRoutes = function(app, subdomain){
 	    res.send('Welcome to our API!');
 	});
 
-	router.post('/topic/submit', utils.isLoggedIn(), topicController.submitTopic);
-	router.post('/topic/image', utils.isLoggedIn(), topicController.setPictureForTopic);
-	router.get('/topic/:title/posts', topicController.getPostsForTopic);
-	router.get('/topic/:title/posts/:postId', postController.getPost);
-	router.get('/topic/:title', topicController.getTopic);
-	router.post('/post/submit', utils.isLoggedIn(), postController.submitPost);
-	router.get('/user/:username', utils.isLoggedIn(), accountController.getUser);
-	router.post('/account/login', utils.isNotLoggedIn(), accountController.login);
-	router.post('/account/logout', utils.isLoggedIn(), accountController.logout);
-	router.post('/account/signup', utils.isNotLoggedIn(), accountController.doSignup); 
 
-
-	app.use(subdomain('api', router));
 
 	//HTML Routes
 	app.route('/')
 		.get(indexController.index);
-
-	app.route('/pages/index/category')
-		.get(indexController.indexCategories);
-
-	app.route('/pages/index/skeleton')
-		.get(indexController.skeletonPage);
-
-	app.route('/pages/index/sidebar')
-		.get(indexController.sidebarPage);
 	
 	//Search routes
 	app.route('/search')
@@ -81,26 +60,19 @@ module.exports.defineRoutes = function(app, subdomain){
 	app.route('/topic/:title/labels')
 		.get(topicController.getTopicLabels);
 
-	app.route('/topic/:title/posts')
+	app.route('/topic/:id/posts')
 		.get(topicController.getPostsForTopic);
 
 	app.route('/topic/:title/posts/:postName')
 		.get(postController.getPostForTopic);
-
-		//HTML
-		app.route('/pages/topic/submit')
-			.get(topicController.topicSubmissionPage)
-		app.route('/pages/topic/sidebar/:title')
-			.get(topicController.topicSidebar);
-		app.route('/pages/topic/posts')
-			.get(topicController.topicContent);
 		
 	//Post routes
 	
 
 	//Submit Routes
 	app.route('/post/submit')
-		.get(postController.submissionPage);
+		.get(postController.submissionPage)
+		.post(utils.isLoggedIn(), postController.submitPost);
 
 	app.route('/post')
 		.get(postController.getPostPage);
@@ -135,17 +107,6 @@ module.exports.defineRoutes = function(app, subdomain){
 
 	app.route('/dashboard/topics')
 		.get(utils.isAdmin(), dashboardController.topicsPage);
-
-	app.route('/dashboard/featured')
-		.get(utils.isAdmin(), dashboardController.featuredPage);
-	app.route('/dashboard/featured/getTopics')
-		.get(utils.isAdmin(), dashboardController.getFeaturedTopics);
-
-	app.route('/dashboard/featured/setFeatured')
-		.post(utils.isAdmin(), dashboardController.setFeaturedTopic);
-
-	app.route('/dashboard/featured/removeFeatured')
-		.post(utils.isAdmin(), dashboardController.deleteFeaturedTopic);
 
 	app.route('/dashboard/posts')
 		.get(utils.isAdmin(), dashboardController.postsPage);

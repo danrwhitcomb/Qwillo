@@ -75,3 +75,20 @@
 #submit-post-modal .row{
 	margin-bottom: 10px;
 }
+
+.topic-data .post-box div {
+display: inline-block;
+}
+
+.arrow-box {
+	text-align: center
+}
+
+.vote-count {
+	text-align: center;
+}
+
+.arrow-button {
+	line-height: 2px;
+	display: block !important;
+}

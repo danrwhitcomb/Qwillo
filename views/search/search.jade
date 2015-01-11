@@ -8,8 +8,8 @@ block append head
 
 block search
 	.search
-		.columns.small-11(ng-controller='SearchController')
-			input.search-box.typeahead(type='text')
-		.columns.small-1
-			button.search-button
+		.columns.small-10(ng-controller='SearchController')
+			input.search-box.typeahead.module-box(type='text' placeholder='Search for a topic')
+		.columns.small-2
+			button.search-button.module-box
 				i.fa.fa-search

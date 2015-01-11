@@ -7,22 +7,22 @@ var async = require('async');
 var Post = postModel;
 var Topic = topicModel;
 
-module.exports.submitPostForUser = function(res, data, username){
+module.exports.submitPostForUser = function(res, data, userId){
 
 	var now = Date.now();
 	var post = new Post({title: data.title, 
 						 link: data.link,
 						 description: data.description,
 						 datePosted: now,
-						 user: username,
-						 topic: data.topic.toLowerCase()
+						 userId: userId,
+						 topicId: data.topicId
 						});
 
 
 	//Check topic exists
 	async.waterfall([
 		function(callback){
-			Topic.findOne({'title': data.topic}, function(err, topic){
+			Topic.findOne({'_id': data.topicId}, function(err, topic){
 				if(err) callback(err);
 				else callback(null, post);
 			})

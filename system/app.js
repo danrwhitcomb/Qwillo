@@ -90,6 +90,7 @@ app.use(function(req, res, next){
   req.model = model.model();
   if(req.session.user){
     req.model.username = req.session.user.username;
+    req.model.userId = req.session.user.id;
   }
   next();
 });

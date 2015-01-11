@@ -19,15 +19,15 @@ module.exports.getTopic = function(req, res){
 };
 
 module.exports.getPostsForTopic = function(req, res){
-	var topic = req.params.title.toLowerCase();
-	Topic.findOne({titleLower: topic}, 
+	var topicId = req.params.id;
+	Topic.findOne({'_id': topicId}, 
 		function(err, topic){
 			if(err || !topic){
 				res.send({status:  defines.messages.dataNotFoundErrorCode,
 						  message: defines.messages.dataNotFound});
 			 
 			} else {
-				topicService.getPostsForTopic(res, req.params.topic, req.query.start, req.query.limit);
+				topicService.getPostsForTopic(res, req.params.id, req.query.start, req.query.limit);
 			}
 		});
 	

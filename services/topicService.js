@@ -94,56 +94,38 @@ module.exports.getHomepageTopics = function(model, res){
 module.exports.getPostsForTopic = function(res, topic, start, limit){
 	start = start || 0;
 	limit = limit || 15;
-
-	Post.find({topic: topic},
+	Post.find({topicId: topic},
 		function(err, posts){
 			if(err){
-				res.send
+				res.send({status: defines.messages.serverErrorCode, message: defines.message.serverError});
 			} else {
 
-				// var hotPosts = posts.slice();
-				// hotPosts.sort(function(a, b){
-				// 	var a_time = (new Date(a.datePosted)).getTime() - Date.now;
-				// 	var a_score = a.upvotes - a.downvotes;
-				// 	var a_sign;
-				// 	if(a_score > 0) a_sign = 1;
-				// 	else if(a_sign < 0) a_sign = -1;
-				// 	else a_sign = 0;
-				// 	var a_order = Math.log(Math.max(Math.abs(a_score)));
-				// 	var a_total = Math.round(a_order + a_sign * a_time / 45000);
+				var hotPosts = posts.slice();
+				hotPosts.sort(function(a, b){
+					var a_time = (new Date(a.datePosted)).getTime() - Date.now;
+					var a_score = a.upvotes - a.downvotes;
+					var a_sign;
+					if(a_score > 0) a_sign = 1;
+					else if(a_sign < 0) a_sign = -1;
+					else a_sign = 0;
+					var a_order = Math.log(Math.max(Math.abs(a_score)));
+					var a_total = Math.round(a_order + a_sign * a_time / 45000);
 
-				// 	var b_time = (new Date(a.datePosted)).getTime() - Date.now;
-				// 	var b_score = a.upvotes - a.downvotes;
-				// 	var b_sign;
-				// 	if(b_score > 0) b_sign = 1;
-				// 	else if(b_sign < 0) b_sign = -1;
-				// 	else b_sign = 0;
-				// 	var b_order = Math.log(Math.max(Math.abs(b_score)));
-				// 	var b_total = Math.round(b_order + b_sign * b_time / 45000);
+					var b_time = (new Date(a.datePosted)).getTime() - Date.now;
+					var b_score = a.upvotes - a.downvotes;
+					var b_sign;
+					if(b_score > 0) b_sign = 1;
+					else if(b_sign < 0) b_sign = -1;
+					else b_sign = 0;
+					var b_order = Math.log(Math.max(Math.abs(b_score)));
+					var b_total = Math.round(b_order + b_sign * b_time / 45000);
 
-				// 	if(a_total > b_total) return 1;
-				// 	if(a_total === b_total) return 0;
-				// 	else return -1;
-				// });
+					if(a_total > b_total) return 1;
+					if(a_total === b_total) return 0;
+					else return -1;
+				});
 
-				// var topPosts = posts.slice();
-				// topPosts.sort(function(a, b){
-				// 	var a_total = a.upvotes - a.downvotes;
-				// 	var b_total = b.upvotes - b.downvotes;
-
-				// 	if(a_total > b_total) return 1;
-				// 	if(a_total === b_total) return 0;
-				// 	else return -1;
-				// });
-
-				// var newPosts = posts.slice();
-				// newPosts.sort(function(a,b){
-				// 	if(a.datePosted < b.datePosted) return 1;
-				// 	if(a.datePosted === b.datePosted) return 0;
-				// 	else return -1;
-				// });
-
-				utils.sendSuccess(res, posts);
+				utils.sendSuccess(res, hotPosts);
 			}
 		}).sort({datePosted: 'asc'}).skip(start).limit(limit);
 }
