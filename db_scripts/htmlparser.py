@@ -21,11 +21,10 @@ for i in soup.select('.wikitable td > a'):
 		if k != None:
 			newK = k.replace('"', '\'')
 			print(str(k))
-			json = "{\"title\": \"" + str(newK) + "\", \"titleLower\": \"" + str(newK).lower() + "\", \"description\": \"\", \"creationDate\": \"" + str(datetime.date.today()) + "\", \"category\": \"\", \"numberOfPosts\": 0, \"imageUrl\": ''}\n"
+			json = "{\"title\": \"" + str(newK) + "\", \"titleLower\": \"" + str(newK).lower() + "\", \"description\": \"\", \"creationDate\": \"" + str(datetime.date.today()) + "\", \"category\": \"\", \"labels\": [], \"numberOfPosts\": 0, \"imageUrl\": \"\", \"isLocked\": \"false\", \"isLive\": \"true\"}\n"
 			d.write(json)
 	except:
 		continue
 
 src_f.close()
 d.close()
-

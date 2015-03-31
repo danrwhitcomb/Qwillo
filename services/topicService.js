@@ -91,7 +91,7 @@ module.exports.getHomepageTopics = function(model, res){
 	
 };
 
-module.exports.getPostsForTopic = function(res, topic, start, limit){
+module.exports.getHotPostsForTopic = function(res, topic, start, limit){
 	start = start || 0;
 	limit = limit || 15;
 	Post.find({topicId: topic},
@@ -127,6 +127,44 @@ module.exports.getPostsForTopic = function(res, topic, start, limit){
 
 				utils.sendSuccess(res, hotPosts);
 			}
+		}).sort({datePosted: 'asc'}).skip(start).limit(limit);
+}
+
+module.exports.getNewPostsForTopic = function(res, topic, start, limit){
+	start = start || 0;
+	limit = limit || 15;
+	Post.find({topicId: topic},
+		function(err, posts){
+			if(err){
+				res.send({status: defines.messages.serverErrorCode, message: defines.message.serverError});
+			} else {
+				utils.sendSuccess(res, posts);
+			}
+
+		}).sort({datePosted: 'asc'}).skip(start).limit(limit);
+}
+
+module.exports.getTopPostsForTopic = function(res, topic, start, limit){
+	start = start || 0;
+	limit = limit || 15;
+	Post.find({topicId: topic},
+		function(err, posts){
+			if(err){
+				res.send({status: defines.messages.serverErrorCode, message: defines.message.serverError});
+			} else {
+
+				var topPosts = posts.slice();
+				topPosts.sort(function(a, b){
+					var a_score = a.upvote - a.downvote;
+					var b_score = b.upvote - b.downvote;
+
+					if(a_score > b_score) return 1;
+					if(a_score == b_score) return 0;
+					else return -1;
+				});
+			}
+
+				utils.sendSuccess(res, topPosts);
 		}).sort({datePosted: 'asc'}).skip(start).limit(limit);
 }
 

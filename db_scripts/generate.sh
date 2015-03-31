@@ -44,13 +44,10 @@ configFile="../system/config.json"
 echo "Wiping former database..."
 echo $host:$port/$database
 mongo $host:$port/$database -u $username -p $password --eval "db.topics.drop();"
-mongo $host:$port/$database -u $username -p $password --eval "db.categories.drop();"
 mongo $host:$port/$database -u $username -p $password --eval "db.posts.drop();"
 
-echo "Writing Categories to database"
-mongoimport --host $host --port $port --db $database -username $username -password $password --collection categories --file "category.json"
-
 echo "Fetching wikipedia most visisted..."
+if[]
 wget -O pages.html http://en.wikipedia.org/wiki/User:West.andrew.g/Popular_pages
 
 echo "Parsing Links..."

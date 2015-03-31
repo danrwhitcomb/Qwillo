@@ -60,7 +60,10 @@ module.exports.defineRoutes = function(app, subdomain){
 	app.route('/topic/:title/labels')
 		.get(topicController.getTopicLabels);
 
-	app.route('/topic/:id/posts')
+	app.route('/topics/labels/createrequest')
+		.post(utils.isLoggedIn(), topicController.createLabelRequest);
+
+	app.route('/topic/:id/posts/:type')
 		.get(topicController.getPostsForTopic);
 
 	app.route('/topic/:title/posts/:postName')

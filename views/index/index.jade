@@ -2,7 +2,6 @@ extends ../common/layout
 
 block append head
 	link(rel='stylesheet' href='/css/header.css')
-	link(rel='stylesheet' href='/css/index.css')
 	link(href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet")
 	script(src='/js/index.js')
 	title The best source of the internet
@@ -16,24 +15,3 @@ block content
 					p What do you want to learn about?
 			.row
 				include ../search/search
-	.row.explanation-wrapper
-		.shadow-wrapper
-		.columns.small-12
-			.row
-				.medium-12.columns.exp-header
-					h1 What is <span class='title'>Qwillo</span>?
-			.row
-				.medium-4.columns.box
-					h3 A place to share
-					.icon-wrapper
-						i.fa.fa-share-alt.fa-5x.fa-inverse
-					p Qwillo enables anyone to share the best references to 
-				.medium-4.columns
-					h3 A place to learn
-					.icon-wrapper
-						i.fa.fa-book.fa-5x.fa-inverse
-				.medium-4.columns
-					h3 A place to discover!
-					.icon-wrapper
-						i.fa.fa-search.fa-5x.fa-inverse
-

@@ -3,6 +3,7 @@ var utils = require('../system/utils');
 var defines = require('../system/defines');
 var Topic = require('../models/topicModel');
 var Label = require('../models/labelModel');
+var async = require('async')
 
 module.exports.getTopic = function(req, res){
 	var topic = req.params.title.toLowerCase();
@@ -27,7 +28,12 @@ module.exports.getPostsForTopic = function(req, res){
 						  message: defines.messages.dataNotFound});
 			 
 			} else {
-				topicService.getPostsForTopic(res, req.params.id, req.query.start, req.query.limit);
+				if(req.params.type == "hot")
+					topicService.getHotPostsForTopic(res, req.params.id, req.query.start, req.query.limit);
+				else if(req.params.type == "new")
+					topicService.getNewPostsForTopic(res, req.params.id, req.query.start, req.query.limit);
+				else
+					topicService.getTopPostsForTopic(res, req.params.id, req.query.start, req.query.limit);
 			}
 		});
 	
@@ -99,7 +105,7 @@ module.exports.topicSidebar = function(req, res){
 
 module.exports.topicContent = function(req, res){
 	res.render('topic/content', {base: req.model});
-}
+};
 
 module.exports.getTopicLabels = function(req, res){
 	Label.find({topic: req.params.title.toLowerCase()}, function(err, data){
@@ -108,6 +114,57 @@ module.exports.getTopicLabels = function(req, res){
 			res.send({status: defines.messages.successCode, message: defines.messages.success, data: data});
 		}
 	});
+};
+
+module.exports.createLabelRequest = function(req, res){
+	if(req.body.name == null || req.body.topic == null){
+		utils.sendErr(res, defines.messages.invalidDataErrorCode, defines.messages.invalidData);
+	} else {
+		var newLabel = new Label({name: req.body.name,
+			nameLower: req.body.name.toLowerCase(),
+			topic: req.body.topic,
+			approvedBy: null,
+			approvedDate: null,
+			submittedBy: req.session.user.id}
+		);
+
+		if(req.body.description){
+			newLabel.description = req.body.description;
+		}
+
+		async.waterfall([
+			function(callback){
+				newLabel.save(function(err, label){
+					if(err || !label) 
+						callback(err, [res, defines.messages.serverErrorCode, defines.messages.serverError]);
+					else {
+						callback(null, label);
+					}
+
+				});
+			},
+
+			function(label, callback){
+				Topic.update({_id: label.topic}, {$push: {'labels': newLabel.id}},
+					function(err, saved_topic){
+					if(err)
+						callback(err, [res, defines.messages.serverErrorCode, defines.messages.serverError]);
+					else
+						utils.sendSuccess(res);
+				});
+			}
+
+			], 
+			function(err, result){
+				utils.sendErr(res, result[0], result[1]);
+			}
+		)
+
+		
+
+	}
+
+	
 }
 
 module.exports.saveTopicData = function(req, res){

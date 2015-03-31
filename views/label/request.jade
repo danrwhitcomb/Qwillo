@@ -1,0 +1,30 @@
+.container
+	if base.username
+		h3 Request a new Label!
+		.label-description
+			p Labels are sub-topics that you can attach to posts! People can use labels to filter posts, and to figure out what a post is about. 
+			p The creation of labels is not an automatic system. To keep everything clean and organized, our staff approves all the labels that get created. All you have to do is submit a new label to us with a (optional) description of what the label refers to. We will approve or deny the label within 24 hours!
+		hr
+		form(role='form', onsumbit='return false').label-form
+			.row.collapse.prefix-radius
+				.small-12.columns
+					label(for='exampleInputEmail1') Topic: #{topic.title}
+					
+			.row.collapse.prefix-radius
+				.small-3.columns
+					span.prefix Name
+				.small-9.columns
+					input(type='text' placeholder="What do you want to call it?" ng-model='labelData.name' required minlength='2' maxlength='50')
+			.row.collapse
+				.small-12.columns
+					label Description
+					textarea(type='text' placeholder="What's this all about?" ng-model='labelData.description' required minlength='2' maxlength='500')
+			.row.collapse
+				.small-12.columns
+					a.button(ng-click="createLabel()"  ng-disabled="form.$invalid" ng-class="{disabledLink: form.$invalid}") Submit! 
+	else
+		h4 Oops!
+		p You need to be logged in to do that
+		a(data-reveal-id='login-modal') Login to Qwillo
+	a(class="close-reveal-modal") &#215;
+	

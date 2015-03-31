@@ -28,8 +28,7 @@ if base.username
 				label Choose a Label
 					select(ng-model='data.label')
 						each label in topic.labels
-							option(value='#{label._id}') #{label.title}
-						option(value='-1') -- NONE --
+							option(value='#{label._id}') #{label.name}
 
 		.row.collapse(ng-show="didReceiveError")
 			.small-12.columns

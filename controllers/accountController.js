@@ -69,7 +69,7 @@ module.exports.doSignup = function(req, res){
 									error:   err});
 			} else {
 				req.session.user = {username: user.username, id: user._id};
-				utils.sendSuccess(res);
+				utils.sendSuccess(res, user);
 			}
 		});
 	}

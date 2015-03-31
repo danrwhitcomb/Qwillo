@@ -8,8 +8,8 @@ module.exports.sendSuccess = function(res, data){
 			  data: data});
 };
 
-module.exports.sendErr = function(res, err){
-	res.send({status: err});
+module.exports.sendErr = function(res, code, message){
+	res.send({status: code, message: message});
 };
 
 //PRE-WARE
