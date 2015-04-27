@@ -45,40 +45,45 @@ app.controller('TopicController', ['$http', '$scope', function($http, $scope){
 
   //Voting Handlers
   $scope.upvote = function(post, $event){
+
+    var upvoteData = {};
+    upvoteData.post = post._id;
+
     //Send vote
     if(post.isVote != 1){
       post.upvote++;
-      var upvoteData = {};
-      upvoteData.post = post.id;
       upvoteData.vote = true;
       $http.post('/post/upvote', upvoteData);
 
+      if(post.isVote == -1) post.downvote--;
+
       post.isVote = 1;
+      
     } else {
       post.upvote--;
       post.isVote = 0;
-      var upvoteData = {};
-      upvoteData.post = post.id;
       upvoteData.vote = false;
       $http.post('/post/upvote', upvoteData);
     }
-
-  }
+  };
 
    $scope.downvote = function(post, $event){
+
     //Send vote
     if(post.isVote != -1){
       post.downvote++;
       var downvoteData = {};
-      downvoteData.post = post.id;
+      downvoteData.post = post._id;
       downvoteData.vote = true;
       $http.post('/post/downvote', downvoteData);
+
+      if(post.isVote == 1) post.upvote--;
 
       post.isVote = -1;
     } else {
       post.downvote--;
       var downvoteData = {};
-      downvoteData.post = post.id;
+      downvoteData.post = post._id;
       downvoteData.vote = false;
       $http.post('/post/downvote', downvoteData);
       post.isVote = 0

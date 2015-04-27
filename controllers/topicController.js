@@ -29,11 +29,11 @@ module.exports.getPostsForTopic = function(req, res){
 			 
 			} else {
 				if(req.params.type == "hot")
-					topicService.getHotPostsForTopic(res, req.params.id, req.query.start, req.query.limit);
+					topicService.getHotPostsForTopic(res, req, req.params.id, req.query.start, req.query.limit);
 				else if(req.params.type == "new")
-					topicService.getNewPostsForTopic(res, req.params.id, req.query.start, req.query.limit);
+					topicService.getNewPostsForTopic(res, req, req.params.id, req.query.start, req.query.limit);
 				else
-					topicService.getTopPostsForTopic(res, req.params.id, req.query.start, req.query.limit);
+					topicService.getTopPostsForTopic(res, req, req.params.id, req.query.start, req.query.limit);
 			}
 		});
 	

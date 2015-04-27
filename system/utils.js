@@ -3,8 +3,8 @@ var User = require('../models/userModel');
 
 //POST-WARE
 module.exports.sendSuccess = function(res, data){
-	res.send({status: defines.messages.successCode,
-			  message: defines.messages.success,
+	res.send({status: defines.response.codes.success,
+			  message: defines.response.messages.success,
 			  data: data});
 };
 
@@ -15,14 +15,14 @@ module.exports.sendErr = function(res, code, message){
 //PRE-WARE
 module.exports.isLoggedIn = function(){
 	return function(req, res, next){
-		if(req.session.user == null) res.send({status:defines.message.accountErrorCode, message: defines.message.notLoggedIn});
+		if(req.session.user == null) res.send({status:defines.response.messages.accountError, message: defines.response.codes.notLoggedIn});
 		else next();
 	};
 };
 
 module.exports.isNotLoggedIn = function(){
 	return function(req, res, next){
-		if(req.session.user) res.send({status:defines.message.accountErrorCode, message: defines.message.notLoggedIn});
+		if(req.session.user) res.send({status:defines.response.codes.accountError, message: defines.response.messages.notLoggedIn});
 		else next();
 	};
 };
@@ -46,3 +46,13 @@ module.exports.isAdmin = function(){
 		
 	};
 };
+
+module.exports.debugLog = function(message){
+	if(process.argv[4] && process.argv[4].toLowerCase() == "debug"){
+		console.log(message);
+	}
+}
+
+module.exports.print = function(){
+
+}

@@ -1,5 +1,7 @@
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+var mongoose;
+var Schema;
+mongoose = require('mongoose');
+Schema = mongoose.Schema;
 
 var Label = new Schema({
 	name: String,

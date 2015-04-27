@@ -3,6 +3,7 @@ var async = require('async');
 var mongoose = require('mongoose');
 var topicModel = require('../models/topicModel');
 var postModel = require('../models/postModel');
+var User = require('../models/userModel');
 var utils = require('../system/utils');
 
 //Models 
@@ -91,7 +92,7 @@ module.exports.getHomepageTopics = function(model, res){
 	
 };
 
-module.exports.getHotPostsForTopic = function(res, topic, start, limit){
+module.exports.getHotPostsForTopic = function(res, req, topic, start, limit){
 	start = start || 0;
 	limit = limit || 15;
 	Post.find({topicId: topic},
@@ -125,12 +126,17 @@ module.exports.getHotPostsForTopic = function(res, topic, start, limit){
 					else return -1;
 				});
 
+				if(req.session.user){
+					if(!addUserVotes(res, req.session.user.id, hotPosts)) return;
+				}
+
+
 				utils.sendSuccess(res, hotPosts);
 			}
 		}).sort({datePosted: 'asc'}).skip(start).limit(limit);
 }
 
-module.exports.getNewPostsForTopic = function(res, topic, start, limit){
+module.exports.getNewPostsForTopic = function(res, req, topic, start, limit){
 	start = start || 0;
 	limit = limit || 15;
 	Post.find({topicId: topic},
@@ -138,13 +144,18 @@ module.exports.getNewPostsForTopic = function(res, topic, start, limit){
 			if(err){
 				res.send({status: defines.messages.serverErrorCode, message: defines.message.serverError});
 			} else {
+
+				if(req.session.user){
+					if(!addUserVotes(res, req.session.user.id, posts)) return;
+				}
+
 				utils.sendSuccess(res, posts);
 			}
 
 		}).sort({datePosted: 'asc'}).skip(start).limit(limit);
 }
 
-module.exports.getTopPostsForTopic = function(res, topic, start, limit){
+module.exports.getTopPostsForTopic = function(res, req, topic, start, limit){
 	start = start || 0;
 	limit = limit || 15;
 	Post.find({topicId: topic},
@@ -162,10 +173,37 @@ module.exports.getTopPostsForTopic = function(res, topic, start, limit){
 					if(a_score == b_score) return 0;
 					else return -1;
 				});
+
+				if(req.session.user){
+					module.exports.addUserVotes(res, req.session.user.id, topPosts);
+				} else {
+					utils.sendSuccess(res, topPosts);
+				}
+			}
+		}).sort({datePosted: 'asc'}).skip(start).limit(limit);
+}
+
+module.exports.addUserVotes = function(res, userId, posts){
+	console.log(userId);
+	User.findById(userId, function(err, user){
+		if(err || user == null){
+			utils.sendErr(res, defines.response.codes.serverError, defines.response.codes.serverError);
+		} else {
+
+			for(vote in user.voteHistory.toObject()){
+				console.log(vote);
+				for(post in posts){
+					if(post.id == vote.post){
+						post.isVote = vote.type ? 1 : -1;
+					} else {
+						post.isVote = 0;
+					}
+				}
 			}
 
-				utils.sendSuccess(res, topPosts);
-		}).sort({datePosted: 'asc'}).skip(start).limit(limit);
+			utils.sendSuccess(res, posts);
+		}
+	});
 }
 
 module.exports.setPictureForTopic = function(res, topic, imageUrl){

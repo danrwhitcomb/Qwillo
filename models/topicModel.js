@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 var Topic = new Schema({
 	title: {type: String, unique: true},
-	titleLower: String, unique: true},
+	titleLower: {type: String, unique: true},
 	description: String,
 	creationDate: {type: Date, default: Date.now },
 	labels: [{type: Schema.Types.ObjectId, ref: 'labels'}],

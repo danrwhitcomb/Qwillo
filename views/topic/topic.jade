@@ -73,11 +73,18 @@ block content
 						.small-12.columns
 							.row.module-box.post-box
 								.small-1.columns
-									.arrow-box
-										.up(ng-click="upvote(post);" ng-class="{upActive: post.isVote == 1}") &#9650;
-										.vote-count
-											{{post.upvote - post.downvote}}
-										.down(ng-click="downvote(post)" ng-class="{downActive: post.isVote == -1}") &#9660;
+									if base.userId
+										.arrow-box
+											.up(ng-click="upvote(post);" ng-class="{upActive: post.isVote == 1}") &#9650;
+											.vote-count
+												| {{post.upvote - post.downvote}}
+											.down(ng-click="downvote(post)" ng-class="{downActive: post.isVote == -1}") &#9660;
+									else
+										.arrow-box
+											.up(data-reveal-id='login-modal') &#9650;
+											.vote-count
+												| {{post.upvote - post.downvote}}
+											.down(data-reveal-id='login-modal') &#9660;
 								.small-11.columns
 									.info-box
 										a(href='{{post.link}}') 
@@ -88,7 +95,6 @@ block content
 					.row(ng-show='postsErrorReceived')
 						.small-12.columns
 							.alert-box.info.radius Oops! We couldn't load anymore posts
-							a.close &times;
 
 
 	#submit-post-modal.reveal-modal(data-reveal)

@@ -14,11 +14,14 @@ var UserSchema = new Schema({
     isConfirmed: {type: Boolean, default: false},
     dateJoined: {type: Date, default: Date.now},
     isActive: {type: Boolean, default: false},
-    history: {upvotes: [Schema.Types.ObjectId], 
-                downvotes: [Schema.Types.ObjectId]
-            },
+
+    voteHistory: [{
+        post: {type: Schema.Types.ObjectId, ref: "posts"},
+        vote: Boolean,
+        date: Date
+    }]
 });
- 
+
 UserSchema.pre("save", function(next) {
     var user = this;
  
@@ -48,5 +51,19 @@ UserSchema.methods.comparePassword = function(candidatePassword, cb) {
         cb(null, isMatch);
     });
 };
- 
+
+UserSchema.methods.addVote = function(vote, callback){
+    this.voteHistory.push(vote);
+    this.save(function(err){
+        callback(err);
+    });
+}
+
+UserSchema.methods.removeVote = function(vote, callback){
+    this.voteHistory.remove(vote);
+    this.save(function(err){
+        callback(err);
+    });
+}
+
 module.exports = mongoose.model('user', UserSchema);

@@ -1,12 +1,17 @@
 {
   "name": "Qwillo",
   "version": "0.0.1",
-  "subdomain": "danrwhitcomb-app",
   "private": true,
   "scripts": {
-    "start-local": "node system/app.js local 3000",
-    "start-test": "node system/app.js test $PORT"
+    "local": "node system/app.js local 3000",
+    "debug": "node system/app.js local 3000 DEBUG",
+    "test": "node system/app.js test $PORT"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danrwhitcomb/Qwillo.git"
+  },
+  "description": "A reference list aggregator for finding the best of the internet",
   "dependencies": {
     "express": "*",
     "express-subdomain": "*",

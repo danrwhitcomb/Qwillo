@@ -77,6 +77,11 @@ module.exports.defineRoutes = function(app, subdomain){
 		.get(postController.submissionPage)
 		.post(utils.isLoggedIn(), postController.submitPost);
 
+	app.route('/post/upvote')
+		.post(utils.isLoggedIn(), postController.updateUpvote);
+
+	
+
 	app.route('/post')
 		.get(postController.getPostPage);
 
