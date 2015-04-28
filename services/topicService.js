@@ -175,7 +175,7 @@ module.exports.getTopPostsForTopic = function(res, req, topic, start, limit){
 				});
 
 				if(req.session.user){
-					module.exports.addUserVotes(res, req.session.user.id, topPosts);
+					addUserVotes(res, req.session.user.id, topPosts);
 				} else {
 					utils.sendSuccess(res, topPosts);
 				}
@@ -183,24 +183,26 @@ module.exports.getTopPostsForTopic = function(res, req, topic, start, limit){
 		}).sort({datePosted: 'asc'}).skip(start).limit(limit);
 }
 
-module.exports.addUserVotes = function(res, userId, posts){
+function addUserVotes(res, userId, posts){
 	console.log(userId);
 	User.findById(userId, function(err, user){
 		if(err || user == null){
 			utils.sendErr(res, defines.response.codes.serverError, defines.response.codes.serverError);
 		} else {
 
-			for(vote in user.voteHistory.toObject()){
-				console.log(vote);
-				for(post in posts){
+			for(i in user.voteHistory.toObject()){
+				var vote = user.voteHistory[i];
+				for(j in posts){
+					var post = posts[j];
+
 					if(post.id == vote.post){
-						post.isVote = vote.type ? 1 : -1;
+						var val = vote.vote ? 1 : -1;
+						post.set('isVote', val);
 					} else {
-						post.isVote = 0;
+						post.set('isVote', 0);
 					}
 				}
 			}
-
 			utils.sendSuccess(res, posts);
 		}
 	});

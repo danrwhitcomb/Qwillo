@@ -15,4 +15,22 @@ var Post = new Schema({
 	isLive: {type: Boolean, default: true}
 });
 
+Post.virtual('isVote').get(function() {
+	return this.userVote;
+});
+
+Post.virtual('isVote').set(function(vote) {
+	this.userVote = vote;
+});
+
+Post.set('toObject', {
+	getters: true,
+	virtuals: true,
+});
+
+Post.set('toJSON', {
+	getters: true,
+	virtuals: true,
+});
+
 module.exports = mongoose.model('posts', Post);

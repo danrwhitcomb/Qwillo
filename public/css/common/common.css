@@ -1,10 +1,9 @@
 body {
-	background-color: #82BB63 !important;
+	background-color: #187F8B !important;
 }
 
 .module-box {
-	background-color: white;
-	box-shadow: 2px 2px 1px gray;
+	background-color: #fafafa;
 }
 
 .header-buttons {
@@ -34,4 +33,10 @@ body {
 
 .row-margin {
 	margin-bottom: 10px !important;
+}
+
+.nav-bar {
+	background-color: #E57F76 !important;
+	box-shadow: 0px 1px 6px -1px #3d3d3d;
+	border-radius: 2px;
 }

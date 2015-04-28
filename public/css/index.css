@@ -2,6 +2,10 @@
 	min-height: 80vh;
 }
 
+.search-wrapper .header { 
+	margin-top:23%;
+}
+
 .explanation-wrapper {
 	min-height: 80vh;
 	background: url(/images/library.jpg) no-repeat center center fixed;

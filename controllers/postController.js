@@ -42,7 +42,7 @@ module.exports.getPostPage = function(req, res){
 }
 
 module.exports.updateUpvote = function(req, res){
-	if(!req.body.post || !req.body.vote) utils.sendErr(res, defines.response.codes.invalidData, defines.response.messages.invalidData);
+	if(req.body.post == null|| req.body.vote == null) utils.sendErr(res, defines.response.codes.invalidData, defines.response.messages.invalidData);
 	else{
 		async.waterfall([
 			function(callback){
@@ -89,7 +89,7 @@ module.exports.updateUpvote = function(req, res){
 					user.voteHistory.push(newVote);
 				} else {
 
-					if(!res.body.vote){
+					if(!req.body.vote){
 						post.upvote--;
 						user.voteHistory.remove(hist);
 					} else {

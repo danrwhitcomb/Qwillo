@@ -5,10 +5,6 @@
 	min-height: 300px;
 }
 
-.topic-content .topic-info .topic-info-header {
-	border-bottom: 3px solid #ffee55
-}
-
 .topic-content .topic-info .topic-image-wrapper {
 	box-shadow: inset 0px 2px 2px 2px black;
 }
@@ -118,6 +114,9 @@
 	padding-top: 5px;
 }
 
+.topic-data .label-button:hover {
+	background-color: #E57F76 !important;
+}
 
 #label-modal .label-description p{
 	color: #545454;
