@@ -73,7 +73,7 @@ block content
 						.small-12.columns
 							.row.module-box.post-box
 								.small-1.columns
-									if base.userId
+									if base.user
 										.arrow-box
 											.up(ng-click="upvote(post);" ng-class="{upActive: post.isVote == 1}") &#9650;
 											.vote-count

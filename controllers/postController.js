@@ -103,7 +103,9 @@ module.exports.updateUpvote = function(req, res) {
 
 					if(!req.body.vote){
 						post.upvote--;
-						req.model.user.voteHistory.remove(vote);
+						User.update({_id: req.model.user.id}, {
+							$pull: {'voteHistory': {'post': post.id}}
+						}, function(err){});
 					} else {
 						post.upvote++;
 						post.downvote--;
