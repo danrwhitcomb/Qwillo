@@ -1,6 +1,12 @@
 h2 Welcome to Qwillo!
 br
 form(novalidate name='form')
+
+	.row.collapse()
+		.small-12.columns
+			.alert-box.alert.radius WARNING! This is the dev site of qwillo.com. It is not secured by SSL. Any data entered into this form will not be encrypted and can potentially be intercepted by a third-party. If you are testing this site, please use fake credentials. Any data you enter this site is at your own risk.
+				a.close &times;
+
 	.row.collapse.prefix-radius
 		.small-3.columns
 			span.prefix First Name

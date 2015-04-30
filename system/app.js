@@ -87,6 +87,7 @@ var utils = require('./utils');
 
 //Baseview model for common data
 app.use(function(req, res, next){
+  req.model = {};
   if(req.session.user){
     utils.populateUser(req, res, next, req.session.user.id)
   } else {

@@ -3,9 +3,9 @@ block append head
 
 .account-handler(ng-controller='AccountController')
 	ul.button-group.header-buttons
-		if base.username
+		if base.user
 			li.username.module-box.right
-				a(data-dropdown='user-dropdown' data-options='align:bottom') #{base.username}
+				a(data-dropdown='user-dropdown' data-options='align:bottom') #{base.user.username}
 			ul#user-dropdown.f-dropdown.module-box(data-dropdown-content)
 				li
 					a() Profile
