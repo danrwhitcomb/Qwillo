@@ -41,7 +41,7 @@ module.exports.createNewTopic = function(res, topic, description, imageUrl){
 module.exports.getTopicsForQuery = function(query, res){
 	query.replace('\(', '\(');
 	query.replace('\)', '\)');
-	Topic.find({title: {$regex: new RegExp('^' + query, "i")}},
+	Topic.find({title: {$regex: new RegExp(query, "i")}},
 		function(err, topics){
 			if(err) {
 				utils.sendErr(res, err);

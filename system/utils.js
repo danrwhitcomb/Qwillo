@@ -13,6 +13,19 @@ module.exports.sendErr = function(res, code, message){
 };
 
 //PRE-WARE
+//
+
+module.exports.populateUser = function(req, res, next, userId){
+	if (userId.match(/^[0-9a-fA-F]{24}$/)) {
+		User.findById(userId, function(err, user){
+			if (user) {
+				req.model.user = user;
+				next();
+			}
+		});
+	}
+}
+
 module.exports.isLoggedIn = function(){
 	return function(req, res, next){
 		if(req.session.user == null) res.send({status:defines.response.messages.accountError, message: defines.response.codes.notLoggedIn});

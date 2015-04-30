@@ -9,12 +9,12 @@ var Schema = mongoose.schema;
 var utils = require('../system/utils');
 
 
-module.exports.getPost = function(req, res){
+module.exports.getPost = function(req, res) {
 	res.send('This is the post page');
 };
 
 //DEPRECATED
-module.exports.submissionPage = function(req, res){
+module.exports.submissionPage = function(req, res) {
 	res.render('posts/submit', {base:req.model});
 };
 
@@ -23,11 +23,11 @@ module.exports.submitPost = function(req, res){
 
 };
 
-module.exports.deletePost = function(req, res){
+module.exports.deletePost = function(req, res) {
 
 };
 
-module.exports.getPostForTopic = function(req, res){
+module.exports.getPostForTopic = function(req, res) {
 	Post.find({_id: req.params.postName, topic: req.params.title.toLowerCase()}, function(err, post){
 		if(err || post.length !== 1){
 			utils.sendErr(res, defines.response.codes.dataNotFoundError, defines.response.messages.dataNotFoundError);
@@ -37,16 +37,16 @@ module.exports.getPostForTopic = function(req, res){
 	}).limit(1);
 }
 
-module.exports.getPostPage = function(req, res){
+module.exports.getPostPage = function(req, res) {
 	//res.render("/post/postContent");
 }
 
-module.exports.updateUpvote = function(req, res){
+module.exports.updateUpvote = function(req, res) {
 	if(req.body.post == null|| req.body.vote == null) utils.sendErr(res, defines.response.codes.invalidData, defines.response.messages.invalidData);
 	else{
 		async.waterfall([
 			function(callback){
-				Post.findById(req.body.post, function(err, post){
+				Post.findById(req.body.post, function(err, post) {
 					if(err || !post) callback(err, [defines.messages.serverErrorCode, defines.messages.serverError]);
 					else{
 						callback(null, post);
@@ -54,53 +54,65 @@ module.exports.updateUpvote = function(req, res){
 				});
 			},
 
-			function(post, callback){
-				User.findById(req.session.user.id, function(err, user){
-					if(err || !user) callback(err, [defines.messages.serverErrorCode, defines.messages.serverError]);
+			function(post, callback) {
+
+				User.findOne({'voteHistory': {$elemMatch:{
+					post: post.id
+				}}}, function(err, vote) {
+					if(err) callback(err, [defines.messages.serverErrorCode, defines.messages.serverError]);
 					else {
-						callback(null, post, user);
+						callback(null, post, vote);
 					}
 				});
+
+				// User.findById(req.session.user.id, function(err, user){
+				// 	if(err || !user) callback(err, [defines.messages.serverErrorCode, defines.messages.serverError]);
+				// 	else {
+				// 		callback(null, post, user);
+				// 	}
+				// });
 			},
 
-			function(post, user, callback){
+			function(post, vote, callback) {
 
-				var hasBeenVoted = false;
-				var userPost;
-				utils.debugLog("Post: " + post);
+				// var hasBeenVoted = false;
+				// var userPost;
+				// utils.debugLog("Post: " + post);
 
-				for(var hist in user.voteHistory.toObject()){
-					utils.debugLog("Hist" + hist);
+
+
+				// for(var hist in user.voteHistory.toObject()){
+				// 	utils.debugLog("Hist" + hist);
 					
-					if(hist.post == post.id){
-						hasBeenVoted = true;
-						if(hist.vote){
-							callback(1, [defines.response.codes.duplicateDataError, defines.response.messages.duplicateDataError]);
-							return;
-						}
-						userPost = hist;
-						break;
-					}
-				}
+				// 	if(hist.post == post.id){
+				// 		hasBeenVoted = true;
+				// 		if(hist.vote){
+				// 			callback(1, [defines.response.codes.duplicateDataError, defines.response.messages.duplicateDataError]);
+				// 			return;
+				// 		}
+				// 		userPost = hist;
+				// 		break;
+				// 	}
+				// }
 
-				if(!hasBeenVoted){
+				if(vote == null){
 					post.upvote++;
 					var newVote = {post: post.id, vote: true, date: Date.now()};
-					user.voteHistory.push(newVote);
+					req.model.user.voteHistory.push(newVote);
 				} else {
 
 					if(!req.body.vote){
 						post.upvote--;
-						user.voteHistory.remove(hist);
+						req.model.user.voteHistory.remove(vote);
 					} else {
 						post.upvote++;
 						post.downvote--;
-						userPost.vote = true;
-						userPost.data = Date.now();
+						vote.vote = true;
+						vote.date = Date.now();
 					}
 				}
 
-				user.save(function(err){
+				req.model.user.save(function(err){
 					if(err) callback(err, [defines.response.codes.serverError, defines.response.messages.serverError]);
 					else callback(null, post);
 

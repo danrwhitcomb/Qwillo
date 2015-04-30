@@ -83,16 +83,16 @@ if ('development' === app.get('env')) {
   app.use(errorHandler());
 }
 
+var utils = require('./utils');
 
 //Baseview model for common data
 app.use(function(req, res, next){
+
   var model = require('../controllers/viewModels/baseViewModel');
   req.model = model.model();
   if(req.session.user){
-    req.model.username = req.session.user.username;
-    req.model.userId = req.session.user.id;
+    utils.populateUser(req, res, next, req.session.user.id)
   }
-  next();
 });
 
 routes.defineRoutes(app, subdomain);

@@ -60,21 +60,8 @@ module.exports.response = {
 	}
 }
 
-module.exports.stormpath = {
-		appAddress: "https://api.stormpath.com/v1/applications/57eR7cPcXVv7PjQgdcgmqr"
-};
-
-module.exports.topics = {
-	homepageTopics: [
-		'Wikipedia',
-		'Lycos',
-		'History of Scotland',
-		'Dwayne Johnson',
-		'Nanoscopic Scale',
-		'404 error'
-	],
-
-	featuredTopic:"Malware"
+module.exports.userExempt = {
+	
 };
 
 module.exports.decodeDatabaseError = function(error){
