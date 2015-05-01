@@ -169,7 +169,7 @@ module.exports.getTopPostsForTopic = function(res, req, topic, start, limit){
 					var a_score = a.upvote - a.downvote;
 					var b_score = b.upvote - b.downvote;
 
-					if(a_score > b_score) return 1;
+					if(a_score < b_score) return 1;
 					if(a_score == b_score) return 0;
 					else return -1;
 				});

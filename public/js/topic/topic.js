@@ -48,45 +48,39 @@ app.controller('TopicController', ['$http', '$scope', function($http, $scope){
 
     var upvoteData = {};
     upvoteData.post = post._id;
+    $http.post('/post/upvote', upvoteData);
 
-    //Send vote
-    if(post.isVote != 1){
-      post.upvote++;
-      upvoteData.vote = true;
-      $http.post('/post/upvote', upvoteData);
-
-      if(post.isVote == -1) post.downvote--;
-
-      post.isVote = 1;
-      
-    } else {
+    if(post.isVote == 1) {
       post.upvote--;
       post.isVote = 0;
-      upvoteData.vote = false;
-      $http.post('/post/upvote', upvoteData);
+    } else if(post.isVote == -1){
+      post.downvote--;
+      post.upvote++;
+
+      post.isVote = 1;
+    } else {
+      post.upvote++;
+      post.isVote = 1;
+
     }
   };
 
    $scope.downvote = function(post, $event){
 
-    //Send vote
-    if(post.isVote != -1){
+     var downvoteData = {};
+     downvoteData.post = post._id;
+     $http.post('/post/downvote', downvoteData);
+
+    if(post.isVote == -1) {
+      post.downvote--;
+      post.isVote = 0;
+    } else if(post.isVote == 1){
+      post.upvote--;
       post.downvote++;
-      var downvoteData = {};
-      downvoteData.post = post._id;
-      downvoteData.vote = true;
-      $http.post('/post/downvote', downvoteData);
-
-      if(post.isVote == 1) post.upvote--;
-
       post.isVote = -1;
     } else {
-      post.downvote--;
-      var downvoteData = {};
-      downvoteData.post = post._id;
-      downvoteData.vote = false;
-      $http.post('/post/downvote', downvoteData);
-      post.isVote = 0
+      post.downvote++;
+      post.isVote = -1;
     }
   }
 

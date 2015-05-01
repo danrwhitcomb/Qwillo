@@ -80,6 +80,9 @@ module.exports.defineRoutes = function(app, subdomain){
 	app.route('/post/upvote')
 		.post(utils.isLoggedIn(), postController.updateUpvote);
 
+	app.route('/post/downvote')
+		.post(utils.isLoggedIn(), postController.updateDownvote);
+
 	
 
 	app.route('/post')

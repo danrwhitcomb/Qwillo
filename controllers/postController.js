@@ -42,7 +42,7 @@ module.exports.getPostPage = function(req, res) {
 }
 
 module.exports.updateUpvote = function(req, res) {
-	if(req.body.post == null|| req.body.vote == null) utils.sendErr(res, defines.response.codes.invalidData, defines.response.messages.invalidData);
+	if(req.body.post == null) utils.sendErr(res, defines.response.codes.invalidData, defines.response.messages.invalidData);
 	else{
 		async.waterfall([
 			function(callback){
@@ -56,44 +56,22 @@ module.exports.updateUpvote = function(req, res) {
 
 			function(post, callback) {
 
-				User.findOne({'voteHistory': {$elemMatch:{
-					post: post.id
-				}}}, function(err, vote) {
-					if(err) callback(err, [defines.messages.serverErrorCode, defines.messages.serverError]);
-					else {
-						callback(null, post, vote);
-					}
-				});
-
-				// User.findById(req.session.user.id, function(err, user){
-				// 	if(err || !user) callback(err, [defines.messages.serverErrorCode, defines.messages.serverError]);
-				// 	else {
-				// 		callback(null, post, user);
-				// 	}
-				// });
+				User.findOne({_id: req.model.user.id, 'voteHistory.post': post.id},{'voteHistory.$': 1},
+                    function(err, vote) {
+                        if(err) callback(err, [defines.messages.serverErrorCode, defines.messages.serverError]);
+                        else {
+                            if(vote && vote.voteHistory[0]){
+                                vote = vote.voteHistory[0];
+                            } else {
+                                vote =null;
+                            }
+                            callback(null, post, vote);
+                        }
+                    }
+                );
 			},
 
 			function(post, vote, callback) {
-
-				// var hasBeenVoted = false;
-				// var userPost;
-				// utils.debugLog("Post: " + post);
-
-
-
-				// for(var hist in user.voteHistory.toObject()){
-				// 	utils.debugLog("Hist" + hist);
-					
-				// 	if(hist.post == post.id){
-				// 		hasBeenVoted = true;
-				// 		if(hist.vote){
-				// 			callback(1, [defines.response.codes.duplicateDataError, defines.response.messages.duplicateDataError]);
-				// 			return;
-				// 		}
-				// 		userPost = hist;
-				// 		break;
-				// 	}
-				// }
 
 				if(vote == null){
 					post.upvote++;
@@ -101,16 +79,19 @@ module.exports.updateUpvote = function(req, res) {
 					req.model.user.voteHistory.push(newVote);
 				} else {
 
-					if(!req.body.vote){
+					if(vote.vote){
 						post.upvote--;
-						User.update({_id: req.model.user.id}, {
-							$pull: {'voteHistory': {'post': post.id}}
-						}, function(err){});
+                        User.update({_id: req.model.user.id}, {
+                            $pull: {'voteHistory': {'post': post.id}}
+                        }, function(err){});
 					} else {
 						post.upvote++;
 						post.downvote--;
-						vote.vote = true;
-						vote.date = Date.now();
+						User.update({_id: req.model.user.id, "voteHistory.post": post.id}, {
+							$set: {"voteHistory.$.vote": true, "voteHistory.$.date": Date.now()}
+						}, function(err){});
+						//vote.vote = true;
+						//vote.date = Date.now();
 					}
 				}
 
@@ -129,6 +110,80 @@ module.exports.updateUpvote = function(req, res) {
 			}
 
 			], 
+			function(err, result){
+				utils.sendErr(res, result[0], result[1]);
+			}
+		);
+	}
+};
+
+module.exports.updateDownvote = function(req, res){
+	if(req.body.post == null) utils.sendErr(res, defines.response.codes.invalidData, defines.response.messages.invalidData);
+	else{
+		async.waterfall([
+				function(callback){
+					Post.findById(req.body.post, function(err, post) {
+						if(err || !post) callback(err, [defines.messages.serverErrorCode, defines.messages.serverError]);
+						else{
+							callback(null, post);
+						}
+					});
+				},
+
+				function(post, callback) {
+
+                    User.findOne({_id: req.model.user.id, 'voteHistory.post': post.id},{'voteHistory.$': 1},
+                        function(err, vote) {
+                            if(err) callback(err, [defines.messages.serverErrorCode, defines.messages.serverError]);
+                            else {
+                                if(vote && vote.voteHistory[0]){
+                                    vote = vote.voteHistory[0];
+                                } else {
+                                    vote =null;
+                                }
+                                callback(null, post, vote);
+                            }
+                        }
+                    );
+				},
+
+				function(post, vote, callback) {
+
+					if(vote == null){
+						post.downvote++;
+						var newVote = {post: post.id, vote: false, date: Date.now()};
+						req.model.user.voteHistory.push(newVote);
+					} else {
+
+						if(!vote.vote){
+							post.downvote--;
+							User.update({_id: req.model.user.id}, {
+								$pull: {'voteHistory': {'post': post.id}}
+							}, function(err){});
+						} else {
+							post.upvote--;
+							post.downvote++;
+                            User.update({_id: req.model.user.id, "voteHistory.post": post.id}, {
+                                $set: {"voteHistory.$.vote": false, "voteHistory.$.date": Date.now()}
+                            }, function(err){});
+						}
+					}
+
+					req.model.user.save(function(err){
+						if(err) callback(err, [defines.response.codes.serverError, defines.response.messages.serverError]);
+						else callback(null, post);
+
+					});
+				},
+
+				function(post, callback){
+					post.save(function(err){
+						if(err) callback(err, [defines.response.codes.serverError, defines.response.messages.serverError]);
+						else utils.sendSuccess(res);
+					});
+				}
+
+			],
 			function(err, result){
 				utils.sendErr(res, result[0], result[1]);
 			}
