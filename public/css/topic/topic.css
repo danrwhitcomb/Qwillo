@@ -5,10 +5,6 @@
 	min-height: 300px;
 }
 
-.topic-content .topic-info .topic-image-wrapper {
-	box-shadow: inset 0px 2px 2px 2px black;
-}
-
 .topic-content .topic-info .topic-title {
 	position: absolute;
 	bottom: -5px;
@@ -29,18 +25,7 @@
 {
     display:block;
 }
- 
-.topic-content .topic-image-wrapper::before
-{
-    display:block;
-    content:'';
-    position:absolute;
-    width:100%;
-    height:100%;
-    -moz-box-shadow:inset 0px -60px 50px -20px rgba(0,0,0,0.8);
-    -webkit-box-shadow:inset 0px -60px 50px -20px rgba(0,0,0,0.8);
-    box-shadow: inset 0px -60px 50px -20px rgba(0,0,0,0.8);
-}
+
 
 .topic-content .topic-description {
 	margin-left: 5px;
