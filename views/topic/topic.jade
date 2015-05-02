@@ -25,10 +25,10 @@ block content
 										img(src='#{topic.imageUrl}').topic-image
 									else
 										img(src='/images/placeholder.jpg').topic-image
-								.topic-title
-									h4 #{topic.title}
 					.row
 						.columns.small-12
+							h4.topic-title
+								| #{topic.title}
 							.topic-description
 								p #{topic.description}
 
